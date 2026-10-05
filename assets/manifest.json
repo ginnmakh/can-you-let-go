@@ -1,0 +1,265 @@
+{
+  "images": {
+    "background.camp": {
+      "src": null
+    },
+    "background.forest": {
+      "src": null
+    },
+    "background.monastery": {
+      "src": null
+    },
+    "background.grassland": {
+      "src": null
+    },
+    "background.empty-camp": {
+      "src": null
+    },
+    "background.return-camp": {
+      "src": null
+    },
+    "character.tana": {
+      "src": null,
+      "frameWidth": 21,
+      "frameHeight": 33,
+      "frames": 6,
+      "fps": 8,
+      "displayWidth": null,
+      "displayHeight": null,
+      "nativeSize": true,
+      "walkDirectory": "characters/taana",
+      "walkFrames": {
+        "down": [
+          "characters/taana/walk_down_01.png",
+          "characters/taana/walk_down_02.png",
+          "characters/taana/walk_down_03.png",
+          "characters/taana/walk_down_04.png",
+          "characters/taana/walk_down_05.png",
+          "characters/taana/walk_down_06.png"
+        ],
+        "left": [
+          "characters/taana/walk_left_01.png",
+          "characters/taana/walk_left_02.png",
+          "characters/taana/walk_left_03.png",
+          "characters/taana/walk_left_04.png",
+          "characters/taana/walk_left_05.png",
+          "characters/taana/walk_left_06.png"
+        ],
+        "right": [
+          "characters/taana/walk_right_01.png",
+          "characters/taana/walk_right_02.png",
+          "characters/taana/walk_right_03.png",
+          "characters/taana/walk_right_04.png",
+          "characters/taana/walk_right_05.png",
+          "characters/taana/walk_right_06.png"
+        ],
+        "up": [
+          "characters/taana/walk_up_01.png",
+          "characters/taana/walk_up_02.png",
+          "characters/taana/walk_up_03.png",
+          "characters/taana/walk_up_04.png",
+          "characters/taana/walk_up_05.png",
+          "characters/taana/walk_up_06.png"
+        ]
+      }
+    },
+    "character.colin": {
+      "src": null,
+      "frameWidth": 25,
+      "frameHeight": 36,
+      "frames": 6,
+      "fps": 8,
+      "displayWidth": 25,
+      "displayHeight": 36,
+      "walkDirectory": "characters/colyn",
+      "walkFrames": {
+        "down": [
+          "characters/colyn/walk_down_01.png",
+          "characters/colyn/walk_down_02.png",
+          "characters/colyn/walk_down_03.png",
+          "characters/colyn/walk_down_04.png",
+          "characters/colyn/walk_down_05.png",
+          "characters/colyn/walk_down_06.png"
+        ],
+        "left": [
+          "characters/colyn/walk_left_01.png",
+          "characters/colyn/walk_left_02.png",
+          "characters/colyn/walk_left_03.png",
+          "characters/colyn/walk_left_04.png",
+          "characters/colyn/walk_left_05.png",
+          "characters/colyn/walk_left_06.png"
+        ],
+        "right": [
+          "characters/colyn/walk_right_01.png",
+          "characters/colyn/walk_right_02.png",
+          "characters/colyn/walk_right_03.png",
+          "characters/colyn/walk_right_04.png",
+          "characters/colyn/walk_right_05.png",
+          "characters/colyn/walk_right_06.png"
+        ],
+        "up": [
+          "characters/colyn/walk_up_01.png",
+          "characters/colyn/walk_up_02.png",
+          "characters/colyn/walk_up_03.png",
+          "characters/colyn/walk_up_04.png",
+          "characters/colyn/walk_up_05.png",
+          "characters/colyn/walk_up_06.png"
+        ]
+      }
+    },
+    "portrait.tana": {
+      "src": null
+    },
+    "portrait.colin": {
+      "src": null
+    },
+    "cutscene.soul": {
+      "src": null
+    },
+    "ending.relics": {
+      "src": null
+    },
+    "ending.john-doe": {
+      "src": null
+    },
+    "ending.love": {
+      "src": null
+    },
+    "ending.return": {
+      "src": null
+    },
+    "ending.farewell": {
+      "src": null
+    },
+    "item.branch": {
+      "src": null
+    },
+    "item.plank": {
+      "src": null
+    },
+    "item.timber": {
+      "src": null
+    },
+    "item.scrap": {
+      "src": null
+    },
+    "item.silver": {
+      "src": null
+    },
+    "item.cloth": {
+      "src": null
+    },
+    "item.silk": {
+      "src": null
+    },
+    "item.coat": {
+      "src": null
+    },
+    "item.scissors": {
+      "src": null
+    },
+    "item.seed": {
+      "src": null
+    },
+    "item.flower": {
+      "src": null
+    },
+    "item.ring": {
+      "src": null
+    },
+    "item.book": {
+      "src": null
+    },
+    "item.ribbon": {
+      "src": null
+    },
+    "item.letter": {
+      "src": null
+    },
+    "item.wreath": {
+      "src": null
+    },
+    "item.nametag": {
+      "src": null
+    },
+    "item.score": {
+      "src": null
+    },
+    "item.gem": {
+      "src": null
+    },
+    "item.poisonflower": {
+      "src": null
+    },
+    "item.pebble": {
+      "src": null
+    },
+    "prop.tent": {
+      "src": null
+    },
+    "prop.fire": {
+      "src": null
+    },
+    "prop.workbench": {
+      "src": null
+    },
+    "item.wood": {
+      "src": null
+    },
+    "item.metal": {
+      "src": null
+    },
+    "item.fineMetal": {
+      "src": null
+    },
+    "item.bentNails": {
+      "src": null
+    },
+    "item.nails": {
+      "src": null
+    },
+    "item.fineNails": {
+      "src": null
+    },
+    "item.rag": {
+      "src": null
+    },
+    "item.toxicSeed": {
+      "src": null
+    },
+    "item.edibleSeed": {
+      "src": null
+    },
+    "item.oldBook": {
+      "src": null
+    },
+    "item.fineLath": {
+      "src": null
+    },
+    "item.woodPeg": {
+      "src": null
+    },
+    "item.poetry": {
+      "src": null
+    }
+  },
+  "audio": {
+    "forest": {
+      "src": null,
+      "loop": true
+    },
+    "fire": {
+      "src": null,
+      "loop": true
+    },
+    "pickup": {
+      "src": null
+    },
+    "craft": {
+      "src": null
+    },
+    "ending": {
+      "src": null
+    }
+  }
+}

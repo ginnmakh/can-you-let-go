@@ -1,0 +1,1909 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#1b2449"><meta name="description" content="七天的旅途，一只逐漸破損的背包，和那些捨不得留下的東西。點陣探索與背包拼圖遊戲。"><title>放得下嗎？</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%231a3026' d='M0 0h32v32H0z'/%3E%3Cpath fill='%23e8bf71' d='M12 5h8v8h7v7h-7v7h-8v-7H5v-7h7z'/%3E%3Cpath fill='%2352734e' d='M13 13h6v6h-6z'/%3E%3C/svg%3E"><style>:root{color-scheme:dark;--ink:#e5e4cb;--muted:#9dada0;--gold:#d8ba7a;--line:#60745b66;--panel:#14241feF}*{box-sizing:border-box}body{margin:0;background:#070e0c;color:var(--ink);font-family:'Noto Sans TC',sans-serif;overflow:hidden;display:grid;place-items:center;height:100dvh}button,input{font:inherit}button{cursor:pointer;color:inherit;background:#21392e;border:1px solid #768a6266;padding:12px 20px;transition:background .15s,border-color .15s}button:hover{background:#36513e;border-color:var(--gold)}button:focus-visible{outline:3px solid var(--gold);outline-offset:4px}button:disabled{opacity:.35;cursor:not-allowed}button.primary{background:#d7bd82;color:#1b2b22;border-color:#f6d99b;font-weight:600}button.primary:hover{background:#ead5a4}button.danger{color:#eea287;border-color:#aa6357}button.textbutton{border:0;background:transparent;color:var(--muted)}[hidden]{display:none!important}#stage{width:1920px;height:1080px;position:relative;overflow:hidden;transform-origin:center;flex:none;background:#183328}#world{position:absolute;width:100%;height:100%;image-rendering:pixelated}.vignette{position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 180px 55px #050e0c8a;background:linear-gradient(180deg,#091b1855,transparent 25%,transparent 70%,#09141099)}header{position:absolute;top:40px;left:54px;right:54px;display:flex;align-items:center;justify-content:space-between;gap:30px}header .brand{display:flex;align-items:center;gap:22px}.flower{font-size:52px;color:var(--gold)}.brand strong{font-family:'Noto Serif TC',serif;font-size:30px;letter-spacing:5px}.brand small{display:block;font-size:12px;letter-spacing:4px;margin-top:3px;color:var(--muted)}.divider{height:43px;width:1px;background:#82917566;margin:0 10px}#location{font-size:20px;letter-spacing:3px}#location small{font-size:10px;letter-spacing:2px}.daybox{display:flex;align-items:center;gap:18px;margin-right:210px;background:#12211dd9;border:1px solid var(--line);padding:15px 27px}.daybox .sun{font-size:35px;color:var(--gold)}#day{font-family:'Noto Serif TC';font-size:21px}#time{display:block;font-size:12px;color:var(--muted);margin-top:3px}#days{font-size:13px;letter-spacing:6px;color:var(--gold);border-left:1px solid var(--line);padding-left:24px}nav{display:flex;gap:10px}nav button{font-size:22px;width:52px;height:52px;padding:0;background:#14251dcc}#quest{position:absolute;top:156px;left:55px;width:328px;background:linear-gradient(100deg,#14271ef2,#14271eb3);border:1px solid var(--line);padding:25px 27px;border-left:3px solid #b39c65}.eyebrow{font-size:12px;letter-spacing:3px;color:var(--gold)}#questDay{float:right;color:#99a487;font-size:11px;letter-spacing:1px}#quest h2{font-family:'Noto Serif TC';font-weight:500;font-size:26px;letter-spacing:3px;margin:17px 0 10px}#quest p{color:#a9b7a3;font-size:14px;line-height:1.9;margin:0}.questline{margin-top:20px;border-top:1px solid var(--line);padding-top:17px;font-size:13px;display:flex;gap:12px}.questline>span:first-child{color:var(--gold)}#exitlabel{position:absolute;top:144px;left:50%;transform:translateX(-50%);color:#dddcb2;font-size:15px;letter-spacing:4px;text-shadow:0 2px #101e18}#exitlabel span{display:block;text-align:center;margin-top:10px;font-size:24px;animation:float 2s infinite}#mapcard{position:absolute;bottom:131px;right:55px;width:246px;padding:20px;background:#13251ed9;border:1px solid var(--line);font-size:13px;letter-spacing:2px}#mapcard small{float:right;color:#aab295;font-size:10px}.mapstrip{display:flex;align-items:center;gap:15px;justify-content:center;margin:21px 0}.mapstrip i{width:29px;height:26px;background:#405b45;border:2px solid #6b8060;transform:rotate(45deg)}.mapstrip i.active{background:#c6b275;border-color:#e5d29c;box-shadow:0 0 20px #caba7233}#maphint{font-size:11px;color:var(--muted);letter-spacing:1px;margin:0}footer{position:absolute;bottom:30px;left:54px;right:54px;display:flex;justify-content:space-between;align-items:center;gap:20px}.controls{display:flex;align-items:center;gap:32px;font-size:13px;color:#a9b9a7}kbd{display:inline-block;background:#182b23;border:1px solid #83917a88;box-shadow:0 2px #08140c;border-radius:3px;color:#d6dec7;padding:5px 8px;font:12px 'Noto Sans TC';white-space:nowrap}.controls kbd{margin-right:5px}#bagbtn{display:flex;align-items:center;gap:19px;background:#1b3126eF;padding:16px 22px;font-size:15px;letter-spacing:2px;box-shadow:0 3px #070d09}#bagbtn>span{font-size:28px;color:var(--gold)}#bagbtn small{color:#a4b495;letter-spacing:1px}#interact{position:absolute;transform:translate(-50%,-100%);background:#101c19ee;border:1px solid #bfa870;padding:10px 15px;font-size:14px;white-space:nowrap;pointer-events:none}#interact kbd{margin-right:12px;color:#f6d89b}#bubble{position:absolute;padding:12px 18px;background:#ece1bd;color:#253326;font-size:15px;max-width:310px;box-shadow:5px 5px #0b1d1855;pointer-events:none}#bubble:after{content:'';position:absolute;bottom:-8px;left:20px;border-top:8px solid #ece1bd;border-right:8px solid transparent}#toast{position:absolute;bottom:128px;left:50%;transform:translateX(-50%);padding:14px 28px;background:#15281feb;border:1px solid #9aa37788;color:#e1d5ab;font-size:16px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9}#toast.show{opacity:1}#intro{position:absolute;inset:0;background:linear-gradient(90deg,#091812eb 0%,#102018c9 37%,#10251e22 70%);z-index:20}.introinner{position:absolute;top:235px;left:190px;text-align:center;width:510px}.introinner .eyebrow{letter-spacing:8px;font-size:12px}h1{font-family:'Noto Serif TC';font-size:104px;letter-spacing:18px;font-weight:500;line-height:1.2;margin:25px 0;color:#eee7cc;text-shadow:3px 4px #14261d}.subtitle{font-family:'Noto Serif TC';display:flex;align-items:center;justify-content:center;gap:22px;font-size:27px;letter-spacing:12px;color:#d1bc88}.subtitle span{width:43px;height:1px;background:#a99d70}.introinner p{font-family:'Noto Serif TC';font-size:17px;line-height:2.4;letter-spacing:4px;color:#bdc4ac;margin:45px 0}.introinner .primary{display:block;width:310px;margin:0 auto;font-size:18px;letter-spacing:5px;padding:19px}.introinner .primary span{margin-left:30px}.introinner .textbutton{margin:12px}.introinner>small{display:block;font-size:12px;letter-spacing:5px;color:#82977d;margin-top:35px}.introfoot{position:absolute;bottom:47px;left:60px;right:60px;color:#94a68e;display:flex;justify-content:space-between;font-size:12px;letter-spacing:3px}#overlay{position:absolute;inset:0;background:#000c;z-index:10;display:flex;align-items:center;justify-content:center}.panel{position:relative;background:#13241fed;border:1px solid #758366;box-shadow:0 0 0 6px #0d1a16,0 0 0 7px #65765b55;padding:36px;max-height:920px;overflow:auto;min-width:460px}.panel h2{font:500 30px 'Noto Serif TC';letter-spacing:5px;margin:10px 0 12px}.panel p{color:#aebda6;font-size:16px;line-height:1.9}.panelhead{display:flex;align-items:center;justify-content:space-between;gap:45px;margin-bottom:22px}.close{font-size:24px;width:44px;height:44px;padding:0;background:transparent}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.menuitems{display:grid;gap:12px;margin-top:30px}.menuitems button{padding:17px 65px;letter-spacing:5px}.hint{font-size:13px!important;color:#8fa28b!important}.columns{display:flex;gap:38px}.grid{display:grid;position:relative;grid-template-columns:repeat(6,66px);grid-template-rows:repeat(6,66px);gap:3px;background:#090f0d;border:5px solid #0b1611;width:max-content;touch-action:none}.cell{background:#1d3127;border:1px solid #53614666;position:relative}.cell.blocked{background:repeating-linear-gradient(135deg,#101b16,#101b16 5px,#374133 6px,#374133 7px);opacity:.7}.cell.good{background:#4b7750!important}.cell.bad{background:#8a3e39!important}.itemcell{background:var(--itemcolor,#766544);border-color:#ddce9366;cursor:grab;box-shadow:inset 0 0 0 3px #0002}.itemcell.selected{outline:2px solid #ead190;outline-offset:-3px}.itemcell canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;pointer-events:none}.itemcell span{position:absolute;bottom:1px;left:3px;font-size:10px;white-space:nowrap;pointer-events:none}.inventoryside{width:330px;display:flex;flex-direction:column}.itemdetail{background:#0c1913;border:1px solid #64714c66;padding:22px;min-height:190px}.itemdetail h3{font:22px 'Noto Serif TC';color:#d9c28e;margin:0 0 15px}.itemdetail p{font-size:14px}.itemdetail .tag{font-size:11px;color:#a8b28e;letter-spacing:2px}.itemlist{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}.itemchoice{padding:10px 12px;font-size:13px;min-width:90px;max-width:150px}.itemchoice.chosen{border-color:#f0d699;background:#455139}.itemchoice canvas{width:48px;height:48px;image-rendering:pixelated;display:block;margin:auto}.detailactions{display:grid;gap:10px;margin-top:18px}.statline{display:flex;justify-content:space-between;margin:15px 0;font-size:13px;color:#aeb999}.progress{height:5px;background:#31432e}.progress>i{display:block;height:100%;background:#c1b073}#dialogue{position:absolute;left:235px;right:235px;bottom:110px;background:#10211ff5;border:1px solid #8c916a;box-shadow:0 0 0 5px #091612aF;min-height:165px;z-index:30;padding:28px 50px 28px 160px;cursor:pointer}#dialogue canvas{position:absolute;left:24px;bottom:0;width:112px;height:155px;image-rendering:pixelated}#dialogue b{display:block;color:#d8bc82;font:20px 'Noto Serif TC';letter-spacing:4px;margin-bottom:14px}#dialogue p{font:21px 'Noto Serif TC';line-height:1.7;margin:0}#dialogue small{display:block;text-align:right;color:#8fa48b;font-size:11px;letter-spacing:2px;margin-top:12px}.slots{display:grid;grid-template-columns:repeat(4,220px);gap:16px}.slot{height:168px;padding:0;overflow:hidden;text-align:left;background:#12211b}.slot img{display:block;width:100%;height:108px;object-fit:cover;image-rendering:pixelated}.slot span{display:block;margin:8px 12px;font-size:12px}.slot small{color:#a2af98}.garden{display:grid;grid-template-columns:repeat(4,100px);gap:10px}.garden button{height:95px;font-size:28px}.garden button small{display:block;font-size:11px}.assembly{display:grid;grid-template-columns:repeat(2,200px);gap:14px}.assembly button{height:115px}.ending{text-align:center;width:850px}.ending h2{font-size:48px;letter-spacing:12px}.ending p{line-height:2.3}.quality{font:28px 'Noto Serif TC';color:#e2c58a}.fireportrait{width:420px;height:260px;image-rendering:pixelated;border:1px solid var(--line)}.scrolllist{max-height:360px;overflow:auto}.range{display:flex;align-items:center;justify-content:space-between;gap:25px;margin:25px 0}.range input{width:210px;accent-color:#d2b577}.achievement{padding:15px;border-bottom:1px solid var(--line);color:#8b9f8a}.achievement.earned{color:#e1c68e}.dragghost{position:absolute;z-index:40;pointer-events:none;opacity:.85;display:grid;gap:3px}.dragghost i{background:#b9a46b99;border:2px solid #dfd097} @keyframes float{50%{transform:translateY(-6px)}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+#stage{position:absolute;left:50%;top:50%;margin:0}
+</style><style>header .brand{display:none}header{justify-content:space-between;pointer-events:none}header>*{pointer-events:auto}.daybox{margin:0;min-width:380px}#quest{top:151px}#mapcard{width:330px}#westexit,#southexit{position:absolute;color:#dddcb2;text-shadow:0 2px #101e18;font-size:16px;letter-spacing:3px;pointer-events:none}#westexit{left:32px;top:660px}#westexit.east{left:auto;right:32px}#southexit{bottom:106px;left:50%;transform:translateX(-50%)}#fade{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;z-index:25}.pieceart{position:absolute;pointer-events:none;image-rendering:pixelated;opacity:.95}.belowbag{margin-top:15px;width:416px;min-height:155px;padding:15px}.belowbag p{margin-bottom:0}.inventoryside{min-width:290px}.minishape{display:grid;grid-auto-rows:7px;grid-auto-columns:7px;gap:1px;width:max-content;margin:8px auto}.minishape i{background:#c4b078}.itemchoice small{display:block;font-size:10px;color:#c8c6ac;margin-top:5px}.targetcell{border:1px solid #c9b16a;background:#655b3533}.talkchoices{display:grid;gap:16px;max-width:770px}.talkchoices button{text-align:left;padding:22px}.garden{grid-template-columns:repeat(3,110px)}.garden button{height:90px}.endinglayout{display:flex;gap:46px;align-items:center;width:1170px}.endinglayout>canvas{width:600px;height:450px;image-rendering:pixelated;flex:none;border:1px solid #6d795e}.endinglayout h2{font-size:40px;letter-spacing:5px}.endinglayout p{line-height:2}.endinglayout>div{flex:1}.burialscene{display:flex;gap:35px;align-items:center;max-width:950px}.burialscene canvas{width:480px;height:360px;image-rendering:pixelated}.burialscene>div{max-width:360px}#soulart{display:block;width:960px;height:540px;image-rendering:pixelated}#holdarea{display:flex;align-items:center;justify-content:center;gap:30px;padding-top:20px}#holdring{--progress:0deg;display:grid;place-items:center;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,#152421 59%,transparent 60%),conic-gradient(#e4d3a5 var(--progress),#36483e 0);font-size:28px;color:#e4d3a5}.intro-symbol{font-size:140px;letter-spacing:0}.panel{max-height:940px}#dialogue{bottom:70px}#dialogue p{max-height:175px;overflow:auto}.introfoot a{color:#d3c697}.introfoot span{margin-left:auto}
+
+#intro{background:#101c18}.introinner{left:160px}.introinner:after{content:'';position:absolute;left:650px;top:20px;width:1px;height:500px;background:#6b796c22}
+.staging{border:1px dashed #73856c;padding:12px;min-height:120px;max-height:235px;overflow:auto;background:#09160f66;align-content:flex-start}
+.staging:empty:after{content:'拖曳至格子外，暫放在這裡';font-size:13px;color:#87967e;margin:auto}
+.grade{font:12px 'Noto Sans TC',sans-serif;color:#b7bb9e;white-space:nowrap}
+.cutslots{display:flex;flex-direction:column;align-items:center;gap:8px}.cutslots>button,.scissorsslot{width:94px;min-height:70px;border:1px solid #a0a77a;text-align:center;padding:8px;font-size:12px}.cutslots canvas{width:40px;height:40px;image-rendering:pixelated}.cutslots small{display:block}#clothchoices{max-height:105px;overflow:auto}#clothchoices button{font-size:12px;padding:7px}#docut{width:100%;margin-bottom:8px}
+#achievement-toast{position:absolute;right:55px;bottom:120px;width:350px;padding:22px 26px;background:#162b23f5;border:1px solid #b6a879;box-shadow:0 5px 20px #0007;z-index:35;pointer-events:none;opacity:0;transform:translateY(70px);transition:transform .65s,opacity .65s}#achievement-toast.show{opacity:1;transform:translateY(0)}#achievement-toast small{color:#c9af7b;letter-spacing:3px}#achievement-toast strong{display:block;font:24px 'Noto Serif TC';margin:10px 0}#achievement-toast p{font-size:13px;line-height:1.7;margin:0;color:#c7cfb4}
+</style><style>/* 靛藍旅途：1920 × 1080 的介面皮膚。格子尺寸由遊戲邏輯共用，維持 66 + 3 px。 */
+:root{--ink:#f0eee5;--muted:#b4bdd9;--gold:#e6ce92;--line:#8796ca66;--panel:#1b2449;--blue:#718ce0;--paper:#e8dfc4;--paper-ink:#303955}
+body{background:#0d1229}#stage{background:#293c57}
+button{background:#2b3b66;border-color:#8495c080;box-shadow:inset 0 2px #b0bee318,0 3px #0e1630;border-radius:2px}
+button:hover{background:#405789;border-color:#e6ce92}button:active{box-shadow:inset 0 2px #0e163055}
+button.primary{background:#e6ce92;color:#26314e;border-color:#f4e5b9;box-shadow:inset 0 -3px #b3986680,0 4px #111b39}
+button.primary:hover{background:#f0dfb0}button.danger{color:#efb5a3;border-color:#c18480}button.textbutton{box-shadow:none}
+.vignette{box-shadow:inset 0 0 140px 35px #1019326b;background:linear-gradient(180deg,#111a3933,transparent 25%,transparent 75%,#10152e80)}
+.daybox,#quest,#mapcard,#bagbtn{background:#1b284beF;border:2px solid #8293bd;box-shadow:inset 0 0 0 4px #1a2545,inset 0 0 0 5px #9ca8cc33,0 5px #10172a80}
+.daybox{min-width:392px;padding:16px 26px}.daybox .sun{color:#f0d797}#day{font-size:24px}#time{font-size:14px}#days{font-size:14px;color:#e6ce92}
+nav button{background:#202d50ed;border-color:#91a0c3;color:#e8ddbc;width:56px;height:56px}
+#quest{width:336px;padding:24px 26px;border-top:4px solid #d6c18d}#quest h2{color:#f2e5c2;margin-top:15px}#quest p{color:#c8d0e4;font-size:16px}
+.eyebrow{font-size:14px;letter-spacing:3px}#questDay{color:#bac4df;font-size:13px}.questline{font-size:14px;border-color:#91a0c34d;line-height:1.7}
+#mapcard{padding:22px 24px;font-size:16px}#mapcard small{color:#c4cbe1;font-size:13px}.mapstrip{gap:19px;margin:24px 0}
+.mapstrip i{background:#3b507a;border-color:#8299c2;width:24px;height:24px}.mapstrip i.active{background:#ead8a2;border-color:#fff0c4;box-shadow:0 0 0 4px #e6ce921c}#maphint{font-size:14px;line-height:1.7}
+.controls{gap:22px;color:#e0e4ef;font-size:14px;text-shadow:0 2px #111a31}.controls kbd{margin-right:7px}kbd{background:#233458;border-color:#8e9fc1;color:#f4e9ca;box-shadow:0 2px #10172a;border-radius:2px;font-size:13px}
+#bagbtn{padding:18px 22px;font-size:17px;border-color:#cfba89}#bagbtn small{color:#c9d1e5;font-size:14px}
+#exitlabel,#westexit,#southexit{color:#fff0c4;text-shadow:0 2px #182342,2px 0 #182342,-2px 0 #182342}#exitlabel{font-size:17px}
+#interact{background:#1b284bf5;border:2px solid #e6ce92;color:#fff0d0;font-size:16px;box-shadow:0 4px #10172a66}
+#bubble{background:#ece3c8;color:#293653;box-shadow:4px 4px #19264580}#bubble:after{border-top-color:#ece3c8}
+#toast{background:#202e52f5;border-color:#c6b991;color:#f4e5bd}
+#overlay{background:#0b1225bb}
+.panel{background:#1d294c;border:2px solid #d7c38f;box-shadow:0 0 0 5px #111b35,0 0 0 7px #8093bd,inset 0 0 0 7px #34476a;padding:34px 40px;scrollbar-color:#8e9dc3 #1d294c}
+.panelhead{border-bottom:1px solid #a1afd04d;padding-bottom:18px;margin-bottom:22px}.panelhead h2{color:#f0dfb0;font-size:30px}.panelhead h2:before{content:'✧';color:#a1b7f2;margin-right:18px;font-size:24px}
+.panel p{color:#c7d0e7}.panel .hint{color:#bac6df!important;font-size:14px!important;line-height:1.8}.close{background:#27395b;color:#e9d4a0;border:1px solid #8b9cbf}
+.itemdetail{background:var(--paper);border:2px solid #b8a783;box-shadow:inset 0 0 0 4px #f7eed344;color:var(--paper-ink)}
+.itemdetail h3{color:#303955;font-weight:600}.itemdetail p{color:#39435c;font-size:16px;line-height:1.8}.itemdetail .tag,.itemdetail .grade{color:#59627a;font-size:13px}
+.inventory-panel{width:1060px;max-height:976px;padding:26px 38px}.inventory-panel .panelhead{padding-bottom:12px;margin-bottom:20px}.inventory-panel .columns{gap:38px}.inventory-panel .inventoryside{width:410px;min-width:340px}
+.pack-column{width:466px;flex:none}.pack-surface{padding:16px 20px 22px;background:#3a4d76;border:2px solid #8194c1;outline:1px dashed #b5c0d077;outline-offset:-9px;box-shadow:inset 0 8px #7185ad33,0 5px #111b35}
+.pack-surface .statline{margin:0 0 16px;color:#e4e4e5;font-size:14px;gap:10px}.pack-surface .statline span:first-child{color:#f0d9a0}
+.grid{background:#17243d;border-color:#17243d;box-shadow:0 0 0 1px #98a7c466}.cell{background:#2b3d61;border-color:#7286af66;box-shadow:inset 0 2px #b4c4e711}
+.cell.blocked{background:repeating-linear-gradient(135deg,#19233b,#19233b 6px,#68627b 7px,#68627b 9px);opacity:.8}
+.itemcell{background:var(--itemcolor,#766544);border-color:#f0e4bb80;box-shadow:inset 0 0 0 3px #11152622}.itemcell.selected{outline:3px solid #ffe4a2;outline-offset:-4px}
+.cell.good{background:#4e8e7e!important;outline:2px solid #b6e4c5;outline-offset:-3px}.cell.bad{background:#945b69!important;outline:2px solid #f4b9ae;outline-offset:-3px}
+.belowbag{width:466px;margin-top:18px;min-height:136px;padding:16px 19px}.belowbag h3{margin-bottom:10px}.belowbag p{margin-top:8px}
+.staging{background:#15203b;border:2px dashed #8096c0;min-height:178px;max-height:235px;padding:15px;margin-top:14px}.staging:empty:after{color:#bcc9e3;font-size:14px;line-height:1.8}
+.inventoryside>.eyebrow{padding-top:6px}.inventoryside>.hint{margin-top:2px}.inventoryside>.travel-note{margin-top:auto;padding:18px 0 0;border-top:1px solid #91a4ce55}
+.itemchoice{background:#334468;font-size:14px}.itemchoice.chosen{background:#526395;border-color:#efd89c}.itemchoice small{font-size:12px;color:#ccd5e9}
+.detailactions{gap:12px}.detailactions button{padding:15px 20px;text-align:left}.detailactions kbd{float:right}.targetcell{border-color:#f2d69a;background:#ead29522}.statline{color:#c6d0e6;font-size:14px}
+.cutslots>button,.scissorsslot{border-color:#94a8d3}.progress{background:#31446c}.progress>i{background:#e6ce92}.minishape i{background:#e6ce92}
+#dialogue{background:#e8dfc6;border:3px solid #b7a77d;box-shadow:0 0 0 5px #17233e,0 0 0 7px #8f9dc0;color:#303854;left:235px;right:235px;padding:26px 42px 24px 166px;min-height:176px}
+#dialogue b{color:#394d79;font-size:22px}#dialogue p{color:#29334d;font-size:23px}#dialogue small{color:#5b6380;font-size:13px}#dialogue canvas{left:28px}
+.talkchoices button{background:#2f426b;border-color:#879cc3;font-size:17px;line-height:1.8}.talkchoices button:hover{background:#465e90}
+.slot{background:#253657;border-color:#8c9dbe}.slot span{font-size:14px}.slot small{color:#c2cde2}.range input{accent-color:#e6ce92}.achievement{color:#aebcda}.achievement.earned,.quality{color:#eed69d}
+#achievement-toast{background:#1e2c51f5;border:2px solid #e6ce92;box-shadow:inset 0 0 0 4px #384c76,0 5px #11172d99}#achievement-toast p{color:#cbd4e8;font-size:14px}#achievement-toast small{color:#eed7a2}
+#holdring{background:radial-gradient(circle,#1d2a4b 59%,transparent 60%),conic-gradient(#e6ce92 var(--progress),#496188 0)}
+#intro{background:linear-gradient(90deg,#101933fc 0%,#182448f5 40%,#1b294680 69%,#111b3c33 100%)}
+#stage:has(#intro:not([hidden]))>header,#stage:has(#intro:not([hidden]))>#quest,#stage:has(#intro:not([hidden]))>#mapcard,#stage:has(#intro:not([hidden]))>footer,#stage:has(#intro:not([hidden]))>#exitlabel,#stage:has(#intro:not([hidden]))>#westexit,#stage:has(#intro:not([hidden]))>#southexit{visibility:hidden}
+.introinner{top:218px;left:150px;width:630px;text-align:left}.introinner:after{display:none}.introinner .eyebrow{font-size:15px;letter-spacing:6px;color:#bccaf1}
+.introinner h1.intro-symbol{font-size:86px;letter-spacing:8px;margin:32px 0 24px;line-height:1.4;color:#f1e6c9;text-shadow:3px 4px #17223d}
+.subtitle{justify-content:flex-start;font-size:23px;letter-spacing:8px;color:#e6ce92}.subtitle span{background:#a4b3da;width:40px}.subtitle span:last-child{display:none}
+.introinner p{font-size:20px;letter-spacing:3px;color:#c4cde4;margin:38px 0 36px;line-height:2.1}.introinner .primary{margin:0;width:345px;text-align:left;padding:19px 26px;font-size:20px;letter-spacing:3px}.introinner .primary span{float:right;margin-left:0}
+.introinner .textbutton{margin:16px 0;padding-left:0;font-size:16px;color:#cad4eb}.introinner>small{font-size:14px;letter-spacing:4px;color:#a6b9df;margin-top:16px}
+.introfoot{color:#bfcae3;font-size:14px;border-top:1px solid #a0b1d844;padding-top:22px}.introfoot a{color:#eed8a2}
+</style></head>
+<body><main id="stage" aria-label="探索遊戲畫面"><canvas id="world" width="480" height="270" aria-label="探索地圖"></canvas><div class="vignette"></div><header><div class="brand"><span class="flower">✣</span><div><strong>第七日</strong><small>花 仍 會 開</small></div><span class="divider"></span><span id="location">營區基地<small>FOREST'S EDGE</small></span></div><div class="daybox"><span class="sun">☼</span><div><span id="day">第一日</span><small id="time">晨光 · 06:00</small></div><div id="days">● ○ ○ ○ ○ ○ ○</div></div><nav><button id="sound" title="切換聲音" aria-label="切換聲音">♫</button><button id="fullscreen" title="全螢幕" aria-label="全螢幕">⛶</button><button id="menu" title="選單 Esc" aria-label="選單">☰</button></nav></header><aside id="quest"><div class="eyebrow">今日的約定 <span id="questDay">01 / 07</span></div><h2 id="questTitle">收集木材</h2><p id="questText">沿著小徑，找一些能用的東西。</p><div class="questline"><span>◇</span><span id="questSub">完成木材組件（上）</span></div></aside><div id="exitlabel">森林小徑 <span>↑</span></div><div id="bubble" hidden></div><div id="interact" hidden><kbd>F</kbd><span></span></div><aside id="mapcard"><div>探索地圖 <small id="mapcount">01 / 04</small></div><div class="mapstrip"><i></i><i></i><i></i><i class="active"></i></div><p id="maphint">森林邊緣的一小片平地</p></aside><div id="toast" role="status"></div><footer><div class="controls"><span><kbd>W A S D</kbd> / <kbd>↑ ↓ ← →</kbd> 移動</span><span><kbd>Shift</kbd> 衝刺</span><span><kbd>F</kbd> 互動</span><span><kbd>E</kbd> 背包</span><span><kbd>Esc</kbd> 選單</span></div><button id="bagbtn"><span>▣</span> 旅人的背包 <small id="bagcount">7 / 36</small><kbd>E</kbd></button></footer><div id="westexit"></div><div id="southexit"></div><div id="fade" aria-hidden="true"></div><div id="overlay" hidden></div><div id="dialogue" hidden></div><div id="intro"><div class="introinner"><div class="eyebrow">A SEVEN-DAY FAREWELL</div><h1 class="intro-symbol">放得下嗎？</h1><div class="subtitle"><span></span>一段七日的旅程<span></span></div><p>有些東西，值得一路帶著。<br>有些告別，需要七天練習。</p><button class="primary" id="start">開始這段旅途 <span>→</span></button><button class="textbutton" id="continue">繼續旅途</button><small>探索 · 收集 · 整理 · 告別</small></div><div class="introfoot">耳機能讓你聽見森林。 離線單檔版<span>1920 × 1080 · 16:9</span></div></div></main><script type="application/json" id="asset-manifest">{"images":{"background.camp":{"src":null},"background.forest":{"src":null},"background.monastery":{"src":null},"background.grassland":{"src":null},"background.empty-camp":{"src":null},"background.return-camp":{"src":null},"character.tana":{"src":null,"frameWidth":21,"frameHeight":33,"frames":6,"fps":8,"displayWidth":null,"displayHeight":null,"nativeSize":true,"walkDirectory":"characters/taana","walkFrames":{"down":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAhCAYAAAA2/OAtAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAAC4UlEQVRIx63WT0gUURzA8e8U2UqYhy4tsmlsiSIZdhAEiS4SZIFgiH8wULC6qJmm66GQOriam6mXYkEh8Q+SIJRBeIkQBA+JhijWkusi28VDibgZ2+uwvGlmZ2YbrXeZebyZz3vzfm9+7ylCCP53URKhiqJYNgohlH2hEsvJLrTscHll1hI3oIqiiJzsQo4ecQDw42cEgMjuDo7kYwC6tuWVWQOsQ81AO/fxcELUTkmIWoHfvm+RevyE4ZoIVoQQKqidLy0KxMDtLRCYojJ4QgjFgGpLZHdHHd20f4Dim/WkpsTqMmjxK8IWOu0foLiunmn/ANdu3+HVs6cU19XbQ90ZeQC6h+PRq7caef28z4BGdncACKwv/EFloCQs8XhUe5XtskhQF6jN4REALt7vUdHJfi+AAQUobfAQieyAgPePWgBIq67Sf/7qzCxLc/O0Dw7rojvq6zDMXWVzh251dNZWk1uQT1ZRoTnqffmGwRc9tHn8uFxnCW+u4WuqVJHm3lGcaZmEQp/o8tZRe6MFz/UrRlSbRNwZeUxODdHm8QPQ11xhGGmjbwyALm8dpSU1BNYXdMnFNKEAyDnePpluQFO+BtU5NMtUpqmv//G4AGhsrbD85/u6Y6NtuFf+99R35vQF4fO2AxDciALgjITV9rDDCUD6qcOxOfZ08vnLh8Spb2p8wjCq4EYUZyRM2OFUMW0pKS+zzlJaMLgRVQEzVNseD6tLSoLBjSiNrRX0dY/pXopH5NSYwZaoNhhmxaxjFQXE6swsbxdC/AIOWUR9rreKgqYRy1UAcDnPRVZRISoKsDQ3T9mDu7HeFEVcys0FoLPmHO1DH9UrwLulJfW5iYdPyC3IB4ih8vPj9/P4Pd9spGbP6n5Ts70/0+VW68lJSezu7an1tVDA8kBhC01OSmIxsIK2kwOj593Zan0xsGL76GMLlaAMnDZQ+0blfabLzVoo8G8HNInaHdmBj5J2QYDfvA0w4RJh2CgAAAAASUVORK5CYII=","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAhCAYAAAA2/OAtAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACtElEQVRIx7WWS0hUURjHf4doGolq0aZBRo0pUSTDFoEwRBsJaiMY4gMDBZcpNqbjohhq4WhOYi0FhcQHUuCmNm0iBKFFoiET1pCjyLRpUTHMZMhpYed4n+NF6tuce+7h/L7H/9zvHiGlxM2EEK6LUkrhus8JqmBVlWFXh2vJRVe4DSqEkFWVYY4d9QPw63cegHwui7/oOIBpbS25aAOboE5AL89WcEGo0b7/+Mapk6dt7wtC3YAKZh0LgYWUUgON9TJC91MBJI5QJZ6UUtigRsvnsgC8HH/Kjc7begS0aNYTURCaz2VtMOtoBdugobIaUwQK2hKJMZOI2UYjVGWU2ljehyqhFFjZQVCjKaBJqO2paQCu3BvxBG3oipLPZ0HC24e9ABS3tZrT//h6kdWldwxMTJnUnUnEbIK0RGKm0zHY0UZ17WUq6sLO0PjzV0w8G6E/Ok4weJ7M9jqJnhYNiYzOECguZ2vrE0PxTjpu9RK9ed0ONTaRUFkNLxYm6Y+OAzAWabZF2p2YBWAo3klDfTupjWVTc3FsKACqxj/PlNqgJ76mdQ2dOpVj63vyaE4CdPc1u7a+seG9aLvuNh3c+s6dvSQT8QEA0pu7AATyGb2e8QcAKC05slfj6CCfv7x3jlSlvTA3b4sqvblLIJ8h4w9omNHqmxrtXUoIIVU6alN6c9f0bIUa163gv31nv0aqlmPDs6ZNVogqjRNYAHL+wWO90Hj/jqMwS6Ot1PZM28QqLTmiHXT3NZsPv/UvKYSQV6urARhsv8DA5Ac9ArxZXdXgazVB7aiiLux8pJx+z06RSimF+ho9Q8uDIT0v8vnI7ezo+fpWypSVyZEXaJHPx0oqidGJEerpMqGgF0OVer6SSnq+pXiuKfBvIlXqG9U+9F3KDVoI5AnqpCoerSD0sPZfoH8AYbEV4cF29TsAAAAASUVORK5CYII=","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAhCAYAAAA2/OAtAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACgElEQVRIx9XWT0hUQRzA8e8jspWoDl1aZFOQJJEWvAiCRJcI6iIU4ioGCh5LbM0/B2Oxg39yFesoKCT+YSnwUpcuEoLQRdgQw1hwXWS7dKiQ3QyZDjXjvDfv7XtUl36X2XnD+7yZ+Q2/HUsIgVdYluU5KISwPN9zQyVWV9vk+cGt7XVP3EAtyxJ1tU2cOhkC4PuPIgDFwgGh8tMAtrGt7XUDtqFuYJDfTrgkqseXr585d/a88bwk6gVKzNmWgi0hhAL1/dLR46UAAldUJk8IYRmoHsXCAQCvZp9xq/ueagGVNOeJKIkWCwcG5mydsIFWV9XbZiDRtniCpWTCaHVUriizu3mMykRJWIYfqocEbYnaX1gE4OrwZHD0d+LePu4DoKKj3b78D2/WSW+8Y2huwZbdpWTCSEhbPGE7HaNdHUQbG7h8vckdHXvxmrnnkwwMzhKJXCK/v0Oyt00h8eklwhU15HIfGR/rputuH4N3bpqoXkSqq+p5uTrPwOAsADPxmDHTnuQyAONj3dxu7iSzu2krLq4FBUDu8bcLlQZ65lNW7aFbpXItfU+frAiAnv6YZ+mbmfg12/sPW4OVvtWVFADZvSMAwsW8Gs+HwgBUXjwBQHNri3/pk6Ae2b0jwsU8+VBYYXo4YVuiZiaW1UvZvSMb4NfXYXWkUiNTamk9/TG1Z6UiECqj5dEDA9iYbqexd9H2TN97mVTXc6rHtWgUgNHOKwzNv1ctwFo6rVZzoz4CYB5+v79nt5mmRqaINjaofiC0JlKt+uVlZRQOD1V/J5fxvAv4ovrL+kd2chnPC4Xv8uW+rqXT/waVoET/6trjhZaCAqHOExAU9EX/NP4f9Cd+0AbdW7BjbQAAAABJRU5ErkJggg==","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAhCAYAAAA2/OAtAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAAC4klEQVRIx63WT0gUURzA8e8U2YqYhy4tsmlsiSIpdhAEiS4SZIFgiH8wUFjqoptpuh4KqYOraaZeKkEh8Q+SIJRBeIlYEDwkGaJsLbkusl08lMhuhr0Oy7xmdma2zXqX+fPefOY37/fmN6MIIfjfTUmEKopi2SmEUP4KVbH8vFLLG66u+SxxA6ooisjPK+XoERsA339EAYhGdrGlpgHo+lbXfAZYh5qByezHwwnRZFpC1Ar8+m2bjGPHDdtEsCKEkKB2vrQoCmSkx0DAFFWTJ4RQDKi2RSO7seh2tpl/Oky5q0lGqyYtfkUkhc6PDHPlxk1ePH5EuauJ+ZEYnhTqzC4C0A1W0cvX3bx8MmiJRiO7AAQ2ln+jaqJUWMVVVItpURXTgrpEbY1PAHD+Th8oYLOlMTvkBTCgAJXNHom+vd8GQGZ9nf7x1xd8rCwu0Tk6rsvuZH+XYe5qW7t0q6O7sZ6CkmJyy0rNUe/zV4w+66PDM4LDcYbwlp/+llqJtA5MYs/MIRT6SI/XReO1NjxXLxlRbRFxZhcxOzdGh2cEgMHWGkOk7v4pAHq8LiorGghsLOuKi2lBAVDneOdElgFN/xKUc2hWqUxL39CDaQHgbq+xfOcHe2PRNt+u/nPpO33qnOj3dgIQ3NwHwB4Ny/6wzQ5A1snDsTn2dPPp87vEpW9uesYQVXBzH3s0TNhml5i2VVRXWVcpLRjc3JeAGartj4flkooHtY9ohgQ393G31zDYOyXPq7Alql5g1dQkmqKAWF/w8Xo5ZLhA2xYH6ihpmTBdBT+BQ8DFIge5ZaVIFGBlcYmqu7did1MUcaGgAIDuhrN0jn2QW4A3Kyty3My9hxSUFAPEUPXx47/n8d98s0jNxupeU7Nvf47DKY9TU1KI7O3JY38oYPlDkTTqDwUodOZJ+MBo/LlCZ57cfx9YOxiqJkpNjBY+EGoWbY7DiT8U+ONPmpLsr6RZ5P+Mmi0dq3G/ABBoMeHVsMWdAAAAAElFTkSuQmCC","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAhCAYAAAA2/OAtAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACtElEQVRIx7WWS0hUURjHf4doGolq0aZBRo0pUSTDFoEwRBsJaiMY4gMDBZcpNqbjohhq4WhOYi0FhcQHUuCmNm0iBKFFoiET1pCjyLRpUTHMZMhpYed4n+NF6tuce+7h/L7H/9zvHiGlxM2EEK6LUkrhus8JqmBVlWFXh2vJRVe4DSqEkFWVYY4d9QPw63cegHwui7/oOIBpbS25aAOboE5AL89WcEGo0b7/+Mapk6dt7wtC3YAKZh0LgYWUUgON9TJC91MBJI5QJZ6UUtigRsvnsgC8HH/Kjc7begS0aNYTURCaz2VtMOtoBdugobIaUwQK2hKJMZOI2UYjVGWU2ljehyqhFFjZQVCjKaBJqO2paQCu3BvxBG3oipLPZ0HC24e9ABS3tZrT//h6kdWldwxMTJnUnUnEbIK0RGKm0zHY0UZ17WUq6sLO0PjzV0w8G6E/Ok4weJ7M9jqJnhYNiYzOECguZ2vrE0PxTjpu9RK9ed0ONTaRUFkNLxYm6Y+OAzAWabZF2p2YBWAo3klDfTupjWVTc3FsKACqxj/PlNqgJ76mdQ2dOpVj63vyaE4CdPc1u7a+seG9aLvuNh3c+s6dvSQT8QEA0pu7AATyGb2e8QcAKC05slfj6CCfv7x3jlSlvTA3b4sqvblLIJ8h4w9omNHqmxrtXUoIIVU6alN6c9f0bIUa163gv31nv0aqlmPDs6ZNVogqjRNYAHL+wWO90Hj/jqMwS6Ot1PZM28QqLTmiHXT3NZsPv/UvKYSQV6urARhsv8DA5Ac9ArxZXdXgazVB7aiiLux8pJx+z06RSimF+ho9Q8uDIT0v8vnI7ezo+fpWypSVyZEXaJHPx0oqidGJEerpMqGgF0OVer6SSnq+pXiuKfBvIlXqG9U+9F3KDVoI5AnqpCoerSD0sPZfoH8AYbEV4cF29TsAAAAASUVORK5CYII=","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAhCAYAAAA2/OAtAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACj0lEQVRIx9XWT0hUQRzA8e8jspWoDl1aZFOQJJEWvAjCEl0iqItgiH8wUPCYYmu6HozFDv7J1cxLsKCQ+AcpEMIuXSQWhC7ChhjGgusi26VDxbKvDZkONdMb3759j+rS7zI7+5jPzPzmt7PPEELgFIZhOD4UQhiO44qhEqurDTlOuLObcMRtqGEYoq42xKmTPgC+fTcBMPM5fOWnAbRnO7sJG6yhxUAvn4/DCpWgdSVeQu7EChtCiJLg5y+fOHf2vK0tBXtCf+cHELijgHA6ZTOfA2AjPsetnruqBdShFasKR7RQMHn59LGGWdvm3og7KlclV2Dmc2zE52gPR1mORW2tFbWO1dCd3QTVVfXarG6oxABS+9tI51fq4XBxCYCrI1PqQFxRMwcC3jwcAKCiswOtpN6/TpDcesvw/KJ2usuxqC1v7eGoVh1j3Z0EGxu4fD2kl5REx5+/Yv7ZFEOROIHAJbKHe8T62xUSnlnGX1FDJvOBifEeuu8MELl9045aL5HqqnperC8wFIkDMBtus620L7YCwMR4D81NXaT2t7XLpeiFYs3x1wuVNvTMx7SWw5IXiownj1YFQN9gm+Nvfnby52p777d6u/rWV9cASB8cAeA3s+p51ucHoPLiCQCaWlvcrz4JWiN9cITfzJL1+RVmjeOwdlCzkytqUPrgSAPc+lZYldTa6LTaWt9gm8pZqfCEymh5cM8GbM100Ni/pH1nzb081KJ1ao1rwSAAY11XGF54p1qAzWRS7eZGfQDAXvxuf8/FVro2Ok2wsUH1PaE1gWrVLy8rI18oqP5eJuX4LuCKWgdbJ9nLpBxfKFy3L/O6mUz+G1SCEv2r1x4ntBTkCT1eAV5BV/RP4/9BfwAy8fXYkyMrCAAAAABJRU5ErkJggg=="],"left":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAjCAYAAABhCKGoAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADsUlEQVRIieXVW2gcZRTA8f+ZTWZnq0khAUnEJNjU1BKSqvRixYK0qGihqI3Y0gdtaqLWyNJcqQTaQmubyyatBkUslIi9Em1f9UkfpBSKSIIXAlGTUBKQFBNdM9nZmc+HZMbd7Oxm08Ynz8vMd/bM+c23M/N9opTivw75/yAiklSwqrjYO/97YgKllNwx4javXP+kl4uZUQB04x4v9+PP36KUyoj5IiKiNj/6NI4DSilMy8ScjWKE5pvrOUFE5nvOWaaHOY7jCyUhoVBImabJY1XbEdFI5N06EWHOMgnmGt5vc5aZHWIYhlr/0BOIaF6z6ZkpVucXAiSd+0UmyEN0XVeV67ahaVpK08XA9MwU+XkF3l+WFWIYhlq7ZhMAwVyD6ZkpryA/r4CZP28njQEv5z4nN/wgUUqh67qqWLvFS5qzUfLzCujvaOfAuye5/cfvSWBiY3M2moRlhZizUa5+2MPL77TweV+ElxqaGPigi5qGZgb6uqlpaCY3GEpp7l77y+j32SHXPuqlpqF5AWnki74e7yia8OLBRnJ1I2kmbmRESu6vJLTqXg9p6fqE7tZ6mjo/pqf1DRBh99tNDPR1IzIP2bbN4kiLAB4kIqzOL6T/VDttPWc51fg6bZGzdLfU0bgABgIBdr0Z5qv2MIGAxo6jEWxnvuFv44PE43F/xIUsy6K+rofw7o2IJgjwattxbMdBKYWI0N/Rzg83bgJQ/fgmXnjrEMO/fkdOTg6xWCz9d+IlRNTzzx2kK7yHQECj7f1LFN63hlu3RjhxvJb62jbOdx9h6MZNUIqqLRup2rkdy7KyX7tERI1/+hnRojIQwVGK5tNXsB2H904coG5/KxciR1FKsWHnDuLxOLZjZ1yJfRdITdPUT19+AwtLjKMUeZNjCApEKK99DStuL9k8I+JC6S463XHBOw+37l1yT8m4aYmIOtN5keK5SQAmgkUAlJUG/r0Zptm1p275+0kicu3SFUbHbIrnJpkIFiUBAKNjNg+W/pURuitkdMymrDSw5Gwybr9nOi96Td2Gi2fh5jJBSyLZROKN+L0Iaff4RCDcupfrvfvYeuh8Sm1i3bOPPMDDz2xbGhERdflYxBu/cqSJ6737OHxuiJP7qzh8biip/uvBQS4fi7Bh62YvtxjyRVJuF9LOBFg+4hcioipKygnpOrOxmJcfHh/xrc/qmaRDhsdHqCgpT0Hu6ov3Q4AUaMWQxPGKIyKinqquBubfJL9YEWRxw0TYxe94gVwunq72H5OnXdmbtGzXAAAAAElFTkSuQmCC","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAjCAYAAABhCKGoAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADxklEQVRIx+WWXWgdVRCAv9lN9t4bTQIJSBJIgm2tLSGRSn9UKkhLEa0UbStt8UGbmvgXic0vSqAVWtv8ttWiiAWJ2B+L2j74or4oKFIpIilqKVRNQpuApJjoNZvs3R0fml3vb3KbtE/Oy56dOTvfmTlnZ46oKrda5P8DEZGECXmlpcH4n5ERVFXmDfGdVy1fG+im7SgAVvi2QPfzxW9R1VlhaSEioqtXbMDzQFWxHRt7Mko4ct25lRNC5LrPKccOYJ7nyZyQSCSitm1zb/U6RAzi8f48EWHKsQnlhgPblGNnBwmHw7r8rgcQMQJn4xNjFBYUAySM08lsoABiWZZW3f0ghmGkOE0GjE+MUZBfFKQsK0g4HNYli1YBEMoNMz4xFkwoyC9i4q9rCe9AoPP3Kf4gJINEVbEsS5cuWRMo7ckoBflF9Hd2sOu1A1z7848EYLxjezKaAMsKYk9GOfN2H0++3MonR3vZ3NDMx291s7WhBdfzMA2D3FAkxbn/7a+DP2YHOfvOIbY2tMxAmvj0aB+bG5pwXS/40Hfuw3yZFVJeVkUk7/YA0tr9Hj1t9TR3vUtf23MgwpaXmnFiMQBM08R13ZRTlhHin67ysipEhMKCYvoPdtDed4yDTc/S3nuMntY6mmaAm55/BdM0+KKjEdM0WL+3Fz/I34cHiMVikvFntCxLHcehvq6Pxi0rEUMQ4On2fbieh6oiIvR3dvDTufMA1Ny3isdf2M2l334gJyeH6elpmbOsiIg++siLdDduxzQN2t88RfEdi7hy5TL799VSX9vO8Z49XDh3HlSpXrOS6o3rcBwn+9olIjr8wYdESypBBE+VlsOncT2PN/bvom5nGyd696Kq3LNxPbFYDNdz5YarsGEY+svnX8NMifFUyR8dQlAQYXHtMzgxF0+9hZV6wzAyNprDnSeCcWPbDr+Ayrz6ydlTpxkccimdGgVgJFQCQGWF+d9iGGfT9jrySkuJXr0qN9RPjnSdDJz5oJFQSQLAt91Z8TcehTyxY1vaBpYA8bvhka6Tga6ywswIGRxyqawwMRjHozDQJadQ4pqRfvR6LwCjkbIESLzD5CiSoQ+vKA/el21Yi6pKWgjAtj3NxEe1OvczvnceS0mtv2qAi19+k2BLgSTfTIJQRfS7Q09x/+7j+E8S27JkutmkpGu2K9FDNTUc2FnNq+9fSLB9NTCwsP8k0+qS5aZBlpYvTmu7NHz55lzuZgMsKBJ/H/y8x4N85wtOVzzEB8VLsm0u0JzpSrfa5EjnDcnmWN9SSHyk2ezJvx57Z9lNAWAOAAAAAElFTkSuQmCC","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAjCAYAAABhCKGoAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACiElEQVRIx+WXT0hUQRzHv4NEz8QyROgh+iJBjGjBiEBYokNi4KXT0q4ZJO0pZLFdBA/JUgdLMl08evAQanjq4ikPEQt1MlhZi0Jod6lXh4iKbCWW6RAzzMyb92efdanf6b3f/Ph+fn9m5u0SSin+tpH/B0IIkQIOmCZ/3rFtUEpJaAgTPxU5z31fvn4CABw62Mp9G4V1APCEaSGEEHrieBT79xkSQBRXbaOw7gpyQHSAIBYYwgAAOMSvgiAgLUQEsBmIMDewL0StggFUE0Hi++7PKgCg+DLvADkg1R/fJaG1hXkMJke1IBFmNDbVBwHAxd0gqjizPUFUGBNn8YEqYaCuo70OCADXqtRqAkPWFuaRSGexPJN1gMRWPb2dAQCcvXkPRmOTFuB6GK8l55CJnea+RDorxTDI1MgwIn1nMJgcxfbbF/Wd+IEL15FLxwEA6dllmO3dqFTe4O6dJEauZHiFDNLTH63v7iKE0HcPlvDtiMV9qZkVAJAgANDTH/W9HD0vyFeP85Kv+UOJP7cPD0lroSC674houenflVmdDbh4KVb/VS+KMzGzavN12zBhdTY4hBJjKezYthbo2MKieGo8jtz0CsyqDdswefZeVirXkBqPSzDpxK/eus+zZZBHD1dRKte04jp/qVzDQG8H3xiUUqKFAEBs8obUMjdjWbNYBtBC1HlQSgl7fzY7hL6xJS1E7L+6WRztcrPnc5fpxOImpq6exMTiprT2pFDY268VMbuglYQ+J20trTjc3KKNeV3ZDg8hhNBzkQgAIL+1hWOm5Yh5//kjLMtCsVgMf60wCOt9d0cXz54Zi/GbjWe7RBF1Dup6KIg4F+2H6E9BfAfqkcS/+f/kF6559so2s3EtAAAAAElFTkSuQmCC","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAjCAYAAABhCKGoAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACbUlEQVRIx+XWMWhTQRjA8f8h1lRRBxdDqRUKpSIGKlIIBHGwVOjiFJqWChYzSQ2aWOhQCXWoBtsYOnboIG2geyc7iBS6VUgRpRIwCRIXBxVt2hKeg9xx7+Ve8prUyW/Je9+7fD++u3fHE5Zl8a9D/D+IEMI24KTfr65/l8tYliWaRmTxq4GbKvf9xzcAzp45p3JbuXWAupgREUJYly+FOHHcZwP04s7Yyq27QjWICfASnhEJAApp1IEXyIjogFwDHXOD9w4qvP+wUQMpxNmFBJyhQ/r93kEFwBtS2f1lK7S2uMBQdMII6Ziv/ZTKOSEjAqjizl99+pzFjxTRi8vxnjqRUPfFPlcEqJk6UzeekLXFBUbiSVbmkjYAYCSeVFP19mkCgOvTLxRUd+F16F70JYnwNVthPSQyOz5GINjPUHSC/Od3rseLERm8dZ9MPAJAPL2Cv6OHUukTz59FGb+TUB1KpHcgdLizSwhhfXm1zM/zXSoXm8sC2BCA3oFQw8Ox7gH58fWGLXf6a0Fdd4yNApBJZXnweLj1o94UmdTfzrouHOP2cLi5TnRodWZe3Zd9flVcj0ZQQySTyuKvlCn7/DXFvUItIYViVeWaQiQgw9RFoVi1PXODPCP1QiKFYpXYZKTxjjcBsckIm+lRgg+XXd80gMG+TuPGNG5G/Y0KP3nEZnqUqaVtZu9eYWpp2zb+TS7H6sw8gWC/yjkhI2KaErdOgMMjpqnr6ewGoL2tjd39ffVsp5Q3/sfTmrghO6U88lpHWtrxTkgWdUJHhuj3R44IIawbgYB6k7ysQctf9ZZlCR2WeNMH5GFxt7F/AKRR9cpQSNo5AAAAAElFTkSuQmCC","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAjCAYAAABhCKGoAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACd0lEQVRIx+XXT0gUURzA8e9Toi2piGJpk12DBTGiBSMCQaJDYuClk/gng6Q9hUmsBkLBUgdLMt08evAQutDdQ+QhQqiTwkoUGwutQ2wRHSqqFVlfB3uPN+OsO+tuh+hdduY3s7/P/H5v5u2skFLyt4f4fxAhhO2EvYGA3v6ZyyGlFDtGVPJTkfM69vXbFwAO7D+kY0upBYBtMVdECCFPHG9l9y6fDTCTO8dSaqEotAVxA7wMz4gCAI2UqsAL5IqYgJoDEysGr63nef1mcQukEWcVCnAOEzL319bzAN6Q/K8ftkTz01N0RAdcIRPz7anTMSfkigA6ufPTbJ8zeVURM7k631MlCgofay6KAFta51aNJ2R+eoqeWJy58bgG1H5PLK5b9eLuEABnbz/Q0LYTb0JXo5MMdZ7WsZ5Y3HaOQkb7+4i0nKEjOkDm/XLR5cUVab9wjUSsG4DYxByB+kYs6x3370XpvzykK1RIU1treWuXEEJ+eDzL9yMNOjY4ngSwIQBNba0lF8dtF8i3zxZtsX0fs3q7vq9Xb1dlqXcbibHNygZvdleGmNiTOw/J+QIE8jlyvs0frYZQLQAXuzp31i4TSIwlXZNnVws0hGqrjyhAjexqgevDXZW1y+/3y1vDj2hvDgLwdNmytaniiS92p6nbNjGWrO7Ev5zopeXGrOvxqiCvJi/JkZkVRq+cZGRmxXbseSr1D1UihJCNwTBpK0NjMGw7lrYyhPyHyX76LCp64s3EaSuDW0zU1LBRKJT/cncuEtF9V0nTVgYppVDVARw9WFdyfkoiKoGz/6pS82LKQpwLZNEvOyouG/H8t+DPxZT9wl3t8RsMSfPKsgfO+wAAAABJRU5ErkJggg==","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAjCAYAAABhCKGoAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACfUlEQVRIidXWQUhTcRzA8e9fiVZSEcVoiVswECMaGBEIEh0SAy+dRGcGSTuFSWwGQsGogyWZLo8ePIQK3T1EHiKEOilMolgMmo9YER0qqomsf4fx//N/z7f1pivqd9nb7/35fd7v9397e0JKyZ8O8U8gQgjbgt2BgD7+ns8jpRRbRlTxE5GzOvf5yycA9u09oHPL6UWAipgrIoSQx462s3OHzwaYxZ2xnF4sC21C3AAv4RlRAKCR33XgBXJFTABKe2Bi5eD1jQIvXy1tgjTi7EIBzjAh8/v6RgHAG1L48c1WaGF6iq7YoCtkYr5dDTrnhFwRQBd3fprjcxavKWIWV+s9daKg8JHWsgiwaXRu3XhCFqaniMaTzI0nNaC+R+NJPapntxMAnL55T0MVN96ELscmSXSf1LloPGlbo5DRgX4ibafoig2SfbsCuD9eXJHOc1dIxXsBiE/MEWhsxrLecPdOjIGLCd2hQlo62qt7dgkh5LuHs3w9FNK5ofF5ABsC0NLRXvbqKyIKev1kyZbb8z6njxv7+/RxTR71bpEaK3U2dL13e4iJPbp1n7wvQKCQJ+8r/WmFgvUAnO/p3tq4TCA1Nu9aPLdWJBSsrz2iABW5tSJXh3u2Ny6/3y9vDD+gs7UJgMcrlm1MsM2N1wscd5q6bVNj87Xd+OcTfbRdm3U9XxPkxeQFOTKzyuil44zMrNrOPU2n/6NOhBCyuSlMxsrS3BS2nctYWYL+g+Q+fNzaLax+8WbhjJXFLSfq6vhZLFb/cncmEgFKc1dFM1YWKaVQ3QEc3t+g13l+uXMiqgDY5686NS+mKsQs4ixeqeOqEa+hLqbqF+5ax19BfgHsXvPKQqqOHwAAAABJRU5ErkJggg=="],"right":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAjCAYAAABhCKGoAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADpUlEQVRIx+XWfWhVZRzA8e9z7svOWm4xCTZkWzUYvbARIYj0R/1V/1qKmkZDMCRZ5e692zQFFUayV7m0LLec9YdkpBaCRYYSTDJfqNwY2nLGvYs2gg3c0vuynfPrj8s53XM999696F/9/jnnPM95fh+e5zwvR4kIDzrU/wdRSslD5eX2893xcUe9iKhFI0opUUrx9JPP22XJ+B0A/HqRXTZ8/UJezBXRNE2s5AU+3UpCci4BQDx2B72wCN2no5RC0+DyL99nhXIiFgCQmI1T4NOx3lfqv3wKEDH5eeg8uq4Ti8VUTsQNyIzb05OUFC933Ft5REyu//4j8XhcLQgREaZnpuzE2SAA0zQZ/m2AZDLpjqR/CyvisdTHLl5WCsD0zJRdV7ys1PFcUrycxGwcgJu3rti9yYpYyfXCIgeYnrj0kUc58v4u6ltamZ6Zcrw7cvOS3Zt7kCeqnr0nsYXNJmKc6OlkXUModX27iVM9XaxtCPLlBx28sj1gt82LpIfVaDYZ56tD3YgpvNoQ4FRPt31d2xDkRE8na95qXBwC4PF4UoAI6xpCnPywC0QItB+mq3kbofZeOpretJHY3X8Y+2vYHfF6vfJYRV0qsQbn9gUxDJOXWsOc/jiMYRgE2g/T3byNUEcfbcGt7Oz+hLbAVup3tnJ7ehIRcQCuU9jv98vc3Bw1jz/H1x8dZPCnKwA8s2ol9S2tiAhKKTyaxmdtexBATCF88iq9fQF8Pp8DyLl3+Xw+GTpznqFLV0EpaletZHNoP739beze08+KFdVM/n2Ltnc2YhgmTeHjfPPtIdetJecu7NE84vV6uXbmHEopNgX30Xe0nfd2H8GjaXTuWI+mFIhQNBGh4o3XF46kYz6vh9H+T0EEQTFTVpkCAMTkqZdfwDRNteDzRCkl4fbP7ecdLZuyvpsNyHuenD7eh0mJXRaJGgCUJyYAGC8o493m1/IeXK6IBfwRfZiqSo+jLhI1KE9MMF5QRlWlhzUb1y8NMSkhEjUc0H1BMocpE8ksi0SNvEPmQKwPnZ5gPrFg5MbZAb779U9Hgsy4eHAzqxuPkT7zckEq7cyWG2cH7IprFy+zYW+QF+vqHA0ObKll19EhDmypZXXjMb7Y32XXbdgbzL0YsyFuYfXELfKueKWU66Kpqai27wv9fmLJJCNjo/P6sZvXis9ERsZGqamovr9IJmChDxxZyH/wvIcrM6wZ98Pg4NJ/uNOnr5UwE14yspihcYt/AfNqZtn5KjGZAAAAAElFTkSuQmCC","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACj0lEQVRIx+2XQUgUURjH/4+IVt2U8FBTbAZSJIsLdSpYwkOdvHSSVungwaOoGZaHYqmDILvJIp02DDJ3Y09dhMROsSBEJBhLEobtxjJdPGiYI7r7OsQ3vTdvZpsZt059l3nvm4/v977vfe+bN4xzjr8t7D+krhDGGG/UNHP+Q9el95xz5hvCGOMAcDFy1dRtbm0AAFqaW03d+5XXf4TZQhhjXHRulc2tDQm0u2eg8DHvCPIFsZNaIAXiBSBGtLtnAIAtyDVEdEhj6x45RSNBGGM83BEFABw5HLDdbJpbpaW51TEaR4ixs61UkhUwn55G98CgtIBAQ5N7CIkIc4LQE4A3CDkPNDRJczvnviFWx3YAAArk85dld9UV7ojC2NnGm4e3AQBX7iWklFkBvaNxZJJxdA8MuoMQqP3MBcynp7Gy9BbjM7NKEQBAJhk3x4ncOzxJD7s7jCJodTFvQmjFM88SuHM3jVDoLPTyJyRHegEAQ8ksFl499gYRm+TqYh4AJAgApEZjpu3Rb0WcutnnH0JSnp0zx99PtEm2569FvTVIEfDyRQ7FUuVXSsZijgty3erJcaOmITOVUoyLpQo04/dHSw9oCtwxXeQ8NZlF2+lDNTsvRaUZOvSAhqGxGFKTWQmmlDAAThu7sPxVgRRLFVsw6a/f6DEhFGXP/VvyiRchBBLDJwdOQra5B49MnQIR02WXV+s7kqWpPlwemTPtRTtXJ95aZV2RiKSb6O/E+NMPmOjvxKXh5/5vK24jOdCVSIScC7Ur+mq1irXyev0gwWAQJ48dVyAAsFZe93fvqpUuiooiiYbDAIB8oeC9rYgA0ZEopD8wpCsSwX6lYuukVtl6grhJR91K2C/gn/2f/AREfRLX3jW4RQAAAABJRU5ErkJggg==","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAjCAYAAABhCKGoAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACjElEQVRIx+WXTUhUURSAv0tEo5ISLuoVk4EU6aBQq4IhWtTKTStplBYuXIqaYbkohloI4iSDtJowyBzDVRshsYXEgBCRMBGJYPQUeUFI/mCOyPBaxH3d96dvXrXybObecw/nu+eec8+7I0zT5H+LODgQIYRZrmnW/Kdh2NZN0xShIUIIE+Bi4zVLt76xCkBVZbWl+5B/sy/MEyKEMFXnTlnfWLWBdnYLfPqc8wWFgnjJXiAXpBSAGtHObgHAExQYojqUY2eO/KKxQYQQZqwuDsCRwxHPZMu5U6oqq32j8YUUtrdcleQETGaGaWrvsG0gUlYRHCJFhflB5C9QGkQ6j5RV2OZezkNDnI69AIALsvh1Llh1xeriFLa3ePvoDgBX7g/ajswJaOlJkk0laWrvCAaRoNozF5jMDJOffUffyKirCACyqaQ1Hpx4z9NMV7DLqILmp3MWRO545Pkgd+9liEbPYqwskOpuAaAzNc7U6yelQdQmOT+dA7BBANI9Ccv26DedU7daw0OkrIyOWePNEzU22/PX46U1SBXw6uUE+lLx95H0Jnw3FLjVS8flmkZ2KO0y1peKaIU/Hy0jorngvsclnacHxqk5fWjPziuj0goGRkSjszdBemDcBnOVMGDKxE7NLbsg+lLREyz1N242WxAZZfOD2/Ybr0IkSA1fOvATaTvx8LGlc0HU4/I6V+ealNmhVi53j1n2ql2gG++ssquNjTZdf1sDfc8+0t/WwKWuF+FfK0Ej+asnkQo5F631XPuxucb3tdVwTyJbR47F0HWdk8eOu9a/GDrx+noAZvL5cDde5mImn7f0MqqF5UXUXP0TiLOCAJzroZ6p+zmR0P2SH6gLB6mgg/H/5BdlAwzZLqJv8QAAAABJRU5ErkJggg==","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADp0lEQVRIx+3WW2gcVRjA8f+ZvWRjbCIpQkJJogaCFxJECqX4oE/6Wm1payuGQqUoUZvdTdLaQlsIlmwuZTFWm9hUH4oV2yqFKlZahIi1F9QmhNbYVLIRE4QEurHdSzLz+bDMuLOd3c0m6Zvfy8ycM+f7cc6cyygR4X6H+h9ZVkQpJQ9UVlrPdycnbfUiohaNKKVEKcWTjz9rlSXjdwDw+kqsspHrP+TFHBFN08RMXuTxmUlIzicAiMfu4CsuwefxoZRC0+DyL99lhXIiJgCQmItT5PFhvq/Uf/kUIGLw8/AFfD4fsVhM5UScgMy4HZ2mrHSl7d7MI2Jw/fcficfjqiBERIjOzliJs0EAhmEw8tsgyWTSGUn/FmbEY6mPXbqiHIDo7IxVV7qi3PZcVrqSxFwcgJu3rli9yYqYyX3FJTYwPXH5Qw9z9L3dNLa1E52dsb07evOS1Zt7kMdqnr4nsYnNJWKc7O1iQ1MwdX2rhdO93axvCvDF+5289KbfapsXSQ+z0VwyzpeHexBDeLnJz+neHuu6vinAyd4u1r3RvDgEwOVypQARNjQFOfVBN4jgDx2hu3UHwVAfnS2vW0js7j9M/DXijLjdbnmkqiGVWIPz+wPousEL7WHOfBRG13X8oSP0tO4g2NlPR2A7u3o+psO/ncZd7dyOTiMiNsBxCnu9Xpmfn6fu0Wf46sNDDP10BYCn1qymsa0dEUEphUvT+LRjLwKIIYRPXaWv34/H47EBOfcuj8cjw2cvMHzpKihF/ZrVbA0eoG+ggz17B1i1qpbpv2/R8fZmdN2gJXyCr7857Li15NyFXZpL3G43186eRynFlsB++o+FeHfPUVyaRtfOjWhKgQglU+NUvfZq4Ug65nG7GBv4BEQQFLMV1SkAQAyeePE5DMNQBZ8nSikJhz6znne2bcn6bjYg73ly5kQ/BmVW2XhEB6AyMQXAZFEF77S+kvfgckRM4I/Ig9RUu2x14xGdysQUk0UV1FS7WLd549IQgzLGI7oNWhYkc5gykcyy8Yied8hsiPmh0xMsJApGbpwb5Ntf/7QlyIyLh7aytvk46TMvF6TSzmy5cW7Qqrh28TKb9gV4vqHB1uDgtnp2Hxvm4LZ61jYf5/MD3Vbdpn2B3IsxG+IUZk+cIu+KV0o5Lpq6qlrrvtjrJZZMMjoxtqAfuwWt+ExkdGKMuqra5UUyARO970gh/8ELHq7MMGfc90NDS//hTp++ZsJMeMnIYobGKf4Fb/Jp1+u5L+0AAAAASUVORK5CYII=","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAjCAYAAABhCKGoAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACeElEQVRIx+XXQUjTURzA8e9rRDNJDxI1YhlIUoSCnQokOhQdugdTOnjoWGqG5aEYFAjqCJNOC4PMTTx1ERI7RAhCRMIiksGgbdhiJKGxnIi+DvEe7//3P7f/tqDoXbb39v6/z/+9329v/wkpJX+6if8HEULI/T6f7v/MZCyfSylF2YgQQgKcbr2gx1bXVgCor2vQY+9jr4pijogQQprB7W11bcUCbWzm+fhpviBUFuLUdoN2IG4Ac0Ubm3kAR8iCCCHkqZPt7Nvr3TWgem/PUaHVOCKAhuyBVN/e6usaCq5GIyYAkF/P7agkOzATHuPyteuWG/DW1JaOOGEKUcHtr4A7RAX31tRa+lVF7IFNACiIJD4vlp74/HqON/dvAXDu7ojeskgoSEdfkEgoqAGzXxQxj5OmY23MhMeILbxlYHxiRxEAREJB/X5k+h1Pwj2lfRlNbGluXiPqjsefjXD7Thi//ziZ5Tih3g4AukNRZl8+doeYq1qamwewIACjfQE998DXJEeudrpHTAhgeWJSj/843GiZd+Jiu7sD0o6MDkV/b0l/oOA810e9CbyYmgYgmdoCwJfPkPH68OUzXLl3s7IfLRNJprZoPOpxxLr7A0Whotv1aHhKKkC1ZGqruohKvLltl9r8AMwupnkwfINsNls5MjoU1UlX5VysosouYbMtPOzkbO9k9ZDzra2WscGuFgaefmCwq4UzPc//gZU0HjooU9lvNPubLOPxdIJmfxPxdKIyZI/HI+X2tgWIpxMAjmNlPdypPHz5ntPBpJRCCCEVEk8nUPNex2LuH+7Mi+13qvJkFkTFSMGLjaIo64BUAUpJ7F/x/+QXysMV2QMyF9cAAAAASUVORK5CYII=","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAjCAYAAABhCKGoAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACeUlEQVRIidXXUUhTURjA8f9pRDNJHyRqxFogSREK9lQg0UPRQ+/BlB586LHUDMuHYlAgqCOW9LQwyHTiUy9CYg8RAyEiYRHJYNA2bDGS0DAnoqenczj3dud2twX2veyes3O/3z33O/fsTkgp+dch9gQihJAHfT7d/p3LWb6XUoqKESGEBDjbdkn3ra6tANDY0KT7PibelMQcESGENJPbY3VtxQJtbhX4/CVeFKoIcYrdoL8QN4A5o82tAoAjZEGEEPLM6Q4O7PfumlAd22tUbDaOCKAheyLVtkdjQ1PR2WjEBAAKG+uW5E7AbHSMqzduWi7AW1dfPuKEKUQlt38C7hCV3FtXb2nXFLEnNgGgKJL6ulh+4Qsb67x7eAeAC/dH9S2bCofo7A8xFQ5pwGyXRBQE0HyindnoGImF9wyOT2jEjKlwSB+PznzgWbS3vIfRxJbm4xpRVzz+YpS796L4/SfJLScJ93UC0BOOMff6qTvEnNXSfBzAggBE+oN67KHvaY5d73KPmBDA8sSk7v91NGAZd+pyh7sN0o5EhmMA9AwEi45zvdWbwKvpGQDSmW0AfIUcOa8PXyHHtQe3q/vRMpF0ZpvAcY8j1jMQLAmVvF1PRqalAlSkM9u1RVThzdt2pd0PwNxilkcjt8jn89UjkeGYLrpazrD7iqpoJvZYeNzF+b7J2iEX29osfUPdrQw+/8RQdyvnel/+BzMJHDksM/kftPibLf3JbIoWfzPJbKo6ZJ/HI+XOjgVIZlMAjn0VvdypOnz7ua6TSSmFEEIqJJlNoca9TSTcv9yZJ9uvVNXJXBBVI0VPNhZFRRukSlBOYUvF3vh/Uov4AxW5Fdmr1o22AAAAAElFTkSuQmCC"],"up":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACN0lEQVRIx+3XTUsbQRgH8P8o9YVCPHgMti4JoRIJxIMghNKLFHrqQUQpufgBFLQtemgPelBaFdoP0IsUQ+jBkyC9iAQEDwaCISIJaxty9KAQso2000tn3ExmdmZ1vXVOOztP5pfZfeZhllBKcd+N/EcCRwghyiBKKbkTwiaPD6WUMcVSTospEUIIjQ+l0P2gBwDw69oBADiNOnp6HwJAy1ixlFNCUkQGmFyrICPEpPlCbgPooBaEAe7n7RdhyeCGlAhrJhib3J1xxojTqKMv1K9FLq8ueMYZIZHBJADwHzmNuhYRYyvneTUiQmwCL0gcFwHpSmpbXwEAT9+tAwSAj9J2sPIaABBOv/J+XKffcygcHmHpy5bv7FqdSSMxNoon4ykzZO3bLi6vLoyBvlA/Fide6BF3UYwMJlG2j0nUGtE+MBZXOc9Li6Vxqc8ub7bdn3w/f/dS//ljxvi1z76Z8l/qo9YI3VhbMn4nC4urKNvH/kr9TiaLHz9/4/GjTi3A4l5OTZpX4Z1Mtm0CHcCaDGpLYREAoEXEGBHSInNvp/Hpw7YSYeNGCNuIe/kq/gDo+DeBaXP/kefJgZYN2YYAQOHwiO8BQgh9lkgoJ98vFHhcdnkTibFRAJAj4vmKB3icubxiPcuKLJ1jAxHe7+3qQqPZ5P2zakW7642QaNi6qVM1G8NWDE7zmvcDQcR7w1aMX5/YZ8EgqXic93PFYgsUCCJbTTRsoVyzjQ/dvj8dZCsLHPFKVVX7C0wg1MiDVnQkAAAAAElFTkSuQmCC","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACGElEQVRIx+XXPUjDQBQH8P9DrIqgg6P4EQyiFApmEIQiLi5ODlIU6eLooKAidtDFoSI66ODoUkQRBycXF5GCIFShUBSxtFU7OiiU1oqc08UYc7mLrZM3JdzL/XKXu3cXYozhrwv9L4SIhEGMMaoI4Y37e4PCmNRNXIoJESJi/t4g6mrrAQBv7yUAQKlYQH1DIwB8q0vdxIWQI+IEqFyLICVEpXhCfgPIoG8IB6zj7RXhk8EKCRFeVDDeuHXGKSOlYgHNTS1S5OX12ZxxSkhXZx8AmA+VigUpYo9NZ6/FiB3iDbhB9no74NiTfGwPADC4vAEQAA+p7Xx1AQDQGp50H67b0ziSF5eI7MY8z67oVBiBgX70DAfVkLWjE7y8PisDzU0tWBobkSP2jMsYI10zpAN2n7kiXTNYOnvtmCylqV7XDBadCgvrI7sx3GeuqKL9RLUnv0Z0zWAz04vS77G9s+4KCRFdM9jmWkT5w88vRYWQMNUfHxwi9/CBjvYaKcDjRsdDjtuy4+w6Pjj80YAM4KV89wQACK3MmdCPdQIAHMk9fACAFLHGuCLWhRhamQMfrtnFCWyt7wsRXu8JAWBClZREIgHDMMg1rfA3ISI2FAgIGztLJqVnL2FaMbvqcrBTPeBJVzwRse62LvO+wedDsVw27+8e09VB9FbtK4XkM9XvidOQBf1+8zqeSlUHsYN/jjjtOf/nJ+gTMWbEyEqL4wgAAAAASUVORK5CYII=","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACG0lEQVRIx9XXO0gDMRgH8P+H+ELQwVF8HD1EKRS8QRCKuLg4OUhRpIujg4KK2EEXh4rooIOjSxFFHJxcXEQKgtAKhaKIpT5HB4XSWpE45Tyvl0vOVtBMd00uv3655EuOGGP47UJ/BiEiYSPGGJWF8M793UFhm/RlXIoJESJi/u4gaqvrAABv7wUAQCGfQ119AwB8q0tfxoWQI+IEqFyLICVEpXhCfgLIoG8IB6zj7RXhk8EKCRFeVDDeuXXGKSOFfA5Njc1S5OX12ZxxSoivowcAzIcK+ZwUsbfN3F6IETvEO3CD7PV2wDGSp9gOAKB/cQ0gAB5S2+nyHACgJTzuPlxXx3Gkzs4R2Y55nl3RiTACfb3oGgyqISsHR3h5fVYGmhqbsTAyJEfsGZcxRrpmSAfsJpskXTNY5vbCMVkqpXpdM1h0Ilzye2Q7hptsksreT1Qj+TGiawabmpyXRrq5teoKCRFdM9j6SkT5xc8uRIWQMNUf7u3j7v4D7W1VUoC3Gx4NOW7LjrPrcG+/pAMZwEvx+hEAEFqaMaGSdQIAHLm7/wAAKWJt44pYF2JoaQZ8uKbnx7CxuitEeL0nBIAJlVMSiQQMwyDXtML/CRGxgUBA2NlJKiU9ewnTihmqy8FO9YAnXfFExDpbfeZ9fU0N8sWieX/9kKkMordoXynkKVv5SJyGLOj3m9fxdLoyiB38dcRpz/k/3yf/AvkEXH7EyNIVJUIAAAAASUVORK5CYII=","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACOElEQVRIx+3Xv2uTQRjA8e8pjS1CO3QM1b4kFEskkA6FQhAXEZwcpFSki3+Agr9oBx3q0FK1UP8AlyINwaGTIC4igUKHBkJDJSS81ZKxQwshsaLnIPeSvHnf9+5M3Lwpl3vyfJI3zz3vvUJKyb8e4j/Sd0QIERokpRQ9ISp5ajIbGlPeL2ixUEQIIVOTWc4NDALw/UcLgFazweDQeYCOtfJ+IRQKRIIAk9dhkBFiMqyQvwF0UAeigPbrbYuoYmiHQhE1TDCVvL3ijJFWs8HI8KgWOT458irOCEmMZwC8D7WaDS3ij60dFMMRP6QSREH+dT8Q+EvqG28BuPL0pUVzAiR8fv4IgPj8nejL9eVjgdL2DotvNqyra/nuPOmZaS5dy5ohK+/ec3xyZAyMDI+ycOuGHmlvionxDFV3VySdKW2bVnG1g2JgszRu9fmlta73Z5896L3Vv36RM76j3Xs8Z9/qk86UfLWyaPyfPFxYpuru2rX6rVyer99+cvHCWS2g4m7OzZp34a1cviuBDlAjCOoqYT8AaBF/jB/SIvef3GZ9dTMUUetGiNqIH4qHHQlMx/rqJr+AM8D1zFjHhuxCAErbO94eEELIq+l0aPJPpZIXl19aIz0zDRCM+M9XXkDEmSsqNrKtBJXzxFjCmw/FYjRPT7155bCm3fVGSDLu/Ll3xAbYcyuoOUC17vYHuexMePM9t2J9VLVCFJBNpbz1QrncH8TrZ3GHat3t74FbIbbfvOdHB1sA4DeTxtHIH6yAoAAAAABJRU5ErkJggg==","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACFElEQVRIx+XXPUgDMRQH8P9DrIqgg6OfR4+iFAp2EIQiLi5ODiKKdHF00EERO7joUBEt6ODoUkQpDk4uLiIFwaFCoShSqR90dFAorYrEKed511xybV0006V5zY8kr+9SYozhtxv9L4SIhEGMMaoK4ZP7+0LCmMx1UooJESJi/r4QGuobAQBvHyUAQKlYQGNTMwD8GMtcJ4VQWaQcoPIsgpQQleYKqQSQQT8QDpj32y3Ck8EMCRHeVDA+uTnjlJFSsYDWljYp8vL6bGScEuLt6QcA40ulYkGKWGPv7q/EiBXiEzhB1nErUHYl+fg+AGBoZdNFcQLAgPO1RQBAe3jaebtuTpNIX1wishd3nV3RmTACgwPoHQmpIetHJ3h5fVYGWlvasDw+KkfMRdHb049sLkW6FpSW6WwuReZK7XgmoqZrQRadCds+j+zFkc2lqOr3iepKKkZ0LcjmZpekK93Z3XCEhIiuBdnWekT54BeWo0LIll38+fgwgYfHT3R31UkBHjc2OeFc6omIJVZjAACPr8M2gQzgrRzkiDw8fgKAFDHHjE1O2NJYiswvTWF740CI8HG+XYnVmO0HKTyTShoHAIgR0a1lOBAQjp+l02CMEd8JpbLi5mJnLSM81nVZISLm6/Qa/SaPB8X3d6N/+3QnvUVWtBK9XfsuKflcbZCQ32/0k5lMbe/CIkRl4qpu9W6Bv/Un6AsrFa/IgHawNgAAAABJRU5ErkJggg==","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACJUlEQVRIx9XXMWgaURgH8P+jNI0EzODUSBoPj5IgCDoEChKydMnUIUhKccnYoYW0hDg0gxkMkgbMkNFFgiIZnLpkCUEoZLAgSEoxmLRIpwwJiNeU8jq963ne832nKZhvuvM9vx/f3XufT8Y5x/8ONjIIY0w6iXPOhkJE8tBcTDqnflZRYlKEMcZDczE8ejgOAPj12wAAGJ02xj0TANA1Vj+rSCFHxAmgXMsgEkIJV8gggArqQgRgfd5uEbEYrJAUEUHBRHLriiMjRqeNSa9PiVzfXJkrjoQEAxEAML9kdNpKxD73/OKLHLFDIkE/yD5uBxwraeUPAAALH3ZcNCcAHDjZeg8A8Cde9X9cX48qqH0+RTKXd7260qsJhJ/NY/Z5jIZsH37C9c0VGZj0+rCxvKRGrE0xGIig0awyXYsq23SjWWXWTt33nchC16I8vZro+TyZy6PRrLKhf0+olQyM6FqUv3m9rqx0bz/TF5IiuhblH7eT5Bf/biMthaStvlws4fL7H8w8eaAExLwXK3F6qy8XSz0JVIAIJ6hnn5RSu4hvrkFUAkCJWOeQEQCIb64hmyng7fpLZDMFKSLGBTLrm6JtRlGNQCiRzRTw2PhJ2/FO56zFcFia/LhWM69LqV06Qj3Y2duImOu6rTDG+NPpoHnvGRtD5/bWvP/241x5ihyoEt2v/WsprebdILFQyLyv1Ot3exaWIZTEQ53q3QKj9f/kXiB/AbN9s8hlp28jAAAAAElFTkSuQmCC"]}},"character.colin":{"src":null,"frameWidth":25,"frameHeight":36,"frames":6,"fps":8,"displayWidth":25,"displayHeight":36,"walkDirectory":"characters/colyn","walkFrames":{"down":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADWUlEQVRIx7WXTWhUVxTHf9ePkCyKFgkOiIZpk5AQxVUGQoNthaFZFAMJpsWPLMxCQ3REqiId7KJhpChFkjTELqYLq6IpE0jpIjIQPxgJvKxEh0gSHaMEXhlKlS5GrHq7SO/13XlvZt6YeFb3vfvO+Z13/ufed5+QUvK+TZQDEUJIKaV4rxAFUmO/QPEu5RJCyNuxveyIXvYF8gVxZq9sxSAq+O3YXuN+1p6jOlDHjuhl/JSuIESVZF1wIwDPM38aAMCYK/ZWnhAvgJ9xIZAviJfNT6WobWnV10UhS+V8O+EXAFAdqCNrz2lYIZCQUhrdkzgSojpQZ0CcZZmfSmlNlD4KVBKS30GF6q6CAzTvOsVjK+HqOE9I/lpQwHXBjS5I1p6jedcpI6HHVsLounyQq1z5EKfApSCdQ5b2VWtISikEIAdjp7VDJNqvdcnacwSqQtg5i9qWVuanUi6AsunffwCgc8gCQMWMRPsxIJFoP9mrowD0XRjmq205AlUhAOycpXXwsuOxAYYP9S113dddbsiJnt0AnIv/xpPkGE+Tk9g5i2v3qnSQo6Ft2DnLgByPDeixSmhzeCdbwh04Y7o0cUKa+i7yerSH+lA95678zb793TropV8vcmLPh8xas6zuipMe7jYgzj3NteIVsOuzT/n+ws+8Hu0B4IOWb1wl+mfqRwBWd8X57tBBRm/e8twsDYgQQva07QQgPjG51P//a5TbsMYFqfrrldYAwOnrauFCkN7GGgBGZhYKbjHOZ8qCxCcmOfvldgBO/nGX3sYagh+vByDz8JkxHplZMJ5V/mVDpiNf8EvygestDoQbaB68Xj4EYGJsnPFoxAim7MYjm88/CuhrJ7w9NkhbR7tLfBdkYmwcgJkHrzj2bSe9jTUlISMzCyg/gLaO9vIggC5HviaqROfPJGhsWFMaIoSQT5JjJKYlb4BVoCF+7PyZhB53Ngu2hDs0yAUBeJqc5JOzPwHQ2tRUNHgqndZi3zl5mM3hpTb2hOR/U5SjH8tfwEWF9zrI1W4KGvOVFWt58fLft9/7xYwLWnRb8Tq1OCGVFWu5n5k1wPOLmZKnyJKQrcF64979zGzJzJcFUQBnM6TS6eVB8jWq3RR0abAip3ohhCw382X/OrzLn9Z/p5h33SB/RYwAAAAASUVORK5CYII=","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADP0lEQVRIx72XS0hUURjHf5ce6CIqYmggUqZUGixazYAkUwmSi1BQsshqkYsUe5ClSEMtipEoIpoSbTEtKqMMhaKFIViJIdxWkaLMTE0PhBtDlLSY6MFtIed6X3O9Y9i3Ovc753y/c87/O+eeI6mqymKblAtEkiRVVVVpUSECJMpuga4g+sDCRiINhMK9rkCOEBF8JNJg8IfCvZovFO6dd1ZZIZIkqSORBlb61gIwk/qs1aWVBB5vMaFwL6/vtTKT+uw4K1uIHUCUk2OjFJWVa1B9m2wgVxC9CaCA6f2uIU4AYcmxUQA83mLSSkKDZQNJs5rNOe0g5uXyeIsN2ghQVoiqqoYU7T8WxOMtttVD6JBWEgAEqjt4L/dbkiErxJymQlQzJK0kCFR3GNq9l/vnh5g3nACaBXYDEXvHIIGd8GLJ0koCb34QJSNTVFZOcmzUAhD26vFF6q7LtpvUokn6fh8ALT1d7N2SwZsfBEDJyJoOdnY6co2uphY8++oNflVVJQlQo5GzABwPX+Dj0ACfhoZRMjIP3uRrjU8Et6BkZAPkdOSaVhYDWl9ZQUFlLfqYjpDSltv86WukJFjC5XtfOXDwkBb07p3btO1fTVyOs6Q+xkTXIWdIW+MerfPl2EMA6nds53zPTf70NQKwouyUZYm+j10BYEl9jHNNR+h7/gIAczyLJmYTGmXWLLXU5X/5PbvzTTpYNNFnlyRJamNVBQCxwWGa/YUAdE9+yBpE30bfN2sKC0hscJhLu7cC0P7kNc3+QnwbVwGQevvNUO6e/GBoK/o7QkRZ3/HV8V3cGpqyzOJw5SYC0ae5Q652zp5F8TuthmDCnr1T2LnBq33r4TWRKFW1NZY/peFYedl+FHnVTq3TyTN1NPsLHSGB6FMABgceab6q2hpniLBtl264vsFc7ezHv2kpk1O/tcG50kSsbXlpqSNgdGJCA9UF5g7fgspaDWR7QOpT0Y2JAX0cGlgYpGidz1Cft3wZP37+mvsVT6ewG5TjUW9eNj0kb/kyxlNxgy85nbLd5Tld7jb7Sgy+8VR83qA53yA3+0osgc0z+SeIAOkzTGRTLpfuBUFyfT7kfKv/L++TRX9pLdT+AqsZV930HwgLAAAAAElFTkSuQmCC","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADJklEQVRIx92XS2gTURSGv6EqZiFVJBgQlWhTLLW4SqBYfBSCLkShwSg+ujALLfVBfQSx6EKJSIuUVou6iItWRSMRFBeVQtWSEhhXoqGSVGMVYSSIiouID8ZFuONMZpJMpLjwX92Zufd8957HzBlJVVXsSpIkVVVViSolVQMRIDG2C6waIkDjkV2s7b5hC2QLot+90IxBhPHxyC7D/ZySwenysLb7BnZcVxIiXFLrXgTAl+wH0xz9s3KnsoRYAcR4KpmgrrnFdL8cyBZEL2FYD6sIKbjzz4NyAKGpZAIAp8tDTskYTmYFklRVNWRP/KAPp8tjgBS7y+nyGBJAgCpCijPIKh4i+DklA4B3ywneyHFTxllCimtBAGvdi0yQnJLBu+WEYUNv5LgGAUwgU+D1pyoOcCVI4KKsbVDUkKqqkiVExCWnZHA5fCh5mbrmFqaSCRNA6On98wAELsqm4pQAAyV3KwZA55VBtjflcTl8ACh5WYuDlY5F+hnc31nIuh1BcwoPRE4BcKj7LG9H7/JudAwlL3P7uUObeNjXhJKXDZBjkX5tLDa0xN/KUn8beptlIY2dQ/yKhaj31dN78xO797RrRq8PD3F85wLScpqaYJTUYHt5yPHQNm1xb/QOAMH16zhz5Sq/YiEA5jUfNbnoa/ICADXBKKf37yP2+AkAxfZMxRja1ApAdGTMEKP8wlkmiOPjT0MMitdaZpckSap+YkfDMgAuT06XfMXo5+jXlqwTAYmOjNGzeTUA4QfP6GhYhnvFfACyrz4bxpcnpw1zxfqqIU8PbeTa6EvTKfb6V+IdeFg9BKDvXJz08BGDMaFHrxU2LHdp13r41sgAm9q2mouxGDIRPoA8fwMAXScDBldZKfzgGQAjd+8B2IcIrem5ZKt7EYDJlz/pOhkoD7HqTFoaG8sCEqkUfecKr/uAt2B3qb+tMsQq38tpInyAJf5W7bpqSN1it+H53Dmz+fb9x59P8fusCVryo1XKZQKiN6YHF0Nsdyt62Cp3PS+yaS02iVTKBKnURVZsUyVJUvXBT6RSFXc+I5Bqfx+qbrj/yf/J3+j/gfwGgA1L32tKtmAAAAAASUVORK5CYII=","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADVUlEQVRIx7WXTWgUSRTHf+UXm8OiIsEB0TCaBEMMnjIQDOoKgzmIgQxGUdeDOWiIziJ+IA67hw0ji7KI0RA9jAe/cLNMIOIhMhBXiQQ6J9EQSUbHKIGWQVQ8zLJ+1B5ilV3TPTOdqO9U1d31flXv/6rqtZBS8r1NzAQihJBSSvFdIQqk2n6BYjbhEkLIe/FdrI9d8wXyBXHOXtk3gyjn9+K7jOdZe4LyQBXrY9fwE7qCEBWShcGlALzNvDQAgPGu2Ko8IV4AP+1CIF8QL0sPD1HZ0Kj7RSHT4fzywi8AoDxQRdae0LBCICGlNLIneTBEeaDKgDjDkh4e0poofRSoJCQ/gwrFXTkHqN96nGdW0pVxnpD8vaCAC4NLXZCsPUH91uPGhJ5ZSSPr8kGucOVDnAKXgkTOWXqs2kNSSiEA2RX/VQ+Ixjq1Lll7gkBZCDtnUdnQSHp4yAVQNnLzDwAi5ywAlM9orBMDEo11kr3RC0DHhW621+UIlIUAsHOW1sHLjsTP0r2/YzrrdrS6IUfbtgFwOvE3z1N9vEgNYucs/npYpp38EqrDzlkG5Ej8rG6rCS0Pb2JFuAWnT5cmTkhtx2U+9rZRHarm9PXX7P55j3Z69cplju5czLg1ztzWBKPdewyI80xz7XgFbN24gd8vXORjbxsAPzYcdoXo3fCfAMxtTfDb/n30/nPX87A0IEII2da0CYDEwOB0/n/WKLdkngtS9uqD1gDAOdaVwoUg7TUVAPSMTRY8YpzfzAiSGBjk1Ja1ABy79YD2mgqCqxYBkHnyxmj3jE0a36rxM4aMRDdzKfXYtYq94dXUd92eOQRgoK+f/ljUcKbszlObn1YGdN8Jb4530dTS7BLfBRno69f9ppZm2msqSkJ6xiY5czJJzep5epxvyNjjDxw6EdHhyNdEhQjwBxFCyOepPpIjX6CHTkR8l0lnTib5BMwBIvWCFeEWDXJBAF6kBll36rwWsbG2tihgaHQUgPvHDrA8PJ3GnpD8OyV/U5YyNSGvEqngseK0ymVB3f5hwXz+/e+9eedPZYx+0WOlUP3lhKSnMqwJVhug9FRmdsVdsZWtCVYb/UeZ8a+HOIVXIjtBXw3xWk3lsqChQ6mie1b/J/kr++aQ2fwI/Q/JEXfdMB5c2QAAAABJRU5ErkJggg==","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADOUlEQVRIx82XS2hTQRSGv8EHdiEqEgyISrQNliquGiiW+oCiC1FosYpVF3ahUq34RAy6UCKiqPgo1UVcqBWtpFBxUSlULZFCuhINlSYaqxSuBFFxEfHBuCgz3ndjpeBZzZx75nx35j/DPVdIKZloE38DEUJIKaWYUIgCqXGxwKIg5sTK+mKN1ETbiwL5QlTyvlijxV8Tbde+mmj7mLvyhAghZF+skRmhOQB8yX3Qz/JGhkCwjJpoO8/vHOBL7oPvrlwhbgA1zvYnKa2q1lBzjBeoKIjZFFDBzP6iIX4AZdn+JACBYBl5I6NhXiAxqtkfpxvEflyBYJlFGwXyhEgpLSWa2BshECxz1UPpkDcyAFSuP8rbVMJRDJ4Qe5kqUe2QvJGhcv1RS9zbVGJsiP3CKaBd4GIg6u5YJHATXh1Z3sgQLIlgFFKUVlWT7U86AMoGHpyh/krK9ZI6NMnf7QCg+Vorm5YWCJZEADAKKa2Dmx2KXaJ1VzOBzQ0Wv5RSCEBejh0HoCV6inc9nbzv6cUopLj3okQH74ssxSikLJBDsUt6rF5oXu1q5tfWYc7pC6lovsmvjibCkTDn7nxi67btOuntWzc5vGUWQ6khJjXESbdu94ccbtqoF5+L3wegYeUKTl67zq+OJgCmVx10HNHX/vMATGqIc2LXTjqePAXAns+hid2URoXZkx3PSj7+HL35Nh0cmpirSwghm9auBiDe3cvu8gUAtA0OeyYxx5jXepawgsS7ezm7bhkARx4+Z3f5AkKLZgKQe/3ZMm4bHLbEqvV/DRloWcONnleOXeyoXUzl5UeWWLdPswMC0N3ZRVe0xZJM2eM3BqsWBvXcDA9vuwDA/mP1/pDuzi49X1u3YfQ2t6zxhbQNDnPxdEL7Ip8fs/zsVQ1yQFRw+eLJDL76yf5j9UV3Ms+O7NFjV4gQQr7r6dRBiQGpAdUVFb7Jk+m0FtxXEztkfm2dY6GfeZWvp/D2RaVzQzpm2tQpfPv+w/o5HskVD/Fq5MyQ7EiOJaGwBZQdyeHXVY7ZQbpBl4TClvnL3ND4mjszxL4TO/CfIW67MVdbMp0esx8eV1c/4ZDx/D6I/+5Pa7z2G5CAYd2EgLamAAAAAElFTkSuQmCC","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADIUlEQVRIx82XS0hUURiAv0sPchEWIQ1EyZQOikUrByTpIUgtwsChKXotclFhGVGJONSiGAmlolS0xbSwjJoYwWhhDEwlE8J1FTUUjjVmBDeGyGgxUcltMZzbfc2ThP7Vf8895//O/zr3XElVVfIVSZJUVVUlChSpEIgACT1fYMEQARr3H2SrbzgvUF4Q/e6F/DOIMD7uP2gYTypxyhyVbPUNk0/oMkJESEqdqwH4lvhsmaN/l80rW4gdQOjTE1Eq6uot49lAeUH0IgzrYTkh6XD+fZENIGR6IgpAmaOSpBI3eGYHklRVNVRP6JSbMkelAWIOV5mj0lAAApQTYq4gu3yI5CeVOAC1TR3MyCFLxdlCzL0ggKXO1RZIUolT29Rh2NCMHNIggAVkSbzeK3OCc0E8vbK2QdFDqqpKthCRl6QSx1HiRknJVNTVMz0RtQCETD66AoCnV7Y0pwQYKMn7QQBaB/vZtymFo8QNgJKStTzYyTn/DfqPt6arbr/XWsI3/RcAaPNdZjY8wsdwBCUl8+BViTbxtHsTSko2QM75b2i62NDaxgbWNTajt5kVUtM6xHywBZfbRc+9rxw6fEQzevfOEOcPrGRKnmKRN0Cs/0h2yPmWvdrinsBDALzbt3Fp8BbzwRYAltedtYTo+8RVABZ5A1w8fozgs+cAmO1ZmrFlVwMAgbGIIUepVYstkJIvvw05MK+1rS5JklT9xBPV5QAMvPmQ8YjRz9GvzdgnAhIYi9C9ezMA7Y9fcqK6HOeGFQAk3s0Z9IE3HwxzxfqCIZNtO7kdfmvx4mhjFbU3nxQOARgbGWXU12YwJuTpe4Ud6x3asx7uOnyNM50eazNmggDsat4DoO3UTkTIrnelD0r33FO2dPflhlzvClFdtdgAyiUv2k9qek7IbHgk/V2ZTI+f6fRQX1OTFRCNxQzPGY96MwTgYzjClu6+vDzJVL4Zj3qzgYo1Tk1ftnQJP37+Mn6OPyUKg9iB9JDpTwnLuH4s79uKGWiGiBxFYzE2Ol28TkwVd7nL5pm+EKKxWM6ralG3+gWHFPP7UBRkwX+C/lvIH/ixUt+vLAB4AAAAAElFTkSuQmCC"],"left":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADdklEQVRIx7XXX2hTVxzA8e9Z7bAFV2WUZGjXpbZgEelTykpDwWJ0D51lDdNhn/zzUtAOnYoYfJmklPoPU6FP7cO2jrERYT61BByUlEgKA5GYoOmu1YkpRWgYWFmFs4funN6b3Py5an9P9x7uPZ/zO+d3bk6ElJKNDuEEqXW75atsVmwoAiCE0C9IKcWGIAqKnGonMJqoCCqLmEdujplQP13ByXdDVOczoX7dtpR9DEBgNKGRSqbOFhFCyJlQP3UeFzljUQP17hbLc13BST2IUlkVIGYAeF1sdG1Hrm82Z1kxIoSQ938+Y3kgE4/R3OErOt8q01KQLZIzFqnzuMjEY9S7W6jzuF5k4rFPFJYPK6goAkiAGpeL6cF9AGqqNKLWYyn7mOYOH1LC/L0YAM0dPpkzFkWpbAQgzXOrkJyxqKvJe/ACc3eGNbTzcx9CsPr/QKoBXRS2iJTSUq5qtJl4DO/BCxZcQR995jJnUnZd9JqoqlKjVxnYIflTmp+JOaSUomDhI6facde0k11JFCD5kBqQef90BScJhy4BMBi8bF9ds+dPcjPxgMN7VmyRs6GbHN6zstZh59m1T8zsVerdLRYgNvMnjTtquTL+m/1mXJ06youqLy0dq7ga/JYniQhVuW0ANPi7mbszTGA0wbnjX+vnFv5+VRpJft/Jlo7vAPjpxx84d2QbjxKPqDo0Tu2zhwA8i97VyKf+vqKbtWBNFLL0y6+sfLxJt/0TvwZgQQDd+fEvugEYn7pbfseboafR25a2mpdv9HX9N4cAGGhtZCy1YDt6R596uxjpaQNgb5Mbb3haZ6IiP6OSP1pCCDnS04Yxv4xn51YAjPllxlILzA0eWN9PeZBjZKC10dJ2zL8Lb3haIxPRNABjqYWia1MWmRs8wB9/Zdnb5NbtE9E0x/y79PVXoUvs7zvhHBFCyBtDEU5fDDDS02ZBFDoRTdMbCvMBSwAaeitkoLVRr4k5jPllekNhfZ9Kv+H0xUBBhRUt4RtDEX2vXrSLqdu/k0qvlXfAK/TeKYmo75eKzpFbAPh277ZFYskks+dP0uDvtmzSsojTw55jxG7qmrd7ANj8YTWv/11dP2Q8N4p+rxyfIBWSeW6grs1IuVNkRWdhBalO86H3hpjv3zsihJCqsmLJZEVr8M6neimlMMMKd3zgdvpnqFw2/wFdl0XdsILeZQAAAABJRU5ErkJggg==","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADaUlEQVRIx7XXX2hTVxzA8e/BDdbCVscoydi0RlNQRHxKWWgItCzYh6nQMB32afZJqJVqW0qDLxsRcW5iOvCpPuha/EMEfWoJdBBuiaSwTSS2aDTWKk0ogmFgBgpnD+Nccu69Sa51PU/n3nNzPud3zu+eeyKklGx0Ee+CCCGklFJsKKIgVXcLNkSqO60uyeMdRCeyrqCaiOo8He8z760VHwEQnciSjvcRjk3hJipHRAgh0/E+WnweyoWSCbR62wEIx6ZMRA0iHJuqCdmQagD4p9boyoXSR+tChBDy3vRJ7YF8xsAfDNl+uPfIL9ybPmlGWg9yRMqFEi0+D/mMQau3nRafZzWfMT5XmBVWUENETROgpspE1HqsFR/hD4aQEh7fNQDwB0OyXCiJetEIQAI0eTzMDn5tIuVCycymwIExFu6cNaEdX4UQgjcA+bvzHyKllhSOiDVN/cEQ+YxB4MCYFraCPtnmqY6k4boIKaX2TqjRqwicEOuUAvUjsS588ngH3qYOipWsDbFCakDq2jUyPzrAxex9Du+pOCLD8Ysc3lP5r8POYQDS8+dp9bYTjk2RiJ9mMPajthM4voxvZr5nddN+rWNVzsdO8DSbZFtHlJXUHFsi3SzcOUt0IksiflrrS2GOSO6HTj4OngLgt6tXGDnyKQ+zD9l0aJLmlQcArKTmANgS6WZrpNcGGOk/aPuymZ8mbzoja9duUPnsA/Pe35mfATQEYGukF4CR/m9t07r8/HVtREHPUre0e00v35r11u8Ouf7+OK5Jo+8IwLlv9gLQtd1LIDELQH9PNwCTM3P1s8uKqM4Kj1/h27HZrF9aXGZhcJ/2fPj6X1RKJfp7um1Qzem6cCbJ0HiUY7vatLajkZ0EErMacjm1xMF4gp7eg44fMdt7AnDhTBKAofEoC4P7+P1Jka7tXq3To5GdGqDK4tJbhsajGqTtwvOjAwBkN3fVRdT15dQSlxaXmbl12wSiAaFln7bw1QhA57lfzfqxXW3myJ0QVawZaUNqHXfqZVl1VqnMsqav6yNRaPduxzYjl9OQaqxhdrl9X6yRqDL9Z47XxeK7If4vfI5t+ReF90NUBPWAeluJq8OdWgcjl9Mga+frPqZaF9vI5bR2a1sjyNUGaQvfEum6EbdpvWFIdaTv9dfh/yz/AmyeUt2ZgK7mAAAAAElFTkSuQmCC","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADX0lEQVRIx82XTWhTWRSAv4sKVqu1SkkGf2o0BUXEVcqEhkKLQRdawTA62NXoStCKv4hhNkJEnM6IreCqLtSKVuqiILQUOlBeiaQwKkNUNBq1igkiWsaxgoU7i3ov7768Ji/VAc8mj3tfznd+7z1PSCkpR4QQUkopyvpPuRAFAvAKmzGkd389sc6UJ1BJiLLaKcOJVhrj3V8HUcqHE6167U3uMQCxzpSGKCkGc4UIIeRwopWqgI/xbF4Davx1xnuN8W5tRDGvCiB2APBpOus27Ppjrt1LzxAhhLx39RDj2byCkElaBMORaeOtPC0GElPhnNpweEEmaVHjr6Mq4HudSVo/KJgTrEBFIQAVPh8DbRsBdC5UHuy/wXAEKeHJbQuAYDgix7N5UcwbAUhnBQXDETJJS6+FWo4z2ndag1b/GEEIPn/xag6gi8IVIqU0ytUOCbUcN9xWoIUrfXZPSuZFJ17lQ/WC8sANokKq8uPJE+dx4a+oJzeRKoA4Qcoge//YG1Q1aQFk5Ng+zqX+pj1+wLVkjyTOsXP9xJTChiNTR8xIOzX+Ohrj3XQkfgXAGv6L2mXz+K3rhnszfu7/hdezthqKlbTHD/As1cvK+hhjg0MsjzYz2neaWGdKAzxB0icbWBA+DMCVy5c4uquaR6lHzNrRxbyx+wCMDQ4BsDzazIrodo7u+anA6+cvP9IzcMsd8uZaDxNLZuu1f5K/AxgQgBXR7SWvhYKc2EEvBm8aaxVvJ/Vzzc87jL09m5v1c1f/UPHq8nKPAJzZsgGAplV+Qh0DBqirf6jg6HcNl1NZ9sl7AqsX6ecLD54z2rbJPPav32Uin3e9XwpKGODsqV4ADp6IsXdtraFsd3QNoY4BA3Jx8CHbEh0APHg4ycETMQNkdPzIsX0ApBY1acho2yb+fJqjaZXfULo7uqYAoCCxkNCFYSTeDgFoOHPeCJmbqNApOXuqVwNcIc58SClFseRPV1nO8vU8rUTWrXPds9JpAzJdGc94JHLzpGyIUr6kajHVlVWu72ReZV0hV++k+ZjLiZIjkQqRlU5PBpcGZrsAPlRXzq989+FfA+QEeIKo2AeXBrT1SmyGoOYEJ6BkuJxKbMr9Vjqds++XPUF6md6dRswY8q0+Ib4K8r9+BH2XkP8Aur5D3UyrvM8AAAAASUVORK5CYII=","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADcUlEQVRIx7XXT2hTSRzA8e9QFSusVaQk4mqNtmAR6SllS0PBYrSHrrIN/sGetHspaMVVSzH0okSk6yq2Qk/tQbciLhH01BJwoaRkSUEQiQma7rP+wZay0CBYsYXZQ53xveTlz/PP7zQZXuYzv5nfvEyElJLvHcIJIoSQUkrxXREFqXapoPiS5RJCyPDJegID8ZKgooh55uYYD7XTFBz5OkQNPh5q131zM88BCAzENVLK0tkiQgg5HmqnwuMiY8xqoNJdY3muKTiiJ1EoqxzEDAAf8s2u7ujV1eYsS0aEEPLx7d8sD6RjUaobfHnXW2VaCLJFMsYsFR4X6ViUSncNFR7X23QsulFh2bCC8iKABCh3uRjr2gOglkojaj/mZp5T3eBDSpj6JwpAdYNPZoxZUSgbAUjz2iokY8zqavLu72HywWUNbf/JhxAsfprISkAXhS0ipbSUq5ptOhbFu7/Hgito7VaXOZOi+6L3RFWVmr3KwA7JXtLsTMwhpRQ5Gx8+WY+7vJ6ZhXgOkg2pCZnPT1NwhP5QLwBdwYv21TXRfYLr8Scc3rVgi5wNXefwroXlARvPLr9iJq5Q6a6xANHxR1T9uIbfh/6yP4yLo8d4W/azZWAVV4KneBEPU5ZZD8BmfzOTDy4TGIhzruOgfm769fvCSOJCIz80nAHgz1s3OXd0Pc/izyg7NMSaV08BeBV5qJEt/ra8hzVnTxQyd+cuCxtW6L53sT8ALAigB+9oaQZgaPRh8RNvhl5G7ln6yv9b0u3KI4cA6KytYjA5bTt7R696u+hrrQNg9zY33v4xnYmK7IwK/mgJIWRfax3G1Dye7esAMKbmGUxOM9m17/N5yoIcI521VZa+4/4dePvHNDIcSQEwmJzOuzdFkcmuffz97wy7t7l1/3AkxXH/Dt3+JdTL3rZfnSNCCHntUpjT5wP0tdZZEIUOR1IcCPXr/pa2A3S0NH8Z0llbpffEHMbUvAVJppY4fT6QU2F5S/japbD+rL5oF6P37pNMLZd3wCv02SmIqPeXisa+GwD4du60RaKJBBPdJ9jsb7Yc0qKI08ueY8Ru6ao3eQBYvWolHz4ufr5kvDHyvq8c3yAVkn5joNpmpNgtsqS7sILUoNnQN0PMn785IoSQqrKiiURJe/DVt3oppTDDCnd84Xb6Z6hYNv8D6AhE3YZSwhEAAAAASUVORK5CYII=","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADOElEQVRIx8XXTWgTQRTA8f/4AbagVTQkolaDKbSI9GKKwdBDMdhDVWjxA3vSngRbQasUghclIn5ievDUi9oiSgTFg6XQQ9gSSUEpEgWNrLUWE4tgEFqh4njQWXeTTbKpinPazG7eb97M291ZIaXkXzdRCSKEkFJK8U8RBaljp2BZxBzU3GLdTXT0Jx1BRREVPB7pNPpmMq8B6OhPEo900hwexElWtogQQsYjndR43eT0rAG4PHUANIcHDUQNojk8WBQqQMwA8LXY6HJ6dtmCECGEnBg6YbkgndDwBYIFf2w8dJWJoRNGpqUgWySnZ6nxukknNFyeOmq87g/phLZWYfmwgsoiapoANVUGotZjJvMaXyCIlPDmiQaALxCUOT0rSmUjAAlQ5XYz3LPTQHJ61qgm/54+xh9eMKDN24MIwTxA+snYUqS0FIUtkl+mvkCQdELDv6fPkraCVmxymzMpuy5CSmm5J9ToVQZ2SP6UAqUzyV/4WHcTnqomMnPJAiQfUgNSvx0jY6ePcT35nANb52yR3sh1Dmyd+xlwRy8A8bHLuDx1NIcHiUbO0BM+Z3kS2N6M848P82Hxbktg1S6Hj/M2GWNTUwdTI6NsCLUw/vACHf1JopEzllgKs0VSZ3ewPHASgNu3bnLq0CpeJV+xeP8A1VMvAJgaGQVgQ6iF2lB7AaDFn7JxfTWXBu7ZIzN37jK3eonR9yVxBcCCANSG2gE41bWvYFon388WRxT0buS+pa/q0zfj2HVwv+P3j+2alHuPAFxsawTg9KMJulpbLOcGHo+Wrq5i2NGGjXg3r0R/85kjoXrLeX902PK7q7WlACqJKADgxstJ1DFgYP7ocNlsyiLjPbvwR4e5dj5GQ/3vYngQ7uFIqP6vIB8BlyqC2Lg0oNb2vcb05DfHiBBikZTye36lqbK92NZou/AVZ1Kuyv44EzMS3LLF9pyWSv2/TIaepZjNZCpDfOu8pKd1fOu81k3GtM76NavZta1xYYjKwBw4Pa1j2ycEmOI4uuPN66ClUkbQ9LT+81n0KzsAz8pq4zrHmzu7xdZSqYIRqkzNg6kIcbp7z8+4YqTST4mKN9z/9Utroe0HV4Y53SJ18VQAAAAASUVORK5CYII=","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADKElEQVRIx82XS0hUURjHfyetHKOHlM30MsURiiFcKQ0NBtJAi2rRkEXSolwFPahUpKFNMBFlRblo5aYyojAoChLBhUwZIwQSU1DKaPayByalVmqnxXgO987c5tEY9MFwL+d8c37n/z3uuVdIKUnHhBBSSinS+k+6EAUCSBX215DWg+X4mkIpgZJC1K5jrTNQTYW/JTOIWrwzUK3HPr5/CYCvKaQhyhLBLCFCCNkZqGZhkZ2RyJAG5DtKTH4V/ha9iUSq4iBGADAJCEBO/35NXyndfT7HqDJliBBC9lw/ykhkSEHo7QridHv+GG+lNBFIRMMZnRBCyEfn9jJvWZ4G5DtKWFhkn+rtCmYpWCxYgRJCAGx2O22HNgHoXKg8GK9Otwcpoe9xEACn2yNHIkMikRoByNgKcro99HYF9VjZtga6757WoOL1HoRgYlrVbEAXhSVESmkqVyOkbFuDSbYCLSi0G5UkzYtOvKoq1QtKgRVEhVTlJyUlsY8Lh62c9+OhOEgsSG3I2D/GBlVNGgd5WH+Ai6GnNPoPW5ZsbeAiO9eNRxfcUBt9xDxsJN9RQoW/hUuBEwAEO5+wemUuZ5tvWTfjxIO9vMvaalpYWaP/MP2hVgrLfQy2d7DKW0n33dP4mkIakBIkfHID893HALh29Qp1u/N4EXpBVlUzuYPPABhs7wBglbeSAu926mp2xKkeeD3Gzbb71pCPN24yvjhbj33tOgdgggAUeLcnPRbicmIEvWq/bRqzfZ7U9/m7qvR9zeZKk1/zg47E1ZXKOQJwZkspAPX3ehIqSOvQ2r92NUXFi4j0fWGfd41pvuxSW1I1CSFKzYVTraxdE83RHf8hAA3LCBKbl9ZuqUEKdvn5QBwgY8iR4744v0whs4Apq4Qrq7/XkxkklSrLWIkR4nG5LOeC4fDMQXLmzOX7zx8zr0SFybmiCGDyw/Cn7KV5S0w+Q8Mf+Do2ypzsLPZs2phexxtDFAyHFYjeNxEMYD5/G8a1coX2+9NLXlKI1QJCCFm8vJC+t/3jHpfLpnxSfrmzqirL3QkxCuQaFacNmcnPiIwh/+z75L+E/AYQKjPdg0YMBwAAAABJRU5ErkJggg=="],"right":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADUElEQVRIx7XXX0hTURzA8e+JGRqEQoiL/tjyDy7fAkfikgqGPhUkRdCfh3wSdNE/kUa9hD5YIZngS9ZTUcYMyQdrsSwnRj5JiOK0ZSVMJLQCk5reHsY53Tvv5lz2ezoeD+dzf+d3zr1nQtM0/neItSKbrFZtIRwW644IIdQgTdPEumcihNC8dQ6q7rxLCUgaedN4knLPA9P/JwPHRfRLJBFvnQOAbGuBGifxRJgpIp9eTiLbMmbDQQVl2nL4Fpqh3PMgLrQqIqHhhxcWATZYLOn6scuRyCKQnghagcQCmbYc1d5gsZgux3IkAhA3o4SIHpgYDJBf6jSFxvv7yC91miJCCM2AmGShTQwGBEDePidCRLMZ7++jcP+BFZCsU0XrS37OzKgNEReZDQcByC91/o4OJm3ybYBsawGz4aABmQtOGzaDvpYJEblcE4MBZCbfP86sAMyQ2G0tAENRTDJRRZX9ZllYMxyUNbepM2WoC6C1Nl4FwO25bjgTEpJLBJgCJYcb+OzzA1DW3LZyd12uPqZNfVnAWb7XAM2Gg5SXXYpmN3ATgMfvM6h1bTc8QMnhBgAuNd4GoLPvdXwkd/sm1Xmj4wneOofhCZcy59jlqFKTAdz0nFPtrUvPSKu8b34YY2uij0++LoXscB0CYGHHHpY6qyl0FHLj4RynTp8B4MfgLYqvDSR/4qsroxN29PoVJkMiAJtLL6r+jK8Rsk8cXx3Rv3ll1NhzaR+ditbhUafq/7nFePJ3uo6u/oLUZyCjo9fPkLuCVx/CANT3DMf9ZiT1qo9FJCCjpPU5NfZcbHlZAIQm57HlZVHfM7zqh8sU6ej1U2PPBeCsq0ghQ+4K7vnGDBO0j06ljrzoustTz3WF3PONqTbAqw9hDu62UtL6fO2IBACWyabb4+asq0hNqkfqe4ZpafJy/kpV8jUBaGnyYi/6u3O6PW5VB32EJudpH51KDfnk68I7FO2zF1moPHok7jK0NHlVOxFkQPSH7rPPT1lzG87iYlMgMDICwEB9reozezkmhaw1UjrxAPnbbKqdvjGNxV+/o9/96dC/Xe70qB6ZmA6pv9cNiQUkmiyQMrLWG35SyxUbcscFRkb+/cKt375ywlh43W71qf74kfEHPHpb2c4G9A0AAAAASUVORK5CYII=","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADbklEQVRIx7XXX0hUWRzA8e+RCTIIFxaZWTbXnZpE82HbwEFxGtpg0KcWkv1DVg/5FOREW0k0uC8yPtgfaTboSXsydl1GiO3BmEVdGzHySUKUZsqshJFhqd2ggqbOPsg9e6/3zPWqdZ7OnHvmfM75nd+5nCuklHzsItaKCCGklFJ8cEQIoTqtFXCFCCFksj1Iyy/3tM/doEUR8+zH462EYwMk24MAlPt2qn7h2MCqmBYRQsjxeKsaxECMtnwuo6Ayv5d/5pcIxwaKQq6RMr/3DUCJx7PZ3Pd9ofAG2OwE2RAzYMz0q0OXmb7xEyUejzYc7wsFgKIrckTK/F7Vnp1ME2gIaaEHd8YINITcIZpVyOxkWgDsqA8hBJR4PDy4M0bV3n02yNgnMySEkEWRfC4DQhCob3y7nD1seng3TblvJ/lcxoI8zyxakqEp8Sevl5ZU1q22ErKTaYyV/Pt4yQboEHN6OyL5XAaAQENIbarRrluFrzRIY89Vle7ms+O4EgMyQgRogboD53iaGgGgseeqfeMBpSTinURjXYzHW8nnMoQbzyyf+ImLAPx2v5QTkW2WCdQdOAfAmfgVAAbH/tIjiXinJZbRWBfJ9qCaYUVkP4/vJfky2KIGA7gYO6nqn737g03N1/WH8Wzbd3Lh2StC4T026ElqSIWhIrIfgFcVu3g32EZVsIoLN55z+MhRAF5OXqL25wlnpHLbFtshu9D3OwBPUkOqzUAAtjacVu2lfxco//F7PWLek9VK/tdBVX/9qfXkfxE56O4FKYSQbc3LYekbXg7TVLSJ0Uc5ADpuTRedgKtXvQH0DY9Q6vUy/sNuS8e6xG2O11Ti3/EJAPMPX6h6x61p94jRODx0k5uxKMci1RZkKtpEf2rOMsC12QV6u5OcOt/iHC4D6O1OUlP9f6zNUH9qzoKOPsrxzXYfdYnb9HYnATh1vkUbOgFIc/Ykp6SCmg9+y/GaSo5FqtWgTkjwxaj21NsQI1OMUgzpT81xbXZB/Z7oOKHqNsQcLqMYGWbOstWyyunaZMuulaVveIRQba0WSM/MrO1KtMXnk4e+rtUiblayYSTwuV/75+zi/Novdyv3xlycoHVd7ordJFdi2cV5tV9O++OICCGkedPTMzOW5yufbRjRDeL2tr8h5IN+Oqz3u2TdX1rrKf8BGRVO2aN+ewIAAAAASUVORK5CYII=","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADaElEQVRIx92XTWhTWRSAvysRbFV0kNInWjUai5qNDjRYGosWQgXBhUVHxp/FdDVgO+h0pEzAjdSFP4hVcFVdKVqJILpQIm2tKRW7kiEoTTT+TCGhaO3YqcKk3lmUe3kvuUleFDee1Xnv3ne/e37uuecJKSVuRQghpZSCMkW4gQghJMCXAFxBhBAy0hag5fzjbwsZ7NpHY/iKcdwNuCBEuQhAQSJtAQCqrLV6noIXgxkhavdqEaUrGU8nNGiRt5rJVIbG8JWCoJIQBXpy9cgngDkezzz73M/Z7CdgXjFQHiQXsMhbrfU5Ho/RHZ+zWSZTGb2hXFBRiB2QHI7hqw8aQaMPB/DVB/Pcps6VA2KwQiaHYwJgzeYgQsxaM/pwgNotW/NAKk7N3ff5mMnohCgIGU8nAPDVB/+bnczc549iVFlrGU8nHJCJxJgjGeyxdGMJyeEYypJ/XmbyACZIblq7sQRAB7aQFVZFgIaTF/SZsgdfAI7I2y1RIOUiwAio29nJm2gfAA0nL+Rn1x+tu+Wrv6cJNv4IQHv4OINd+xhPJ2hs6JgFD50G4PpfFRwKLXdsoG5nJwAdXecA6B14UBqiQJG2gN5hTaiJl48jrAq06MUATod/0/rSmdvM3X7ZfBj3NO+QK5dX5uX+qZ4bvI7e1G6oCTUBMF2zgZneVmoDtZy6OsH+AwcB+DB8Bv+xITMkNyYmeR29qXUFAVhY/7t+X/E2S9XePaXLihBCtm5v0s89d/uchfFar9Y/LnGe/BWhXaULpCrtCqIAI+3N9L9IA3D0zpOC1roq9fb7o6K6msGfNjom1nXf49f1K/GuWQxA6vl7rdvhBd2lAGdPRFi/btYNt8Lt/BJa54CMtDdzKfrMscDFp684eyICwOE/W4wgAUgV2MiI1JBc0KXoMwe0/0Wabast6rrvaUjgfb/xQDogCqR2BDhcZBLlqqGjh/S7PIjdXUqKZVihoNvXKHhp5aavHRL0+42Lx+Lx8rqVYpBSVriGVFqW/HmT3wjxLfMaP56YmuTt5LvyWqJcUM/dPn5YMJ+JqX+nfMu8C3I/To6lskG/31PKdXmNRKVlSXU/q1jE4nE9rqxKjqUcsSoLYq9jdkjQ77di8XjaPsc+XnYHaYIYy4XLbr9ow/21vwxl/Z98rXw/kP8BDJ5K1xGCUvoAAAAASUVORK5CYII=","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADTElEQVRIx7XXX0hTURzA8e+JGRqEQUhGmS1NXL4FjsQlFQx9KkiKoD8P+SSk0T+JRr2EPpghmeBLqyeljBmRD6vFspoY+SQhStOWmjCRsD9QUrPbwziHe+fdvFv2ezoeD+dzf+d3zr1nQtM0/neIdBEhhKZpmlh1RAihBqULWEKEEJqvwUnt7bcZAZaRV83HqfJ0m/7fCpwU0S+RRHwNTgDy8neqcRJPhZki8unlJLItYz4aVlCufRNfI3NUebqTQisiEhrpOb8IsMZmy9aP/ROLLQLZqaBlSCKQa9+k2mtsNtPl+BOLASTNKCWiByaGQhRXuEyh968HKK5wmSJCCM2AmGShTQyFBEDRHhdCxLN5/3qAkr37lkGyTtUdz/k5N6c2RFJkPhoGoLjC9Ts+mKzJNyHy8ncyHw0bkIXwrGEz6GuZEpHLNTEUQmby7ePcMsAMSdzWAjAUxSQTVVTZb5ZFfo6TytZOdaYMdQG0juarADR6rhvOhITkEgGmQPnBy8wEggBUtnYu312X6o5oU59+4KrabYDmo2GqKi/GsxtsA+DBuxzOuLcaHqD84GUALjbfAqB34GVypHDrOtV5w/sQX4PT8IRLuQtsd9aqyQDaPGdVe/PSE7Jq7pkfxsSa6GM60KeQAvcBAH4U7GKpt44SZwk3ehY4cfIUAN+HblJ2bdD6ia+riU/o9QcVJkMiAOsrLqj+nM8x8o4dXRnRv3ll1DsK6Rqbitfhfq/q/7nRePK3uQ+v/ILUZyDD6w8y3FjNiw9RAJr6R5J+Myy96hMRCcgo73hKvaMQe9EGACKTX7AXbaCpf2TFD5cp4vUHqXcUAnDaXaqQ4cZq7gbGDRN0jU1ljjzru8Mjz3WF3A2MqzbAiw9R9u/Ip7zjafqI1x/E3/dYDXjsaeS0u1RNqkea+kdob/Fx7kqt9ZoAtLf4cJTaDIisgz4ik1/oGpvKDJkO9OEbjvc5Sm3UHD6UdBnaW3yqnQoyIPpDNxMIUtnaiauszBQIjY4CMNh0RvWZvRwtIelGRiceoHiLXbWz12ax+Ot3/Ls/G/m3y50e1SMTsxH196ohiYBErQIZI+ne8C0tV2LIHRcaHf33C7d++8oJE+FVu9Vn+uNHxl+c61rZp56luAAAAABJRU5ErkJggg==","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADN0lEQVRIx83XX0hTURzA8e+RCRmEQZiLtBotoXyQAkfiGiGIPohBUoRWLz4FafQXadSL7EUtaAk+aU9GGQpRD8ZCTBdG9SIhSptMzcFkif0BDVqeHuwe7mV3/1xB9+nut3Pv5/zu73fuzoSUkn99iEwRIYSUUoq/jggh1KBMgbQQIYQcbHHQcP+t6ffpoAkR/ezHPE243P0MtjgAKLAeUONc7v6UmCkihJBjniZ1Ew3RYtFIQEH5tkK+hpZwufsTQmkj+bbCHwA5FssW/dj1WOwHsCUZFIfoAW2mZY13mXx4hRyLxfRxrMdiAAkzSork2wpVPDjhx17hNIU+jo9ir3Cmh5hkIYMTfgGw/6gTISDHYuHj+Cglx47HQVqd9JAQQiZEopEACIH9aOXPje4hd/aNnwLrAaKRgAFZCYQNzVDjfcna0pLqulSZEJzwo2XybW4pDjBD9O2dFIlGAgDYK5yqqFrcLAtrnoPKjm7V7vq1kzQTDdIeEWAKlNe38ck3AkBlR3d84QGleD23aHW3M+ZpIhoJ4Kq8trHiX3cB8PhDHheriwwTKK9vA+Ca5x4AA6OvzBGv55bhWba62xlscagZFldXMfd2kH2OBnUzgC73JXW+69czcmsfmC/G682n5PziKk7XkThowTekHkNxdRUAq8WH+DXQTImjhM6HK5w9dx6A7xN3KL39Ojmyt2hr3CLr7H0CwIJvSMU0BGBbxVUVz1uOUXDmtDmir0mqI/poQJ2v7TCu/D3VJ9N7QQohZHNtlWFA7/AIHXVlANx4PplwAmm96jWgd3jEMOBda43hc59vBtv+7YRmv9AzPZ/Zj1aiLDSkzzej4j3T81w4uFedp4LSQvp8M5zweFV8eibG5ZsNvGutodz7IjtEgwCGh54qoKFcqGIDUSnlzqyRjroyVXR9O2sdJYTIkVKuZ53JZroqI8RZWmp6sX9qKjNkq9UqGw+X/ttMzJAX7ydZ/LyMfbfNEA+GQ9h32wiGQ5lv7vQbOoQAKQ1AMBza+CEziW1qc6fVIfJlVd3sTydJDQmGQ6peyeqTEvFPTcXNVMtY3xBZIwkvTnO3n3LDvZm/Cln/Cfpvkd9am1DZXzTEXwAAAABJRU5ErkJggg==","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAADGklEQVRIx+2XS0hUURiAv2Nj+ShKykelqWhCuQgCh8RJQhCFoiBJAquNqyCLykIS2oQt1IhMaKUtoihj3NQiGAmrEcNWEqI4ivYwnCzsAVp29bSwc7t35s7MHZl2/at/7vznfP/rnPtfIaXErgghpJRSEKUIOxAhhARYCcAWRAgh3XVOqm4O/FvI86YaShvvWv5vBxwSolIEoCDuOicAqRnbdTsFDwezhCjv1SZKVzIz7dNB63PT+Trhp7TxbkhQRIgCDd479wMgzuFIMNouaZoGOMKBgiCBgPW56boe53BYpmNJ0/g64dcdCgSFhRgBY/1e8otdlqDRF73kF7uC0qbOlQliEYUc6/cKgLw9LoRYjmb0RS8Fe/cFgVSdKtp6mPf79YYICZmZ9gGQX+z6tWxM/PhLL6kZ25mZ9pkgs74pUzMYa2knEsb6vahIvk36gwBWkMC2thMJgF7YUFFkJDopaW7Xz5Sx+AIwVd4YiQKpFAGWgKKDDbzzPAWgpLk9uLsu1B6Rb97P4SrdDcDpxis8b6phZtpHaUn9MrivFYAHrxM5VZ5pcqDoYAMA9U03AOjqfRYZokDuOqfuYVZ5GZMDbnKcVfpmAK2NZ3R98+Ij4itvWx/G6or9MjszKaj3Wzoe8tbTrachq7wMgLmsnSx21VLgLKDl3izHjp8A4Hv/NQov91lDAmtiJW893bquIADris/rzxM/a6QerY58rQghZG1lmcmg48nTv41wv0vX5zeaT/628sORL0jj1R4ozQd2AXDx8WDIaG1d9aGieHW6wvSs0zNCbt4GJsa/cGv4TXQvrUiQTs8IAIea2gAYHtE4e6nK1tsxLESBTu7I1jdXgKoiYasetiGBcv2qO/YQVXglFg2wSkq5FNNIVjythIO4CgstF3uHhmIHsZKE1Wv4sfAz+rnLCLrT84wFbZF1Scmkp6SZFn2c/URayiYNcIxNTUQ/d6mTr1I09H6KjWtTloeJPxvmb83Vfyu7cKkLOXcZFs/nbclJHP8waZpCjI7EAgIwJ6VMDjfKRj2mxuJzIervk/8QJb8BM6861xHWGkAAAAAASUVORK5CYII="],"up":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACMElEQVRIx72XMUgcQRSG/9eYIhAJUZQ7krDH3Rnx7MRKclUgbRKstEsX0M5KrMJV6QykS5dUktgKVopVSJc7Lt4et6jscXInoiCoKcbqTWbnZndnz9W/2d2Zt++bN++9ZZaEELhr0SAQIhJCCEodQkTSMAnAGkJEYreygJer3xMDBoLosoFGQtQt2q0soNtxMTpeCNgwOAoWCuHVDztjAIAz7xjdjivnR8cLgbmorTRCTIBhZ0yCGMDjcSAriCrVsT5uDYkCxMkEIiIRCgGQCHTmHQMAuh0X7z7/ClSfEfJjabavimykVx9HFQoZVHoUMidqP6QtIQQRALFeWTMarH/5huUPi7GOouyWVz/i/iAr7+eNBptbv1HKZVAoZkIBbqONaquNN69njPOfvm7cU05M1QUA5cmJvhf882tkHw3Jq66d+r7xYxkKue3qYyHlyQm52vzz7P+V/vFQnnbkldU88KX9Tn0/GUR1FAXhucSQxyMjOO31rCNh+0QQdt488GXSdXHyVdtYiFpZagQAcHJxhUIxg6e5Fzhq/YXbaOPJwwcBG4boybeG8HaVchlUW+2+nFhBiEgcbv/Es1dvwTnRVxqV+JOLK5kT9hP4CqsQAAGQqtNeT5aqaY4B7KMPojeiqePjxFsVmZPbdn6iI5EOy2eVnvA9lJwiLq//yee4U6QVRB8rOUV5X/Ua6UDmpqbk816tFgClAjFFk886aPqe9aE78U+QKbLUIYP8EN0AfOb00OXIq3MAAAAASUVORK5CYII=","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACKklEQVRIx82XP0hbQRzHv7+lHQRFGlESqiQYrWjpUlwsySS4tsXFdOsmrVtdQifJ0kIHW7q5mUlaV8HJoIu4qViNJNiSoBgRCw52OQf5Xe9d7t679xql3+X9uR/3+f2533FHQgjctigKhIiEEIJaDiEiaRgG4AwhIlEq5JDJF5vGXIC+EPa+VMgBADL5onxnMdgPZoWw9x3JbjyZ+oRSIYfT47Ic7+pJoyPZDQC4qJ4gky9aQUaICuBJWKfHZQm4qJ44gZwgqtSJ9f/OED9AkGwgKwRAKBCnVIcQkTBCvr0dRVdPOnQkvDBeft70LHErJKpU5zgquoHdhMd98S8QPQpZE73p1H6IAjEWXt2XWi2ZrvnCe6PB/NdFzEy/CpzIz24mP4e7g7x7PWk0WF7ZwkgqjvRA3AooH9SxU6nj+cRT4/jHhaU7qolt78oODTb9r/3+g0T7PfnUtba37753tcL7QEh2aFB629+X+OvpdhXZx0n5ZB0e1aS9KRoPhKNgiDqRH4THGKJHY4VwBIdHNVkPXVwX1XZtbx8bs28w9uGLd1vxg7DOLq+QHojjYeoRflV+oHxQx4O2+x6bQAgRiZ+r39E7/sII4ZSMpOLYqdSb0qVCrOnSIZ2xWJOnfjU5u7zCeaPhXnhOWWcs5pnovNGQq8g05twnfs0YpFCQqE0Z6tylw/oTSuPVqqGPqs5nYfX72fCwfF/f3W0NRAfeOiTKNYL+25tWWF0DgkHM0OPIVEoAAAAASUVORK5CYII=","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAAB9klEQVRIx92XP0hCQRzHv7fUECSRYSgRRlZibdEUubZGNNnWFuTWFE3h1GbQ1lZTRGtr0RRtJaZPCgnF0IiChlqupd917zzv3TNt6Ls8ud/P3+d+f+55Ms45/IgxxjnnzNd3bCGMMQ4AfgHWEMYYv8iksLB19DcQVTZQI4RKBAAXmRTqNQdDwzGXD4FNsJYQ2n0gGgIAvD48oV5zhH1oOOaymUqphegAgWhIgAhA614gK4gsObC6bg0xAbyAKojOVEsIACuQDACAes3B8t6Va/q0kJONuaYpspE6fZQV45z/pPU9sicbc2hXahaunlCZ5DFtF6I231WuTmXSBAHA0WUxADyb2dYas/uHSK+vegYx+aW3dv4Qsrm2onU4PbvG9FgYsYlwS4BTrOL2voqlxVmtfffgGGKEu9UP7WGkKUvGJ5vWK2+fiPT3iKeq83zB/t3Vid17QpLxSbHb8dHIz05vHpCciYonqVSuCH9dNkaIHMgEIZtvyEAwiJdGwzoT8j/PF5pK1hJCwUvlimi6Kmq+7OsJoabLENLz+wdiE2GMjE3h8f4OTrGKwb5elw9BrF6QVC41iKknz+8folxWPZFBsl4aDTFFOpv1OTEdRi/5grR7KH3du7yA84mE+HyZy3leVVk7fx26DlEz+/WFu2M/v/8G8gX0IM/Q7+19FAAAAABJRU5ErkJggg==","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACOklEQVRIx72XP0gcQRTGv1doAkIkRFHuiLLH3Rnx0oWrQq4KpDUhlenSBbSzklThqnQG7OxiJcY2YKVYhXQ5Md4et2jY4+ROxICFacYivMns3NzuzHrxa/bPe/t+b+a9GWZJCIH/LUoDISIhhKCBQ4hIOroArCFEJPaqC3i2suEMSAXRZQONhahTtFddQKftY3yyEPFhcBysL4SzH/UmAAAXwSk6bV/axycLEVvcVBohJsCoNyFBDOD3SSAriCo1sP7eGhIHSJIJRESiLwSAE+giOAUAdNo+Xn36Fuk+I2RrsdzTRTbSu49HFYFwy24tllPvU/ooZE3U9TBoCSGIAIjV6nujw+raZyy9e5MYKM5vaeUDbg+y/Pa10WH763eUchkUipm+AL/eQq3ZwvyLJ0b7x/XNW6qJqYUBoDI70/NB+PsPsveG5VXX7uGRcbPsC7lp9omQyuyMzDY/nf2X6Y8AlceevLIax6H03z08coOogeIgbHOG3B8bw3m3az0S9neCcPDGcSiLrouLr/omQtTOUkcAAGeXVygUM3iYe4RfzZ/w6y08GLkT8WGIXnxrCE9XKZdBrdnqqYkVhIjEyc4XTD1/Ca6Jnmlc4c8ur2RNOE5kF1YhACIgVefdrmxVk40BHKMHoi9E04pPEk9VbE1uuvKdjkQ6LJ/9O/93h4dQC+rgZwBohEHiKdIKUvKK8rkW1J2Pqk4QBjydm5P2/YODwUD4Pp/10AiDwR64GeKaeepfh7Q/QABwDSij8dBXHYBNAAAAAElFTkSuQmCC","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAACJ0lEQVRIx82XP0hbQRzHv79Fh4JSVAwJbUkwpiGKi7hYkqngqqVL081NqltdQqeSRcFBxc3NTNK6Cp0S6iJuKjFGEmxJUIyECBnicp3uennv3rvLM4rf5SXv9+M+vz/3O+4RYwyPLfICISLGGKOuQ4hIOHYCMIYQEculk4inMjabCdAVwqPPpZMAgHgqI35zcbAbzBHCo+8PDmPi0xpy6SRurorCPuQLoz84DABolK8RT2UcQUqIDOCLcN1cFQWgUb42AhlBZMkLW98bQ9wAOjmBHCEAOgLxklohRMSUkB+LUxjyhTvOhG+MDxuHbVvcEeJVcnA8qzbIQwGqLERPrEMnz4MXiLLx8rnUbTHGiACw9fQ3pcP61g6WFj5rF3LzW0p9x9NBvs5/VDrs7R9hLORHeNTvCCieV3FSqmJ2ZlJpX93efaKeOJ1diWjE9r5yd49AX494WpXNF8zPrm5Er4UkohER7cibwP9Ij8tIjAfFk+visiL8VdnYJh4AOEReyA3CbVoIEbGD5S+YXtlEIhoRGVxcVkQ/rOJ9kX2z+YKtZFoI122zhfCoH69Cb/G3dIbieRUDL3rbfLQQa7msEF6SsZAfJ6WqrVwy5M+vn3j9fq79gFQ1/uXgoC1St57cNluo12pmECtIVr1WE7tIZeOlci2Xbhh1Mh7GhwxlR/cuHWwkIA1ipay9qhpB3sVi4v/v09Pu3oWdII92q/f62eD5I+hZQv4BuurL0OdH7DcAAAAASUVORK5CYII=","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAkCAYAAAB8DZEQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAG3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAAB90lEQVRIx92XPUjDQBTH/7foIFiKkZYWkYqxluomncSsriJOurkJujmJk3Ryq+DmppOIq6vFSdy0qI0oIi2VpoiCgy7ndOflckku/XDwv4Tee32/ex+XXgmlFFFECKGUUhLpO7oQQggFgKgAbQghhJaLy5jbOvobiCwdaCCElQgAysVlNBs2hpOmy4eBg2C+ELb7WCYBAHh/ekWzYXP7cNJ02YJKqYSoALFMgoMYgK2HgbQgosTA8ro2JAgQBlSBCCHUFwJACyQCAKDZsLG4d+maPiXkZL3gmSIdydPHsiKUUteoAsDJegHtSs7C1RNWJnFM24XIzXeVi2XUaSYeCACKHosAoKXittJY2j/ExtpKaJAgv42tnT+EbK4uKR1Oz64wNZaCOZHyBdjVOm4e61iYn1Hadw+OoRzhbkp5GNmUWbmsZ7328Y30YB9/yjq/vdd/d3Vj96EQK5flux0fTf/u9PoJ1nSGP5kenmvcX5VNIEQMFARhNi0IK5WVyyJuGHhzHO1MmH8kCAv+8FzjTZfFmi/6RiqXmAEAtD6/YE6kMDI2iZfHO9jVOoYG+l0+DCI33xcSNwxPkKCetD6/eLlCITJI1Jvj8ClS2VSAUEhUaR/GTg5lpHuXDJvN5/nni0qlu9dUP0hP/jqIpevZrb7jn99/A/kBnVzI0h6YFF8AAAAASUVORK5CYII="]}},"portrait.tana":{"src":null},"portrait.colin":{"src":null},"cutscene.soul":{"src":null},"ending.relics":{"src":null},"ending.john-doe":{"src":null},"ending.love":{"src":null},"ending.return":{"src":null},"ending.farewell":{"src":null},"item.branch":{"src":null},"item.plank":{"src":null},"item.timber":{"src":null},"item.scrap":{"src":null},"item.silver":{"src":null},"item.cloth":{"src":null},"item.silk":{"src":null},"item.coat":{"src":null},"item.scissors":{"src":null},"item.seed":{"src":null},"item.flower":{"src":null},"item.ring":{"src":null},"item.book":{"src":null},"item.ribbon":{"src":null},"item.letter":{"src":null},"item.wreath":{"src":null},"item.nametag":{"src":null},"item.score":{"src":null},"item.gem":{"src":null},"item.poisonflower":{"src":null},"item.pebble":{"src":null},"prop.tent":{"src":null},"prop.fire":{"src":null},"prop.workbench":{"src":null},"item.wood":{"src":null},"item.metal":{"src":null},"item.fineMetal":{"src":null},"item.bentNails":{"src":null},"item.nails":{"src":null},"item.fineNails":{"src":null},"item.rag":{"src":null},"item.toxicSeed":{"src":null},"item.edibleSeed":{"src":null},"item.oldBook":{"src":null},"item.fineLath":{"src":null},"item.woodPeg":{"src":null},"item.poetry":{"src":null}},"audio":{"forest":{"src":null,"loop":true},"fire":{"src":null,"loop":true},"pickup":{"src":null},"craft":{"src":null},"ending":{"src":null}}}</script><script>const factories={"scripts/main.js":async function(exports,require){
+const {initRelationships}=require("scripts/systems/relationships.js");
+const {initStory}=require("scripts/systems/story.js");
+const {loadAssets}=require("scripts/rendering/assets.js");
+// 程式入口：只負責把各功能連接起來。
+const {initJourney,game,maps}=require("scripts/systems/journey.js");
+const {initInventory}=require("scripts/systems/inventory.js");
+const {initCrafting}=require("scripts/systems/crafting.js");
+const {initFarewell}=require("scripts/systems/farewell.js");
+const {initMenus}=require("scripts/ui/menus.js");
+const {capacity}=require("scripts/core/rules.js");
+initInventory();initCrafting();initFarewell();initMenus();initRelationships();initStory();await loadAssets();initJourney();
+if(document.modelContext?.registerTool){const life=new AbortController();const add=t=>{try{Promise.resolve(document.modelContext.registerTool(t,{signal:life.signal})).catch(()=>{})}catch{}};add({name:'read_journey',description:'Read the current game day, location, inventory and available interactions.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute:()=>({day:game.state.day,location:maps[game.state.map],started:game.state.started,mode:game.mode,position:{x:Math.round(game.state.x),y:Math.round(game.state.y)},dialogueLines:game.dialogues.length,craftDone:game.state.craftDone,capacity:capacity(game.state),items:game.state.bag.map(i=>({name:i.name,x:i.x,y:i.y})),nearby:game.near?.label||null})});add({name:'open_backpack',description:'Open the same backpack as the E key. Does not collect, consume or move items.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:false},execute:()=>{if(!game.state.started||game.mode||game.dialogues.length)throw Error('Start the journey and finish the current interaction first.');game.actions.inventory();return{opened:true,capacity:capacity(game.state)}}});addEventListener('pagehide',()=>life.abort(),{once:true})}
+
+Object.assign(exports,{});
+},"scripts/systems/relationships.js":function(exports,require){
+const {dialogues : D}=require("scripts/data/dialogues.js");
+const {achievementData}=require("scripts/data/achievements.js");
+const {applyChoice}=require("scripts/core/catalog.js");
+const {burnedGift,talkTier,availableTalks,rotatingChoices}=require("scripts/core/relationship-rules.js");
+const Core=require("scripts/core/rules.js");
+const {game,$,$$,panel,closePanel,say,bubble,hud}=require("scripts/systems/journey.js");
+
+const sample=a=>a[Math.floor(Math.random()*a.length)];
+const lines=a=>a.map(l=>[l.speaker==='tana'?'Ａ':'Ｂ',l.text.replace('{burned_gift_name}',burnedGift(game.state)||'')]);
+const awardQueue=[];let awardActive=false;
+function showAward(){
+  if(awardActive||!awardQueue.length)return;
+  awardActive=true;const id=awardQueue.shift(),data=achievementData.find(a=>a[0]===id);
+  let el=$('#achievement-toast');if(!el){el=document.createElement('div');el.id='achievement-toast';el.setAttribute('role','status');$('#stage').append(el)}
+  el.innerHTML='<small>成就解鎖</small><strong>'+data[1]+'</strong><p>'+data[2]+'</p>';
+  // 新建立的第一個通知也先確立下方的起始樣式，再套用共同的滑入動畫。
+  el.classList.remove('show');
+  void el.offsetHeight;
+  el.classList.add('show');
+  setTimeout(()=>{el.classList.remove('show');setTimeout(()=>{awardActive=false;showAward()},650)},7000);
+}
+function unlock(id){const a=game.state.achievements;if(!a.includes(id)){a.push(id);awardQueue.push(id);showAward()}}
+function syncFollowing(){const s=game.state;if(s.affinity>=60)s.stayingToday=false;if(s.affinity<50){s.ax=287;s.ay=189;game.trail=[]}}
+function changeAffinity(delta){const s=game.state;s.affinity=Math.max(0,Math.min(100,s.affinity+delta));syncFollowing()}
+function recordBurn(it){
+  const s=game.state;s.burned++;s.burnedOrigins??=[];s.burnedKeys??=[];
+  const origin=it.originId??it.id;
+  if(it.memory&&!s.burnedOrigins.includes(origin)){s.burnedOrigins.push(origin);s.burnedMemories++;s.burnedMemory=true;changeAffinity(-20)}
+  if(!s.burnedKeys.includes(it.originKey||it.key))s.burnedKeys.push(it.originKey||it.key);
+  if(it.fromTana&&!s.burnedNames.includes(it.originName||it.name))s.burnedNames.push(it.originName||it.name);
+}
+function gift(it){
+  const s=game.state;
+  if(s.day===7||it.noGift||!s.bag.some(i=>i.id===it.id))return;
+  const key=D.gifts.specific.some(g=>g.id===it.key)?it.key:it.key==='flower'?'flower_safe':it.key==='poisonflower'?'flower_toxic':it.key==='nametag'&&it.initial?'name_strip':it.type==='book'?'book':it.key;
+  const entry=D.gifts.specific.find(g=>g.id===key);
+  if(!entry){s.rejectedGifts++;if(s.rejectedGifts>=3)unlock('garbage');closePanel();bubble(sample(D.gifts.rejection.pool).lines[0].text);return}
+  if(entry.max_accepted&&s.gifted.filter(g=>g.key===it.key).length>=entry.max_accepted){closePanel();say(lines(entry.limit_lines));return}
+  if(entry.affinity_delta){applyChoice(s,'gift:'+entry.id,entry.affinity_delta);syncFollowing()}
+  if(entry.accepted){s.bag=s.bag.filter(i=>i.id!==it.id);s.gifted.push({...it,memory:true,x:-1,y:-1});s.gifts++;if(it.key==='ring')s.ringGifted=true;if(it.key==='nametag')unlock('remember')}
+  closePanel();say(lines(entry.lines));hud();
+}
+function talk(){
+  const s=game.state,id=talkTier(s);if(s.day>=7)return;
+  const tier=D.interactions.tiers.find(t=>t.id===(id==='neutral'?'high':id));
+  const pool=rotatingChoices(s,'talk:'+id,availableTalks(s));
+  say(lines([sample(tier.opening_pool)]),()=>{
+    game.mode='talk';panel('想對塔納說的話','<div class="talkchoices">'+pool.map((t,i)=>'<button data-talk="'+i+'">'+t.label+'</button>').join('')+'</div>');
+    $$('[data-talk]').forEach(b=>b.onclick=()=>{const t=pool[Number(b.dataset.talk)];applyChoice(s,t.id,t.affinity_delta||0);syncFollowing();closePanel();say(lines(t.lines))});
+  });
+}
+function banter(){
+  const s=game.state;if(s.affinity<50||s.stayingToday||s.day===7)return;
+  const high=s.affinity>=85&&s.burnedMemories===0;
+  let pool=D.following.modes.find(t=>t.id===(high?'high':'low')).pool;
+  pool=pool.filter(t=>(t.id!=='follow_joke'||(!s.jokeTold&&s.banterCount>=7))&&(t.id!=='follow_song'||s.burnedKeys?.includes('score'))&&(!t.requires?.current_map_has_hidden_good_loot||Core.loot(s,s.map).some(i=>Core.defs[i.key].grade==='優質'&&Math.hypot(i.x-s.x,i.y-s.y)>45)));
+  const line=high&&!s.jokeTold&&s.banterCount>=7?pool.find(t=>t.id==='follow_joke'):rotatingChoices(s,'banter:'+(high?'high':'low'),pool,1)[0];
+  if(!line)return;if(line.id==='follow_joke')s.jokeTold=true;else s.banterCount=(s.banterCount||0)+1;
+  bubble(line.text);
+}
+function initRelationships(){Object.assign(game.actions,{gift,talk,banter,unlock,recordBurn})}
+
+
+Object.assign(exports,{unlock,changeAffinity,recordBurn,initRelationships});
+},"scripts/data/dialogues.js":function(exports,require){
+const dialogues = {
+  "schema_version": 1,
+  "language": "zh-Hant",
+  "characters": {
+    "tana": {
+      "name": "塔納"
+    },
+    "colin": {
+      "name": "柯林"
+    }
+  },
+  "display_rules": {
+    "conversation": {
+      "placement": "bottom",
+      "portrait": "current_speaker_left"
+    },
+    "colin_solo": {
+      "placement": "bottom",
+      "portrait": "colin_left"
+    },
+    "tana_solo_follow": {
+      "placement": "above_head",
+      "shape": "comic_bubble"
+    },
+    "night_exit_warning": {
+      "placement": "bottom",
+      "portrait": "tana_left",
+      "explicit_exception": true
+    }
+  },
+  "affection": {
+    "initial": 85,
+    "maximum": 100,
+    "hidden_from_player": true,
+    "burn": {
+      "delta": -20,
+      "applies_to": [
+        "tana_related",
+        "gift_from_tana"
+      ],
+      "deduplicate_per_item": true
+    },
+    "stop_following": {
+      "below": 50,
+      "wait_at": "campfire"
+    },
+    "after_burning_next_day_follow_distance_px": {
+      "normal": 100,
+      "distant_range": [
+        250,
+        400
+      ]
+    }
+  },
+  "gifts": {
+    "sampling": {
+      "rejection": "random_one_full_dialogue",
+      "specific_gift": "use_full_sequence"
+    },
+    "rejection": {
+      "match_tags": [
+        "wood",
+        "metal",
+        "stone",
+        "damaged"
+      ],
+      "accepted": false,
+      "affinity_delta": null,
+      "counts_toward_achievement": "gift_junk_attempts",
+      "pool": [
+        {
+          "id": "reject_keep",
+          "lines": [
+            {
+              "speaker": "tana",
+              "text": "你自己留著。"
+            }
+          ]
+        },
+        {
+          "id": "reject_use",
+          "lines": [
+            {
+              "speaker": "tana",
+              "text": "你是要我用在哪裡？"
+            }
+          ]
+        },
+        {
+          "id": "reject_inspiration",
+          "lines": [
+            {
+              "speaker": "tana",
+              "text": "誰給你的靈感，讓你想送我這些？"
+            }
+          ]
+        }
+      ]
+    },
+    "specific": [
+      {
+        "id": "gem",
+        "match_tags": [
+          "gem"
+        ],
+        "accepted": true,
+        "affinity_delta": null,
+        "lines": [
+          {
+            "speaker": "tana",
+            "text": "我不討厭閃閃發光的東西。"
+          },
+          {
+            "speaker": "colin",
+            "text": "難怪你喜歡我！"
+          },
+          {
+            "speaker": "tana",
+            "text": "……"
+          }
+        ]
+      },
+      {
+        "id": "ring",
+        "match_tags": [
+          "ring"
+        ],
+        "accepted": true,
+        "affinity_delta": null,
+        "records": [
+          "ring_accepted_by_tana"
+        ],
+        "lines": [
+          {
+            "speaker": "tana",
+            "text": "你知道這是什麼意思嗎？"
+          },
+          {
+            "speaker": "colin",
+            "text": "知道啊！"
+          }
+        ]
+      },
+      {
+        "id": "flower_safe",
+        "match_tags": [
+          "flower_nontoxic"
+        ],
+        "accepted": true,
+        "affinity_delta": null,
+        "lines": [
+          {
+            "speaker": "tana",
+            "text": "它很快就會枯萎了。"
+          },
+          {
+            "speaker": "colin",
+            "text": "所以要現在送你啊！"
+          }
+        ]
+      },
+      {
+        "id": "flower_toxic",
+        "match_tags": [
+          "flower_toxic"
+        ],
+        "accepted": true,
+        "affinity_delta": null,
+        "lines": [
+          {
+            "speaker": "tana",
+            "text": "這有毒。"
+          },
+          {
+            "speaker": "colin",
+            "text": "對你沒影響吧？"
+          },
+          {
+            "speaker": "tana",
+            "text": "對你有。"
+          }
+        ],
+        "max_accepted": 2,
+        "limit_lines": [
+          {
+            "speaker": "tana",
+            "text": "我看起來像毒窟嗎？"
+          }
+        ]
+      },
+      {
+        "id": "book",
+        "match_tags": [
+          "book"
+        ],
+        "accepted": true,
+        "affinity_delta": null,
+        "lines": [
+          {
+            "speaker": "tana",
+            "text": "這本書我以前看過了。"
+          },
+          {
+            "speaker": "colin",
+            "text": "啊……好吧。"
+          },
+          {
+            "speaker": "tana",
+            "text": "我可以再看一次。"
+          },
+          {
+            "speaker": "colin",
+            "text": "為什麼？"
+          },
+          {
+            "speaker": "tana",
+            "text": "是你送的。"
+          }
+        ]
+      },
+      {
+        "id": "name_strip",
+        "match_tags": [
+          "colin_initial_name_strip"
+        ],
+        "accepted": true,
+        "affinity_delta": null,
+        "unlocks": "remember_me",
+        "records": [
+          "name_strip_held_by_tana"
+        ],
+        "lines": [
+          {
+            "speaker": "colin",
+            "text": "你也許會丟掉，但我就是想給你。"
+          },
+          {
+            "speaker": "tana",
+            "text": "……"
+          },
+          {
+            "speaker": "tana",
+            "text": "至少現在，我收著。"
+          }
+        ]
+      },
+      {
+        "id": "wreath",
+        "accepted": true,
+        "lines": [
+          {
+            "speaker": "colin",
+            "text": "你戴起來應該會很好看。"
+          },
+          {
+            "speaker": "tana",
+            "text": "……我可以稍微配合你。"
+          }
+        ]
+      },
+      {
+        "id": "score",
+        "accepted": true,
+        "affinity_delta": 5,
+        "lines": [
+          {
+            "speaker": "tana",
+            "text": "為什麼給我？"
+          },
+          {
+            "speaker": "colin",
+            "text": "旋律我都記住了！"
+          },
+          {
+            "speaker": "tana",
+            "text": "……"
+          },
+          {
+            "speaker": "colin",
+            "text": "如果能知道這首曲子在講什麼就好了……"
+          }
+        ]
+      },
+      {
+        "id": "poetry",
+        "accepted": false,
+        "affinity_delta": 5,
+        "lines": [
+          {
+            "speaker": "colin",
+            "text": "感覺你會喜歡這種艱澀難懂的東西。"
+          },
+          {
+            "speaker": "tana",
+            "text": "我對愛情故事沒興趣。"
+          },
+          {
+            "speaker": "colin",
+            "text": "嗯？這本詩集在講愛情嗎？"
+          },
+          {
+            "speaker": "tana",
+            "text": "……"
+          },
+          {
+            "speaker": "tana",
+            "text": "是又怎麼樣？"
+          },
+          {
+            "speaker": "colin",
+            "text": "……嘻嘻。"
+          }
+        ]
+      }
+    ]
+  },
+  "interactions": {
+    "choice_sampling": {
+      "count": 2,
+      "without_replacement": true,
+      "refresh_on": "new_F_interaction",
+      "not_on": "hover_or_choice_change",
+      "exclude_unmet_conditions": true
+    },
+    "tier_precedence": [
+      "cold",
+      "low",
+      "high",
+      "neutral"
+    ],
+    "tiers": [
+      {
+        "id": "high",
+        "condition": {
+          "min_inclusive": 85,
+          "max_inclusive": 100
+        },
+        "opening_pool": [
+          {
+            "speaker": "tana",
+            "text": "怎麼了嗎？"
+          },
+          {
+            "speaker": "tana",
+            "text": "你想說什麼？"
+          }
+        ],
+        "pool": [
+          {
+            "id": "high_look",
+            "label": "沒事，就想看看你。",
+            "affinity_delta": 5,
+            "lines": [
+              {
+                "speaker": "colin",
+                "text": "沒事，就想看看你。"
+              },
+              {
+                "speaker": "tana",
+                "text": "隨便你。"
+              }
+            ]
+          },
+          {
+            "id": "high_name",
+            "label": "你知道嗎？你從來沒叫過我的名字。",
+            "affinity_delta": -5,
+            "lines": [
+              {
+                "speaker": "colin",
+                "text": "你知道嗎？你從來沒叫過我的名字。"
+              },
+              {
+                "speaker": "tana",
+                "text": "是嗎？"
+              },
+              {
+                "speaker": "colin",
+                "text": "嗯。"
+              }
+            ]
+          },
+          {
+            "id": "high_remember",
+            "label": "你會一直記得我嗎？",
+            "affinity_delta": 5,
+            "lines": [
+              {
+                "speaker": "colin",
+                "text": "你會一直記得我嗎？"
+              },
+              {
+                "speaker": "tana",
+                "text": "……不好忘。"
+              }
+            ]
+          },
+          {
+            "id": "high_nothing",
+            "label": "……沒有。",
+            "affinity_delta": 0,
+            "lines": [
+              {
+                "speaker": "colin",
+                "text": "……"
+              },
+              {
+                "speaker": "colin",
+                "text": "沒有。"
+              },
+              {
+                "speaker": "tana",
+                "text": "我不會追問。"
+              }
+            ]
+          },
+          {
+            "id": "high_here",
+            "label": "你真的到最後都在這裡。",
+            "affinity_delta": 5,
+            "lines": [
+              {
+                "speaker": "colin",
+                "text": "你真的到最後都在這裡。"
+              },
+              {
+                "speaker": "tana",
+                "text": "因為你在這裡。"
+              }
+            ]
+          },
+          {
+            "id": "high_live",
+            "label": "可以的話，我想繼續活在有你的世界。和你一起。",
+            "affinity_delta": 0,
+            "lines": [
+              {
+                "speaker": "colin",
+                "text": "可以的話，我想繼續活在有你的世界。和你一起。"
+              },
+              {
+                "speaker": "tana",
+                "text": "……"
+              },
+              {
+                "speaker": "colin",
+                "text": "開玩笑的啦！"
+              },
+              {
+                "speaker": "tana",
+                "text": "不好笑。"
+              }
+            ]
+          },
+          {
+            "id": "high_more_time",
+            "label": "既然你不需要睡覺，那你可以想我的時間就更多了！",
+            "affinity_delta": 0,
+            "lines": [
+              {
+                "speaker": "colin",
+                "text": "既然你不需要睡覺，那你可以想我的時間就更多了！"
+              },
+              {
+                "speaker": "tana",
+                "text": "……"
+              },
+              {
+                "speaker": "tana",
+                "text": "我不知道……什麼時候能忘掉你不吃什麼、你喜歡什麼、你害怕什麼、你會為什麼而掉淚、你會因為什麼而笑？"
+              },
+              {
+                "speaker": "colin",
+                "text": "……"
+              },
+              {
+                "speaker": "colin",
+                "text": "不能一直記得嗎……？"
+              }
+            ],
+            "requires": {
+              "min_day": 4
+            }
+          }
+        ]
+      },
+      {
+        "id": "low",
+        "condition": {
+          "min_inclusive": 61,
+          "max_inclusive": 80
+        },
+        "opening_pool": [
+          {
+            "speaker": "tana",
+            "text": "怎樣？"
+          },
+          {
+            "speaker": "tana",
+            "text": "什麼？"
+          }
+        ],
+        "pool": [
+          {
+            "id": "low_look",
+            "label": "只是想看看你。",
+            "affinity_delta": 2,
+            "lines": [
+              {
+                "speaker": "colin",
+                "text": "只是想看看你。"
+              },
+              {
+                "speaker": "tana",
+                "text": "現在製造新的回憶，是不是有點晚？"
+              }
+            ]
+          },
+          {
+            "id": "low_miss",
+            "label": "如果你想念我了怎麼辦？",
+            "affinity_delta": -2,
+            "lines": [
+              {
+                "speaker": "colin",
+                "text": "如果你想念我了怎麼辦？"
+              },
+              {
+                "speaker": "tana",
+                "text": "如果{burned_gift_name}還在的話，我也許會想起你。但現在……沒有了。"
+              }
+            ],
+            "requires": {
+              "has_burned_gift_from_tana": true
+            },
+            "substitutions": {
+              "burned_gift_name": "玩家已燒毀且由塔納送給柯林的實際物品名稱"
+            }
+          },
+          {
+            "id": "low_remember",
+            "label": "你會一直記得我嗎？",
+            "affinity_delta": 0,
+            "lines": [
+              {
+                "speaker": "colin",
+                "text": "你會一直記得我嗎？"
+              },
+              {
+                "speaker": "tana",
+                "text": "你想被記得嗎？"
+              },
+              {
+                "speaker": "colin",
+                "text": "……我不知道。"
+              },
+              {
+                "speaker": "tana",
+                "text": "我沒辦法回答你自己都不知道的問題。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cold",
+        "condition": {
+          "max_inclusive": 60
+        },
+        "opening_pool": [
+          {
+            "speaker": "tana",
+            "text": "……"
+          },
+          {
+            "speaker": "tana",
+            "text": "（盯著你，但沒有開口說話。）",
+            "stage_direction": true
+          }
+        ],
+        "pool": [
+          {
+            "id": "cold_words",
+            "label": "你有什麼話想跟我說嗎？",
+            "affinity_delta": 0,
+            "lines": [
+              {
+                "speaker": "colin",
+                "text": "你有什麼話想跟我說嗎？"
+              },
+              {
+                "speaker": "tana",
+                "text": "沒有。"
+              },
+              {
+                "speaker": "colin",
+                "text": "……知道了。"
+              }
+            ]
+          },
+          {
+            "id": "cold_name",
+            "label": "塔納。",
+            "affinity_delta": 10,
+            "lines": [
+              {
+                "speaker": "colin",
+                "text": "塔納。"
+              },
+              {
+                "speaker": "tana",
+                "text": "？"
+              },
+              {
+                "speaker": "colin",
+                "text": "塔納！塔納！塔納！"
+              },
+              {
+                "speaker": "tana",
+                "text": "你有什麼毛病？"
+              },
+              {
+                "speaker": "colin",
+                "text": "就是想叫叫你。"
+              }
+            ]
+          },
+          {
+            "id": "cold_understand",
+            "label": "你到最後還是無法理解我。",
+            "affinity_delta": 0,
+            "lines": [
+              {
+                "speaker": "colin",
+                "text": "你到最後還是無法理解我。"
+              },
+              {
+                "speaker": "tana",
+                "text": "？"
+              },
+              {
+                "speaker": "tana",
+                "text": "我知道你喜歡什麼、討厭什麼、為什麼開心、為什麼難過。"
+              },
+              {
+                "speaker": "colin",
+                "text": "……你看吧。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "neutral",
+        "condition": {
+          "min_inclusive": 81,
+          "max_inclusive": 84
+        },
+        "opening_pool": [],
+        "pool": []
+      }
+    ]
+  },
+  "following": {
+    "only_while": {
+      "both_moving": true,
+      "tana_following": true
+    },
+    "do_not_show_if": {
+      "tana_waiting_at_camp": true
+    },
+    "speaker": "tana",
+    "placement": "above_head",
+    "modes": [
+      {
+        "id": "high",
+        "interval_seconds": 13,
+        "pool": [
+          {
+            "id": "follow_hidden",
+            "text": "再往深處找好像會有不錯的東西。",
+            "requires": {
+              "current_map_has_hidden_good_loot": true
+            },
+            "weight": 1
+          },
+          {
+            "id": "follow_slow",
+            "text": "你不要走太快。",
+            "weight": 1
+          },
+          {
+            "id": "follow_sheepdog",
+            "text": "你的體力和牧羊犬一樣。",
+            "weight": 1
+          },
+          {
+            "id": "follow_unforgettable",
+            "text": "你是個……令人難忘的傢伙。",
+            "weight": 1
+          },
+          {
+            "id": "follow_carry",
+            "text": "不要期待我能替你搬東西。",
+            "weight": 1
+          },
+          {
+            "id": "follow_joke",
+            "text": "用木棍和鐵棍敲頭，哪個比較痛？……頭比較痛。",
+            "weight": 0.1
+          },
+          {
+            "id": "follow_freedom",
+            "text": "依照立場不同，自由的定義是不是也不一樣？",
+            "weight": 1
+          },
+          {
+            "id": "follow_finally",
+            "text": "終於……",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "id": "low",
+        "interval_seconds": 23,
+        "pool": [
+          {
+            "id": "follow_tired",
+            "text": "我累了。",
+            "weight": 1
+          },
+          {
+            "id": "follow_best",
+            "text": "不一定都要最好的。",
+            "weight": 1
+          },
+          {
+            "id": "follow_if",
+            "text": "……如果——算了。",
+            "weight": 1
+          },
+          {
+            "id": "follow_humans",
+            "text": "人類就愛弄這些有的沒的。",
+            "weight": 1
+          },
+          {
+            "id": "follow_how_long",
+            "text": "還要逛多久？",
+            "weight": 1
+          },
+          {
+            "id": "follow_freedom_near",
+            "text": "自由就在眼前。",
+            "weight": 1
+          },
+          {
+            "id": "follow_song",
+            "text": "那首歌……你很久沒哼了。",
+            "weight": 1
+          }
+        ]
+      }
+    ],
+    "affinity_delta": 0
+  },
+  "night_exit_warning": {
+    "speaker": "tana",
+    "placement": "bottom",
+    "selection": "random_one",
+    "pool": [
+      "天色已晚。",
+      "這不是明智的選擇。",
+      "黑暗的環境會讓你死得更快。",
+      "不要把無謀和勇敢混為一談。"
+    ]
+  },
+  "sleep": {
+    "unfinished": "得先完成木工作業才能安心地睡覺。",
+    "question": "結束一天？",
+    "choices": [
+      "是。",
+      "再等等。"
+    ]
+  },
+  "soul_extraction": {
+    "lines": [
+      {
+        "speaker": "colin",
+        "text": "這之後你會怎樣？"
+      },
+      {
+        "speaker": "tana",
+        "text": "我會自由。"
+      },
+      {
+        "speaker": "colin",
+        "text": "……這段時間，什麼時刻讓你最開心？"
+      },
+      {
+        "speaker": "tana",
+        "text": "……"
+      },
+      {
+        "speaker": "colin",
+        "text": "如果你浮現的畫面不是現在，那就算我贏吧。"
+      },
+      {
+        "speaker": "tana",
+        "text": "那我輸了什麼？我不理解。"
+      },
+      {
+        "speaker": "colin",
+        "text": "總有一天你會理解吧……"
+      },
+      {
+        "speaker": "colin",
+        "text": "真想看你那時的表情。"
+      }
+    ],
+    "after_dialogue": {
+      "hold_key": "F",
+      "seconds": 5,
+      "progress_shape": "circle"
+    },
+    "after_completed": [
+      {
+        "speaker": "tana",
+        "text": "這就是最後一個……"
+      }
+    ]
+  },
+  "ending_interactions": {
+    "only_relics": {
+      "allow_sit": false,
+      "lines": [
+        {
+          "speaker": "tana",
+          "text": "這樣就夠了。"
+        }
+      ]
+    },
+    "return": {
+      "title": "總是回來",
+      "choices": [
+        {
+          "id": "sit",
+          "label": "坐下",
+          "lines": [],
+          "seconds_before_fade": 5
+        },
+        {
+          "id": "pour_wine",
+          "label": "把酒撒在墓上",
+          "animation": "pour_wine",
+          "lines": [
+            {
+              "speaker": "tana",
+              "text": "據說把酒撒在墓上，亡者就會記得回來的路。"
+            },
+            {
+              "speaker": "tana",
+              "text": "……但你不喜歡喝酒。"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "pickups": {
+    "poetry": [
+      {
+        "speaker": "colin",
+        "text": "這本詩集好像很古老，有些詞我看不太懂。"
+      },
+      {
+        "speaker": "tana",
+        "text": "那就別看。"
+      },
+      {
+        "speaker": "colin",
+        "text": "昏鐘……為……亡者……而鳴，"
+      },
+      {
+        "speaker": "colin",
+        "text": "……愛人……說……那只是……鳥群……歸巢……"
+      },
+      {
+        "speaker": "colin",
+        "text": "咦？不覺得唸起來，和我常哼的曲子節奏很配嗎？"
+      },
+      {
+        "speaker": "tana",
+        "text": "我說別看。"
+      }
+    ]
+  }
+};
+
+Object.assign(exports,{dialogues});
+},"scripts/data/achievements.js":function(exports,require){
+const achievementData=[
+ ['clock','計時開始','新的一天，旅程開始了。'],
+ ['artisan','手工藝職人','現在發現新專長還不算太晚，對吧？'],
+ ['goodnight','晚安，做個好夢','躺下吧，你已經做得很好了。'],
+ ['garbage','送禮天花板','你獨到的眼光，並非所有人都能理解。'],
+ ['remember','記得我','全世界都可以忘記我，唯獨你不行。'],
+ ['fullbag','魔術大空間','阿嬤的冰箱需要你。']
+];
+
+Object.assign(exports,{achievementData});
+},"scripts/core/catalog.js":function(exports,require){
+// 2026-09-23 道具清單。座標單位為背包格。
+function updateCatalog(defs) {
+  const add=(key,base,data)=>defs[key]={...defs[base],...data};
+  Object.assign(defs.branch,{desc:'破破爛爛的木材，感覺輕輕一碰就會碎掉。'});
+  add('wood','plank',{name:'普通木材',shape:[[0,0],[1,0]],desc:'常見的普通木材，小心木刺。'});
+  Object.assign(defs.timber,{desc:'做工精良，十分堅固。沉甸甸的。應該能撐過很長、很長的日子。'});
+  add('fineLath','timber',{name:'優質長木條',shape:[[0,0],[0,1],[0,2],[0,3]],desc:'平直而堅固的細長木條。適合做成支架。'});
+  add('woodPeg','timber',{name:'優質短木塊',shape:[[0,0]],desc:'仔細修整過的短木塊，能填上小小的空缺。'});
+  Object.assign(defs.scrap,{desc:'鏽斑下面，還有一點光。外型歪七扭八，感覺輕輕一碰就會碎。'});
+  add('metal','scrap',{name:'普通金屬板',grade:'普通',shape:[[0,0],[1,0]],desc:'中規中矩的材質和外型，坊間普遍大量使用的材料。'});
+  add('fineMetal','metal',{name:'優質金屬板',grade:'優質',shape:[[0,0],[1,0],[2,0],[3,0]],desc:'形狀和材質都無可挑剔，完美的金屬板。'});
+  add('bentNails','scrap',{name:'破爛的釘子',shape:[[0,0],[1,0],[1,1]],desc:'尾部有點扭曲，釘起來應該很醜。'});
+  add('nails','metal',{name:'普通的釘子',shape:[[0,0],[0,1]],desc:'沒什麼特別的，還算堪用。'});
+  add('fineNails','nails',{name:'優質的釘子',grade:'優質',shape:[[0,0]],desc:'做工精良，就算有點釘歪了，看起來也還算高級。'});
+  Object.assign(defs.silver,{grade:'普通',desc:'應該也曾有人守著這束光，等待著誰吧。'});
+  Object.assign(defs.cloth,{name:'亞麻布料',desc:'非常常見的亞麻布料，用途廣泛。'});
+  add('rag','cloth',{name:'破爛的布料',grade:'破爛',shape:[[0,0],[1,0],[0,1]],desc:'有許多線頭、破洞，摸起來非常粗糙的布料。'});
+  Object.assign(defs.silk,{name:'優質布料',shape:[[0,0],[1,0],[2,0],[3,0]],desc:'觸感如絲絨，滑順又舒適，可遇不可求。'});
+  Object.assign(defs.seed,{seedKind:'ordinary',grade:'普通',desc:'有機率長出金盞花、雛菊和錦葵。好像可以種在整理好的土地上。'});
+  add('toxicSeed','seed',{name:'有毒的種子',seedKind:'toxic',grade:'有毒',color:'#89759b',desc:'開出的花當然也有毒。有機率長出夾竹桃、烏頭。很高機率會長出顛茄。好像可以種在整理好的土地上。'});
+  add('edibleSeed','seed',{name:'可食用的種子',seedKind:'edible',grade:'可食用',desc:'能種出可食用的花。好像可以種在整理好的土地上。'});
+  const changes={
+    flower:{name:'鮮花',desc:'隨處可見的漂亮小花。可送給塔納，或用兩朵編成花圈。'},
+    wreath:{name:'花圈'},
+    poisonflower:{name:'有毒花朵',shape:[[0,0]],desc:'有著鮮艷顏色的漂亮花朵，它們就是這樣吸引獵物的。'},
+    ring:{name:'戒指',unique:true,desc:'一枚沒有刻名字的精緻銀戒。或許就是因為這樣，誰都能擁有它。'},
+    nametag:{name:'名字布條',unique:true,shape:[[0,0],[1,0]],desc:'刻著「COLYN」字樣的布條，針法有些不成熟，布的邊緣都纖維外露了。'},
+    coat:{unique:true,desc:'這是塔納送我的。已經非常老舊了，他總是叫我丟掉。'},
+    gem:{name:'寶石',desc:'寶石怎麼會出現在這種地方？也許是貿易商隊落下的。'},
+    score:{unique:true,desc:'塔納送的。聽起來是一首童謠，我哼過很多次旋律。塔納不願告訴我歌詞在講些什麼。'},
+    scissors:{name:'剪刀',unique:true,shape:[[0,0]],desc:'一隻老舊但仍鋒利的剪刀。看來可以將布料裁切成更小的形狀。'},
+    letter:{name:'沒送出的信',unique:true,noGift:true,desc:'要說的話都在這裡了。其實……也沒有很多。'},
+    book:{},ribbon:{}
+  };
+  for(const [key,data] of Object.entries(changes))Object.assign(defs[key],data,{grade:null});
+  add('poetry','book',{name:'古老的詩集',grade:null,unique:true,shape:[[0,0]],after:'看起來非常古老的詩集，裝幀隨時會脫落。中間缺了幾頁。',desc:'看起來非常古老的詩集，裝幀隨時會脫落。中間缺了幾頁。'});
+  add('oldBook','book',{name:'舊書本',desc:'紀載著許多傳說故事的書本，邊角有點磨損、內頁有些摺痕，看得出來這本書的主人曾不斷翻閱此書。'});
+}
+
+function bloom(seedKind,random) {
+  if(seedKind==='toxic')return random<.15?{name:'夾竹桃',color:'#d993aa'}:random<.3?{name:'烏頭',color:'#8c85c5'}:{name:'顛茄',color:'#aa78ad'};
+  if(seedKind==='edible')return {name:'金盞花',color:'#e7b454'};
+  return [{name:'金盞花',color:'#e7b454'},{name:'雛菊',color:'#eee7c9'},{name:'錦葵',color:'#cf9dbc'}][Math.min(2,Math.floor(random*3))];
+}
+
+function applyChoice(s,id,delta) {
+  s.appliedChoices??=[];
+  if(s.appliedChoices.includes(id))return false;
+  s.appliedChoices.push(id);s.affinity=Math.max(0,Math.min(100,s.affinity+delta));return true;
+}
+
+// 保留原物品的回憶來源；同一件衣物的碎片不會重複扣好感。
+function cutPieces(s,it) {
+  return it.shape.map(()=>({...it,id:++s.serial,key:it.grade==='優質'?'silk':it.grade==='普通'?'cloth':'rag',type:'cloth',grade:it.grade||'破爛',name:it.name+'的碎布',unique:false,initial:false,noGift:false,shape:[[0,0]],x:-1,y:-1,originId:it.originId??it.id,originKey:it.originKey??it.key,originName:it.originName??it.name}));
+}
+
+Object.assign(exports,{updateCatalog,bloom,applyChoice,cutPieces});
+},"scripts/core/relationship-rules.js":function(exports,require){
+const {dialogues : D}=require("scripts/data/dialogues.js");
+
+function burnedGift(s){return (s.burnedNames||[]).find(n=>!s.bag.some(i=>(i.originName||i.name)===n))}
+function talkTier(s){return s.affinity<=60?'cold':s.affinity<=80?'low':s.affinity<85?'neutral':'high'}
+function availableTalks(s){
+ if(s.day>=7)return [];
+ const tier=talkTier(s),pool=D.interactions.tiers.find(t=>t.id===(tier==='neutral'?'high':tier)).pool;
+ return pool.filter(t=>(tier!=='neutral'||['high_nothing','high_look'].includes(t.id))&&(!t.requires?.min_day||s.day>=t.requires.min_day)&&(!t.requires?.has_burned_gift_from_tana||!!burnedGift(s)));
+}
+
+// Shuffle a full cycle, rather than repeatedly drawing the same two choices.
+// Store the remaining IDs in the save so reloading does not restart the cycle.
+function rotatingChoices(s,key,pool,count=2,random=Math.random){
+ if(!pool.length)return [];
+ s.dialogueRotations??={};
+ const ids=pool.map(t=>t.id),old=s.dialogueRotations[key]||{eligible:[],remaining:[]};
+ let remaining=old.remaining.filter(id=>ids.includes(id));
+ remaining.push(...ids.filter(id=>!old.eligible.includes(id)&&!remaining.includes(id)));
+ const shuffle=list=>{list=[...list];for(let i=list.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[list[i],list[j]]=[list[j],list[i]]}return list};
+ if(!s.dialogueRotations[key])remaining=shuffle(remaining);
+ const selected=[];
+ while(selected.length<Math.min(count,pool.length)){
+  if(!remaining.length)remaining=shuffle(ids.filter(id=>!selected.includes(id)));
+  selected.push(remaining.shift());
+ }
+ s.dialogueRotations[key]={eligible:ids,remaining};
+ return selected.map(id=>pool.find(t=>t.id===id));
+}
+
+Object.assign(exports,{burnedGift,talkTier,availableTalks,rotatingChoices});
+},"scripts/core/rules.js":function(exports,require){
+const {updateCatalog}=require("scripts/core/catalog.js");
+const defs={
+branch:{name:'分岔的枯枝',type:'wood',shape:[[0,0],[0,1],[1,1],[0,2]],color:'#725d3b',desc:'被風折下的枝椏。彎曲也有彎曲的用處。',after:'他說，彎曲也有彎曲的用處。'},
+plank:{name:'完整木板',type:'wood',shape:[[0,0],[0,1],[0,2]],color:'#80683f',desc:'馬車上掉下來的木板。剛好，還沒有腐朽。',after:'邊緣留著他仔細摸過的痕跡。'},
+timber:{name:'老橡木',type:'wood',shape:[[0,0],[1,0],[2,0],[0,1],[1,1],[2,1]],color:'#796445',desc:'沉甸甸的。應該能撐過很長、很長的日子。',after:'他比劃了好久，才騰出放它的位置。'},
+scrap:{name:'生鏽的鉸鏈',type:'metal',shape:[[0,0],[1,0],[0,1]],color:'#536c63',desc:'鏽斑下面，還有一點光。',after:'他總能在鏽斑下面找到光。'},
+silver:{name:'銀製燭台',type:'metal',shape:[[0,0],[0,1],[0,2],[1,2]],color:'#69827a',desc:'曾有人守著這束光，等一個不會回來的人。',after:'以後，不必再等了。'},
+cloth:{name:'粗布料',type:'cloth',shape:[[0,0],[1,0],[0,1],[1,1]],color:'#88816b',desc:'粗糙，卻有很柔軟的背面。',after:'是他親手剪下的布。'},
+silk:{name:'褪色的祭布',type:'cloth',shape:[[0,0],[1,0],[2,0],[1,1]],color:'#8e8171',desc:'陽光從破窗落下來，照著褪色的花紋。',after:'他曾把這塊布披在肩上，假裝是披風。'},
+coat:{name:'舊外套',type:'coat',shape:[[0,0],[1,0],[0,1],[1,1],[0,2]],color:'#506e65',desc:'再舊一點也沒關係。我還捨不得丟。可用剪刀裁成布料。',after:'Ｂ的東西。明明老舊不堪，他卻一直說捨不得丟。'},
+scissors:{name:'小剪刀',type:'scissors',shape:[[0,0],[0,1]],color:'#6b7867',desc:'還算鋒利。可以把衣物裁成布料。',after:'他做事的時候，難得那麼安靜。'},
+seed:{name:'野花種子',type:'seed',shape:[[0,0]],color:'#616d3f',desc:'好像可以種在營地整理好的土地上。',after:'他問我喜不喜歡花。我問他，你喜歡嗎。'},
+flower:{name:'白色野花',type:'flower',shape:[[0,0],[0,1]],color:'#60754c',desc:'把一點春天帶走。可送給Ａ，或用兩朵編成花圈。',after:'他說，花開的時候，要記得替他看。'},
+ring:{name:'無名的戒指',type:'ring',shape:[[0,0]],color:'#82713f',desc:'沒有刻名字。或許就是因為這樣，誰都能擁有它。',after:'沒有刻名字。有些約定也不需要名字。'},
+book:{name:'旅人的詩集',type:'book',shape:[[0,0],[0,1]],color:'#7b634b',desc:'最後一頁寫著：路走到這裡，花仍會開。',after:'他的聲音，停在最後一頁。'},
+ribbon:{name:'Ａ留下的髮帶',type:'memory',shape:[[0,0],[1,0]],color:'#536d6e',desc:'他說只是多的。我知道不是。關於Ａ的回憶。',after:'我說只是多的。他一直都知道不是。'},
+letter:{name:'沒有寄出的信',type:'memory',shape:[[0,0]],color:'#8b7b56',desc:'要說的話，都在這裡了。其實，也沒有很多。',after:'字跡很端正。只有我的名字，被寫過很多遍。'},
+wreath:{name:'手編花圈',type:'flower',shape:[[0,0],[1,0],[0,1],[1,1]],color:'#688055',desc:'把春天編成一個圓，像不會結束的約定。',after:'圓圈沒有盡頭。'},
+nametag:{name:'繡字名條',type:'cloth',shape:[[0,0],[1,0]],color:'#8d866c',desc:'一小條布，足夠让名字留在這裡。',after:'Ｂ。我會記得。'}};
+defs.nametag={...defs.nametag,name:'刻有柯林名字的布條',shape:[[0,0]],memory:true,initial:true,desc:'柯林。這個名字，請你記得。',after:'他的名字。不是無名的旅人。'};
+defs.coat={...defs.coat,memory:true,fromTana:true,desc:'塔納送的舊外套。我還捨不得丟。可用剪刀裁成布料。'};
+defs.score={name:'一首歌的簡譜',type:'book',shape:[[0,0]],color:'#8d8160',memory:true,fromTana:true,desc:'塔納送的簡譜。我曾哼過很多次。',after:'那首歌。他很久沒哼了。'};
+defs.gem={name:'透光的寶石',type:'ring',shape:[[0,0]],color:'#6b989a',desc:'比陽光更固執的一點光。',after:'他說，自己也閃閃發光。'};
+defs.poisonflower={...defs.flower,name:'有毒的紫花',desc:'漂亮，卻有毒。不要碰嘴巴。',after:'我提醒過他。對他有影響。',color:'#807398'};
+defs.pebble={name:'路邊石頭',type:'metal',shape:[[0,0]],color:'#70786d',desc:'很普通的石頭。',after:'他也帶走了這個。'};
+defs.letter.memory=true;defs.ribbon.memory=true;defs.ribbon.fromTana=true;
+for(const [key,d]of Object.entries(defs)){d.grade=['branch','scrap','coat','pebble'].includes(key)?'破爛':['timber','silver','silk','gem','ring'].includes(key)?'優質':'普通';d.name=d.name.replaceAll('Ａ','塔納').replaceAll('Ｂ','柯林');d.desc=d.desc.replaceAll('Ａ','塔納').replaceAll('Ｂ','柯林');d.after=d.after.replaceAll('Ａ','塔納').replaceAll('Ｂ','柯林')}
+updateCatalog(defs);
+const rotate=shape=>{let h=Math.max(...shape.map(p=>p[1]));return shape.map(([x,y])=>[h-y,x])};
+const capacity=s=>36-(s.day-1)*3;
+const cells=it=>it.shape.map(([x,y])=>[x+it.x,y+it.y]);
+function fits(s,it,x,y,shape=it.shape){if(!shape.every(([a,b])=>a+x>=0&&a+x<6&&b+y>=0&&b+y<6&&(b+y)*6+a+x<capacity(s)))return false;return !s.bag.some(o=>o.id!==it.id&&!s.offerings?.includes(o.id)&&o.x>=0&&cells(o).some(([a,b])=>shape.some(([c,d])=>c+x===a&&d+y===b)))}
+const make=(key,id)=>({...defs[key],key,id,shape:defs[key].shape.map(p=>[...p]),x:-1,y:-1});
+function placeFirst(s,it){for(let y=0;y<6;y++)for(let x=0;x<6;x++)if(fits(s,it,x,y)){it.x=x;it.y=y;return true}return false}
+function newState(){let s={version:2,activeSeconds:0,banterSeconds:0,banterCount:0,jokeTold:false,appliedChoices:[],burnedOrigins:[],burnedKeys:[],uniqueCollected:[],postEnding:false,graveTalked:false,day:1,map:0,x:254,y:176,ax:229,ay:183,parts:[],flowers:Array(12).fill(null),affinity:85,gifted:[],burnedMemories:0,burnedNames:[],rejectedGifts:0,achievements:[],campBuilt:true,craftDone:false,campLocked:false,soulTaken:false,ringGifted:false,epilogue:false,direction:'down',visited:[0],bag:[],started:false,elapsed:0,seed:Math.floor(Math.random()*1e8),serial:10,looted:[],tutorial:false,seedHint:false,returned:false,burnedMemory:false,distant:false,gifts:0,burned:0,burial:0,offerings:[],wreath:false,nametag:false,cross:false,assembled:[],ended:false};s.bag=[{...make('coat',1),x:0,y:0},{...make('nametag',2),x:3,y:2},{...make('score',3),x:4,y:4},{...make('letter',4),x:5,y:4}];return s}
+function wear(s){for(const it of s.bag)if(it.x>=0&&!cells(it).every(([x,y])=>y*6+x<capacity(s))){it.x=-1;it.y=-1}for(const it of s.bag.filter(i=>i.x<0))placeFirst(s,it)}
+const quality=score=>score===0?'空物':score>=.85?'優質':score>=.5?'普通':'破爛';
+function rng(seed){return()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296}}
+function loot(s,map){
+ if(!map||s.day===7)return[];
+ const r=rng(s.seed+s.day*2137+map*837);
+ const essentials=s.day<=2?['plank','branch','timber']:s.day===3?['scrap','metal','fineMetal']:s.day===4?['cloth','rag','silk']:s.day===6?['plank','fineLath','woodPeg']:['flower','oldBook','book'];
+ // 第三天起不再採木，第四、五天不再採金屬；第六天為十字架重新提供木材。
+ // 石頭沿用金屬圖示分類，但不是金屬材料退場規則中的金屬製品。
+ const pool=[...essentials,'wood','nails','bentNails','fineNails','silver','cloth','seed','toxicSeed','edibleSeed','book','oldBook','flower','gem','poisonflower','pebble'].filter(key=>
+  !(s.day>=3&&s.day<=5&&defs[key].type==='wood')&&
+  !(s.day>=4&&s.day<=5&&defs[key].type==='metal'&&key!=='pebble'));
+ const pts=[[255,220],[160,195],[282,142],[215,96],[283,210],[143,138]];
+ if(map===2)pts.push([235,192]);
+ return pts.map(([x,y],i)=>{
+  let key=i<3?essentials[(i+map-1)%3]:pool[Math.floor(r()*pool.length)],id=`${s.day}-${map}-${i}`;
+  if(s.day===1&&map===1&&i===0){key='plank';x=370;y=170}
+  if(s.day===1&&map===1&&i===3)key='seed';
+  if(s.day>=2&&map===1&&i===4){key='ring';id='unique-ring'}
+  if(map===1&&i===5){key='scissors';id='unique-scissors'}
+  if(s.day===3&&map>=2&&i===5)key='fineNails';
+  if(s.day===4&&map===2&&i===5)key='silk';
+  if(map===2&&i===6){key='poetry';id='unique-poetry'}
+  return{id,x:x+(i>0?(s.day%3-1)*5:0),y,key};
+ }).filter(p=>!s.looted.includes(p.id)&&(!defs[p.key].unique||!([...s.bag,...s.gifted].some(i=>i.key===p.key)||(s.uniqueCollected||[]).includes(p.key))));
+}
+
+Object.assign(exports,{defs,rotate,capacity,cells,fits,make,placeFirst,newState,wear,quality,loot});
+},"scripts/systems/journey.js":function(exports,require){
+const {canWalk,portal,travelBlock,gameMinutes,dusk}=require("scripts/core/world-rules.js");
+const {followStep}=require("scripts/core/following.js");
+const {imageAsset,characterAsset,characterDisplayHeight,playAsset,syncAudio,stopAsset}=require("scripts/rendering/assets.js");
+const {Art}=require("scripts/rendering/art.js");
+const Core=require("scripts/core/rules.js");
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const maps=['營區基地','森林小徑','湖邊的廢棄修道院','石林草原'],days=['第一日','第二日','第三日','第四日','第五日','第六日','第七日'],parts=['木材組件（上）','木材組件（下）','金屬組件','布料內襯','搭建作品','預備墓地','送終之日'];
+// 480 × 270 世界座標的像素／秒；Shift 使用同一基準倍率。
+const WALK_SPEED=94,SPRINT_MULTIPLIER=2;
+// 遊戲畫面放大四倍：原本 7 格世界像素，增加畫面上的 100px。
+const TALK_DISTANCE=7+100/4;
+// 平常跟隨由畫面上的 100px 增為 225px，離開對話提示的範圍。
+const FOLLOW_DISTANCE=25+125/4;
+const FOLLOW_SPEED_MULTIPLIER=1.4;
+const game={state:Core.newState(),mode:'',keys:{},target:null,selected:null,pending:null,craft:null,near:null,dialogues:[],scale:1,soundOn:true,volume:.2,actions:{}};
+const world=$('#world'),ctx=world.getContext('2d'),overlay=$('#overlay');let audioCtx,lastTone=0,last=performance.now(),bubbleUntil=0,onDialogEnd;game.motion=null;game.returnMode='';game.hold=0;game.tapKeys={};
+function resize(){game.scale=Math.min(innerWidth/1920,innerHeight/1080);$('#stage').style.transform=`translate(-50%, -50%) scale(${game.scale})`}
+function toast(s){$('#toast').textContent=s;$('#toast').classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('#toast').classList.remove('show'),3500)}
+function bubble(s){$('#bubble').hidden=false;$('#bubble').textContent=s;bubbleUntil=performance.now()+5000}
+function tone(freq=440,dur=.1){if(!game.soundOn)return;try{audioCtx??=new(window.AudioContext||window.webkitAudioContext)();audioCtx.resume();let o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sine';o.frequency.value=freq;g.gain.setValueAtTime(Math.max(.001,game.volume*.1),audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+dur);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+dur)}catch{}}
+function hud(){const s=game.state;if(s.started&&s.bag.filter(i=>i.x>=0&&!s.offerings.includes(i.id)).reduce((n,i)=>n+i.shape.length,0)===Core.capacity(s))game.actions.unlock?.('fullbag');let en=['FOREST’S EDGE','THE WOODLAND PATH','ABANDONED ABBEY','THE ANCIENT MEADOW'],goals=['收集木材','另一半的形狀','留下的微光','柔軟的地方','把約定拼起來','花開的地方','最後的約定'];$('#location').innerHTML=maps[s.map]+`<small>${en[s.map]}</small>`;$('#day').textContent=days[s.day-1];$('#days').textContent=Array.from({length:7},(_,i)=>i<s.day?'●':'○').join(' ');$('#questDay').textContent=`0${s.day} / 07`;$('#questTitle').textContent=goals[s.day-1];$('#questText').textContent=s.day===7?'今天，只剩下一個人的腳步。':s.day===5?'工作區裡，放著這幾天的約定。':s.day===6?'種一些花，再留下能被記住的東西。':'沿著小徑，找一些能用的東西。';$('#questSub').textContent=(s.day<5?'完成':'')+parts[s.day-1];$('#bagcount').textContent=`${s.bag.filter(i=>i.x>=0&&!s.offerings.includes(i.id)).reduce((n,i)=>n+i.shape.length,0)} / ${Core.capacity(s)}`;if($('#mapcount'))$('#mapcount').textContent=`0${s.map+1} / 04`;$('#maphint').textContent=['森林邊緣的一小片平地','樹影之間，藏著旅人的故事','風穿過破碎的彩繪玻璃','有些名字，已被風忘記'][s.map];$$('.mapstrip i').forEach((i,n)=>i.classList.toggle('active',n===3-s.map));$('#mapcard>div:first-child').innerHTML=maps[s.map]+`<small id="mapcount">0${s.map+1} / 04</small>`;$('#exitlabel').innerHTML=s.day===7?'':s.map===0?'修道院 ↑':s.map===3?'營區基地 ↑':'';$('#westexit').classList.toggle('east',s.map===1);$('#westexit').textContent=s.map===0&&s.day<7?'← 森林小徑':s.map===1?'營區基地 →':'';$('#southexit').textContent=s.map===0&&s.day<7?'石林草原 ↓':s.map===2?'營區基地 ↓':'';}
+function objects(){
+ const s=game.state;let list=[];
+ if(s.map===0){if(!s.epilogue&&s.day<7)list=[{x:318,y:181,kind:'fire',label:'坐在營火旁'},{x:129,y:193,kind:'work',label:`工作區 · 木工完成 ${Math.round(s.parts.slice(0,4).reduce((n,p)=>n+p.score,0)/4*100)}%`},{x:326,y:163,kind:'tent',label:'回帳篷休息'}];list.push({x:172,y:182,kind:'garden',label:s.day===7?'履行最後的約定':'整理花圃'})}
+ else list=Core.loot(s,s.map).map(o=>({...o,kind:'loot',label:Core.defs[o.key].name}));
+ if(s.day<7&&(s.map===0||(s.affinity>=50&&!s.stayingToday)))list.push({x:s.ax,y:s.ay,kind:'talk',label:'互動'});
+ return list;
+}
+function changeMap(p){const s=game.state;
+ const blocked=travelBlock(s,p);
+ if(blocked){
+  game.target=null;if(game.blockedExit===blocked)return;game.blockedExit=blocked;
+  if(blocked==='last-day')bubble('就在這裡。');
+  else if(blocked==='night')say([['Ａ',['天色已晚。','這不是明智的選擇。','黑暗的環境會讓你死得更快。','不要把無謀和勇敢混為一談。'][Math.floor(Math.random()*4)]]]);
+  else if(blocked==='loose')toast('先安置暫放物品，或到營火清出空間。');
+  else toast('先向西走，到森林撿起第一塊木板。');
+  return;
+ }
+ game.blockedExit=null;
+ s.map=p.map;s.x=p.x;s.y=p.y;s.ax=p.x;s.ay=p.y;s.visited=[...new Set([...s.visited,p.map])];game.target=null;game.trail=[];
+ if(s.affinity<50||s.stayingToday){s.ax=287;s.ay=189}if(s.map===0&&gameMinutes(s)>=1200)s.campLocked=true;hud();tone(294,.2);
+ if(p.map===1&&!s.tutorial&&s.day===1)say([['Ｂ','看起來是個好東西！靠近木板，按 F 撿起來吧。'],['Ｂ','沒有拿回營地的話，明天應該就會不見了。']]);
+ if(p.map===0&&!s.returned&&s.tutorial){s.returned=true;say([['Ｂ','準備好就去工作臺開始加工，做完再回帳篷休息吧。']])}
+}
+function animate(seconds,update,done){game.mode='cinematic';game.keys={};game.tapKeys={};game.target=null;game.motion={elapsed:0,seconds,update,done}}
+function fade(opacity,seconds=1){$('#fade').style.transition=`opacity ${seconds}s`;$('#fade').style.opacity=opacity}
+function walkScene(dest,seconds,done){const s=game.state,start={x:s.x,y:s.y,ax:s.ax,ay:s.ay},dx=dest.x-start.x,dy=dest.y-start.y;if(dx||dy)s.direction=Math.abs(dx)>Math.abs(dy)?dx>0?'right':'left':dy>0?'down':'up';animate(seconds,p=>{s.x=start.x+(dest.x-start.x)*p;s.y=start.y+(dest.y-start.y)*p;s.ax=start.ax+((dest.ax??dest.x-20)-start.ax)*p;s.ay=start.ay+((dest.ay??dest.y)-start.ay)*p},done)}
+function startJourney(){game.state=Core.newState();let s=game.state;s.started=true;s.campBuilt=false;s.x=504;s.y=171;s.ax=532;s.ay=175;game.blockedExit=null;$('#intro').hidden=true;$('#overlay').hidden=true;fade(1,0);void $('#fade').offsetHeight;hud();tone(261,.4);
+ requestAnimationFrame(()=>{fade(0,3);animate(1.5,()=>{},()=>{walkScene({x:250,y:171,ax:278,ay:176},3,()=>say([['Ｂ','是時候了，對吧？'],['Ａ','……'],['Ｂ','你會幫我吧？'],['Ａ','開始吧。']],()=>{fade(1,1);tone(95,.4);animate(1,()=>{},()=>{s.campBuilt=true;fade(0,1.5);animate(1.5,()=>{},()=>{game.mode='';say([['Ｂ','去西邊的森林看看吧！說不定能收集到需要的材料！']],()=>{bubble('向西。');game.actions.unlock('clock')})})})}))})});playAsset('forest',game.volume)
+}
+
+const iconCache={};for(const type of new Set(Object.values(Core.defs).map(i=>i.type))){let c=document.createElement('canvas');c.width=c.height=16;Art.icon(c.getContext('2d'),type);iconCache[type]=c}
+function frame(t){
+ const s=game.state,dt=Math.min((t-last)/1000,.05);last=t;
+ if(s.started&&(s.day>1||s.tutorial)&&!s.ended&&!['cinematic','soul'].includes(game.mode))s.elapsed+=dt;
+ if(s.started&&!s.ended&&!['cinematic','soul'].includes(game.mode))s.activeSeconds=(s.activeSeconds||0)+dt;
+ let moving=false;const previousAX=s.ax,previousAY=s.ay;
+ if(game.motion){let m=game.motion,oldX=s.x,oldY=s.y;m.elapsed+=dt;m.update(Math.min(1,m.elapsed/m.seconds));moving=oldX!==s.x||oldY!==s.y;if(m.elapsed>=m.seconds){game.motion=null;m.done?.()}}
+ if(game.mode==='soul')game.actions.updateSoul?.(dt);
+ if(s.started&&!game.mode&&!game.dialogues.length&&!s.ended){
+  const k={...game.keys};for(const key of Object.keys(game.tapKeys))if(game.tapKeys[key])k[key]=true;game.tapKeys={};let dx=Number(!!(k.d||k.ArrowRight))-Number(!!(k.a||k.ArrowLeft)),dy=Number(!!(k.s||k.ArrowDown))-Number(!!(k.w||k.ArrowUp));
+  if(dx||dy)game.target=null;
+  if(!dx&&!dy&&game.target){let n=Math.hypot(game.target.x-s.x,game.target.y-s.y);if(n>2){dx=(game.target.x-s.x)/n;dy=(game.target.y-s.y)/n}else game.target=null}
+  let n=Math.hypot(dx,dy)||1,speed=WALK_SPEED*(k.Shift?SPRINT_MULTIPLIER:1);if(dx||dy)s.direction=Math.abs(dx)>Math.abs(dy)?dx>0?'right':'left':dy>0?'down':'up';dx=dx/n*dt*speed;dy=dy/n*dt*speed;
+  let oldX=s.x,oldY=s.y;if(canWalk(s,s.x+dx,s.y))s.x+=dx;if(canWalk(s,s.x,s.y+dy))s.y+=dy;moving=oldX!==s.x||oldY!==s.y;
+  const p=portal(s);
+  if(p&&travelBlock(s,p)){s.x=oldX;s.y=oldY;moving=false;game.target=null}
+  if(p)changeMap(p);else game.blockedExit=null;
+  const gap=s.distant?75:FOLLOW_DISTANCE,dist=Math.hypot(s.x-s.ax,s.y-s.ay);
+  if(s.day<7&&s.affinity>=50&&!s.stayingToday&&dist>gap){
+   const next=followStep(s,dt*speed*FOLLOW_SPEED_MULTIPLIER,gap,canWalk,game.followerNav??={});s.ax=next.x;s.ay=next.y;
+  }else game.followerNav=null;
+  if(moving&&s.day<7&&s.affinity>=50&&!s.stayingToday){s.banterSeconds=(s.banterSeconds||0)+dt;if(s.activeSeconds>=20&&s.banterSeconds>=(s.affinity>=85&&!s.burnedMemories?13:23)){s.banterSeconds=0;game.actions.banter?.()}}
+ }
+ const followerMoving=Math.hypot(s.ax-previousAX,s.ay-previousAY)>1e-6;
+ if(followerMoving){const dx=s.ax-previousAX,dy=s.ay-previousAY;s.aDirection=Math.abs(dx)>Math.abs(dy)?dx>0?'right':'left':dy>0?'down':'up'}
+ Art.scene(ctx,s.map,t/1000,s);
+ for(const o of objects())if(o.kind==='loot'){
+  let color={'破爛':'#e1e4e1','普通':'#78bbeb','優質':'#edd085'}[Core.defs[o.key].grade]||'#a5c9aa';ctx.fillStyle=color+'33';ctx.fillRect(o.x-9,o.y-10,18,14);if(!imageAsset(ctx,'item.'+o.key,o.x-6,o.y-11,12,12))ctx.drawImage(iconCache[Core.defs[o.key].type],o.x-6,o.y-11,12,12);ctx.fillStyle=color;for(let i=0;i<3;i++)ctx.fillRect(o.x-6+i*5,o.y-14-(t/120+i*5)%13,1,1)
+ }
+ Art.setContext(ctx);
+ const draw=(a,x,y)=>{const follower=a&&!s.soulTaken,direction=follower?s.aDirection||'down':s.direction,walking=follower?followerMoving:moving;if(!characterAsset(ctx,a?'tana':'colin',x,y,direction,walking,t/1000))Art.char(x,y,a,walking?t/100:0);if(a&&s.gifted.some(i=>i.key==='wreath'&&!s.offerings.includes(i.id))){const head=y-characterDisplayHeight('tana',direction)+3;ctx.fillStyle='#7c9d58';ctx.fillRect(x-5,head,11,3);ctx.fillStyle='#eadbbe';for(let j=0;j<3;j++)ctx.fillRect(x-4+j*4,head-1,2,2)}};
+ if(s.day<7||!s.soulTaken){if((s.affinity>=50&&!s.stayingToday)||s.map===0)draw(true,s.ax,s.ay);if(!s.bodyDown)draw(false,s.x,s.y)}else draw(true,s.x,s.y+(s.sitting?4:0));if(s.bodyDown&&s.burial<2){Art.setContext(ctx);Art.char(s.bodyX??252,s.bodyY??180,false,0,true)}if(s.pouring){ctx.fillStyle='#b69c64';ctx.fillRect(s.x-7,s.y-12,7,3);ctx.fillStyle='#c5d9c1aa';for(let i=0;i<7;i++)ctx.fillRect(s.x-8-i,s.y-8+i,1,3)}
+ ctx.fillStyle=`rgba(3,8,20,${s.day===7&&!s.epilogue?.45:dusk(s)})`;ctx.fillRect(0,0,480,270);
+ if(s.map===0&&s.campBuilt&&!s.epilogue){let glow=ctx.createRadialGradient(318,180,0,318,180,45);glow.addColorStop(0,'#e8a45122');glow.addColorStop(1,'#e8a45100');ctx.fillStyle=glow;ctx.fillRect(270,130,96,96)}
+ game.near=objects().filter(o=>Math.hypot(o.x-s.x,o.y-s.y)<=(o.kind==='talk'?TALK_DISTANCE:27)).sort((a,b)=>(a.kind==='talk')-(b.kind==='talk')||Math.hypot(a.x-s.x,a.y-s.y)-Math.hypot(b.x-s.x,b.y-s.y))[0];let near=game.near;
+ $('#interact').hidden=!near||!!game.mode||!s.started||game.dialogues.length>0||s.ended;
+ if(near){$('#interact').style.left=near.x*4+'px';$('#interact').style.top=(near.kind==='talk'?near.y+5:near.y-25)*4+'px';$('#interact span').textContent=near.label}
+ $('#bubble').style.left=Math.max(12,Math.min(1570,(s.soulTaken?s.x:s.ax)*4-50))+'px';$('#bubble').style.top=Math.max(80,(s.soulTaken?s.y:s.ay)*4-180)+'px';if(t>bubbleUntil)$('#bubble').hidden=true;
+ const minutes=Math.min(1439,gameMinutes(s));$('#time').textContent=`${minutes<720?'晨光':minutes<1080?'午後':'暮色'} · ${String(Math.floor(minutes/60)).padStart(2,'0')}:${String(minutes%60).padStart(2,'0')}`;
+ if(s.started&&game.soundOn&&t-lastTone>6500){lastTone=t;tone([196,220,261.63,293.66,329.63][Math.floor(t/6500)%5],2.5)}requestAnimationFrame(frame)
+}
+
+function say(lines,done){game.dialogues=lines.map(([who,text])=>[who,text.replaceAll('Ａ','塔納').replaceAll('Ｂ','柯林')]);onDialogEnd=done;game.keys={};game.tapKeys={};game.target=null;showLine()}
+function showLine(){if(!game.dialogues.length){$('#dialogue').hidden=true;let f=onDialogEnd;onDialogEnd=null;f?.();return}let [who,text]=game.dialogues[0];$('#dialogue').hidden=false;$('#dialogue').innerHTML=`<canvas width="28" height="39"></canvas><b>${who==='Ａ'?'塔納':'柯林'}</b><p>${text}</p><small>F / 空白鍵 / 點擊繼續 ▾</small>`;Art.portrait($('#dialogue canvas'),who==='Ａ')}
+function nextLine(){game.dialogues.shift();tone(520,.035);showLine()}
+function panel(title,body,eyebrow='旅途中'){overlay.hidden=false;game.keys={};game.tapKeys={};game.target=null;overlay.innerHTML=`<section class="panel" role="dialog" aria-modal="true" aria-label="${title}"><div class="panelhead"><div><div class="eyebrow">${eyebrow}</div><h2>${title}</h2></div><button class="close" aria-label="關閉">×</button></div>${body}</section>`;$('.close').onclick=closePanel;setTimeout(()=>$$('#overlay button:not(.close):not(:disabled)').find(b=>!b.hidden)?.focus(),0)}
+function closePanel(){if(game.state.ended){game.state.ended=false;game.state.postEnding=true;game.state.sitting=false;game.state.x=194;game.state.y=182;}if(['craft','assembly'].includes(game.mode)){toast('先完成今天的打造，才能收起工具。');return}if(['cinematic','soul','farewell'].includes(game.mode))return;game.mode='';stopAsset('fire');game.pending=null;game.selected=null;overlay.hidden=true;overlay.innerHTML='';if(!game.state.started)$('#intro').hidden=false;hud()}
+function confirmAction(title,text,yes){game.mode='confirm';panel(title,`<p>${text}</p><div class="actions"><button id="yes" class="primary">是，繼續</button><button id="no">否，返回</button></div>`);$('#yes').onclick=yes;$('#no').onclick=closePanel}
+const iconHTML=it=>`<canvas width="32" height="32" data-icon="${it.type}" data-key="${it.key}"></canvas>`;
+function paintIcons(){$$('[data-icon]').forEach(c=>imageAsset(c.getContext('2d'),'item.'+c.dataset.key,0,0,32,32)||Art.icon(c.getContext('2d'),c.dataset.icon,32))}
+function handleChoiceKey(e,k){
+ if(!game.mode&&game.state.started)return false;
+ if(!['w','s','a','d','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Enter',' '].includes(k))return false;
+ const scope=game.mode?'#overlay':'#intro';
+ const options=$$(scope+' button:not(:disabled)').filter(b=>!b.hidden&&b.getClientRects().length>0&&!b.classList.contains('close'));
+ if(!options.length)return false;e.preventDefault();
+ let i=options.indexOf(document.activeElement);
+ if(k==='Enter'||k===' '){if(!e.repeat)(options[i]||options[0]).click();return true}
+ const backwards=['w','a','ArrowUp','ArrowLeft'].includes(k);
+ options[i<0?0:(i+(backwards?-1:1)+options.length)%options.length].focus();return true;
+}
+function interact(){let near=game.near,s=game.state;if(!near){bubble(s.day===7?'去花圃吧。':'走近一點。');return}tone(392,.08);if(near.kind==='loot'){game.pending={point:near,item:Core.make(near.key,++s.serial)};game.actions.inventory('pickup');return}if(near.kind==='fire')game.actions.inventory('fire');if(near.kind==='garden')s.day===7?game.actions.burial():game.actions.garden();if(near.kind==='work')game.actions.work();if(near.kind==='tent')game.actions.sleep();if(near.kind==='talk')game.actions.talk()}
+function initJourney(){resize();addEventListener('resize',resize);$('#dialogue').onclick=nextLine;$('#start').onclick=startJourney;$('#continue').onclick=()=>game.actions.slots('load');$('#bagbtn').onclick=()=>{if(game.state.started&&!game.dialogues.length&&!game.mode)game.actions.inventory()};$('#menu').onclick=()=>{if(game.state.started&&!game.dialogues.length&&!game.mode)game.actions.menu()};$('#fullscreen').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen().catch(()=>toast('這個瀏覽器目前不支援全螢幕。'))};$('#sound').onclick=()=>{game.soundOn=!game.soundOn;syncAudio(game.soundOn,game.volume);if(game.soundOn)playAsset('forest',game.volume);$('#sound').style.opacity=game.soundOn?1:.45;tone(440);toast(game.soundOn?'森林的聲音已開啟':'聲音已關閉')};world.addEventListener('pointerdown',e=>{if(!game.state.started||game.mode||game.dialogues.length)return;let r=world.getBoundingClientRect();game.target={x:(e.clientX-r.left)/r.width*480,y:(e.clientY-r.top)/r.height*270}});
+addEventListener('keydown',e=>{if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' ','Tab'].includes(e.key)&&game.state.started)e.preventDefault();let k=e.code?.startsWith('Key')?e.code.slice(3).toLowerCase():e.key.length===1?e.key.toLowerCase():e.key;if(game.mode==='soul'){if(k==='f'){game.keys.f=true;e.preventDefault()}return}if(['cinematic','farewell'].includes(game.mode)&&!game.dialogues.length)return;if(e.repeat&&['f','e','r','Escape',' '].includes(k))return;if(game.dialogues.length){if(['f',' ','Enter','Escape'].includes(k))nextLine();return}if(handleChoiceKey(e,k))return;if(!game.state.started){if(k==='Escape'&&game.mode)closePanel();return}if(k==='Escape'){game.mode?closePanel():game.actions.menu();return}if(k==='e'&&!['craft','assembly','result','cinematic','soul','farewell','ending'].includes(game.mode)){game.mode?closePanel():game.actions.inventory();return}if(k==='r'&&['bag','pickup','fire','craft'].includes(game.mode)){game.actions.rotateSelected();return}if(k==='f'&&!game.mode){interact();return}if(k==='Tab'&&game.mode){let f=$$('#overlay button:not(:disabled),#overlay input'),n=f.indexOf(document.activeElement);f[(n+(e.shiftKey?-1:1)+f.length)%f.length]?.focus();return}game.keys[k]=true;if(!game.mode&&['w','a','s','d','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(k))game.tapKeys[k]=true});addEventListener('keyup',e=>{game.keys[e.code?.startsWith('Key')?e.code.slice(3).toLowerCase():e.key.length===1?e.key.toLowerCase():e.key]=false});addEventListener('blur',()=>{game.keys={};game.tapKeys={};game.target=null});hud();requestAnimationFrame(frame)}
+
+Object.assign(exports,{$,maps,game,resize,toast,bubble,tone,hud,objects,animate,fade,walkScene,startJourney,say,panel,closePanel,confirmAction,iconHTML,paintIcons,initJourney,$$,days,parts});
+},"scripts/core/world-rules.js":function(exports,require){
+// 地圖幾何共用於繪圖與碰撞；座標為480×270的點陣世界。
+const stones=[[118,112],[172,131],[305,104],[344,153],[122,205],[280,214],[365,223],[200,224]];
+function obstacles(s){if(s.map===0)return s.campBuilt===false||s.epilogue?[[151,127,39,48]]:[[296,126,64,32],[108,174,42,13],[311,176,15,11],[151,127,39,48]];if(s.map===1)return[[302,149,37,20],[112,115,19,8],[340,201,18,8]];if(s.map===2)return[[111,98,17,89],[190,98,17,89],[133,110,65,13],[310,68,150,179]];return stones.map(([x,y])=>[x-2,y-7,23,12])}
+function canWalk(s,x,y){let allowed=s.map===0?(x>90&&x<390&&y>86&&y<235)||(x>0&&x<130&&Math.abs(y-170)<17)||(Math.abs(x-240)<25&&y>0&&y<270):(x>87&&x<389&&y>83&&y<239)||(s.map===1&&x>=380&&x<480&&Math.abs(y-170)<18)||(s.map===2&&Math.abs(x-240)<25&&y>=230&&y<270)||(s.map===3&&Math.abs(x-240)<25&&y>0&&y<90);if(!allowed)return false;return !obstacles(s).some(([a,b,w,h])=>x+3>a&&x-3<a+w&&y+1>b&&y-2<b+h)}
+function portal(s){if(s.map===0){if(s.x<6)return{map:1,x:468,y:170};if(s.y<6)return{map:2,x:240,y:258};if(s.y>264)return{map:3,x:240,y:12}}if(s.map===1&&s.x>474)return{map:0,x:12,y:170};if(s.map===2&&s.y>264)return{map:0,x:240,y:12};if(s.map===3&&s.y<6)return{map:0,x:240,y:258};return null}
+const gameMinutes=s=>420+Math.floor(s.elapsed);
+const dusk=s=>Math.min(.66,Math.max(0,(gameMinutes(s)-900)/660));
+function resolveEnding(s){const possessions=[...s.bag,...s.gifted];const offered=possessions.filter(i=>s.offerings.includes(i.id));if(offered.length>0&&!possessions.some(i=>i.memory)&&!s.nametag)return'relics';if(!s.nametag)return'john-doe';if(s.ringGifted&&offered.some(i=>i.key==='ring')&&offered.length===6&&offered.every(i=>i.memory)&&s.cross&&s.wreath)return'love';if(s.gifted.some(i=>i.key==='ring'&&!s.offerings.includes(i.id))&&s.burnedMemories===0)return'return';return'farewell'}
+
+function travelBlock(s,p){
+ if(!p)return null;
+ if(s.map===0){
+  if(s.day===7)return 'last-day';
+  if(s.campLocked||gameMinutes(s)>=1200)return 'night';
+ }
+ if(s.bag.some(i=>i.x<0&&!s.offerings.includes(i.id)))return 'loose';
+ if(s.map===0&&s.day===1&&!s.tutorial&&p.map!==1)return 'tutorial';
+ return null;
+}
+
+Object.assign(exports,{stones,obstacles,canWalk,portal,gameMinutes,dusk,resolveEnding,travelBlock});
+},"scripts/core/following.js":function(exports,require){
+// 只以柯林目前的位置為目標；這些路徑點是避障用，不記錄玩家的足跡。
+const GRID=4;
+const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+function clearLine(s,a,b,walkable){
+ const steps=Math.max(1,Math.ceil(distance(a,b)/2));
+ for(let i=1;i<=steps;i++)if(!walkable(s,a.x+(b.x-a.x)*i/steps,a.y+(b.y-a.y)*i/steps))return false;
+ return true;
+}
+function routeToRange(s,start,target,gap,walkable){
+ const queue=[],seen=new Set(),add=(x,y,parent)=>{
+  const id=x+','+y;if(seen.has(id)||x<0||x>480||y<0||y>270)return;
+  if(!walkable(s,x,y)||!clearLine(s,parent||start,{x,y},walkable))return;
+  seen.add(id);
+  queue.push({x,y,parent});
+ };
+ const gx=Math.round(start.x/GRID)*GRID,gy=Math.round(start.y/GRID)*GRID;
+ for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)add(gx+dx*GRID,gy+dy*GRID,null);
+ for(let i=0;i<queue.length;i++){
+  const p=queue[i];
+  if(distance(p,target)<=gap){const path=[];for(let n=p;n;n=n.parent)path.unshift({x:n.x,y:n.y});return path}
+  for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)if(dx||dy)add(p.x+dx*GRID,p.y+dy*GRID,p);
+ }
+ return [];
+}
+function followStep(s,budget,gap,walkable,nav){
+ let here={x:s.ax,y:s.ay};const target={x:s.x,y:s.y};
+ if(distance(here,target)<=gap+1e-6){nav.path=[];return here}
+ const directEnd=()=>{const d=distance(here,target),step=d-gap;return{x:here.x+(target.x-here.x)/d*step,y:here.y+(target.y-here.y)/d*step}};
+ if(clearLine(s,here,directEnd(),walkable))nav.path=[];
+ else if(nav.owner!==s||nav.map!==s.map||!nav.target||distance(nav.target,target)>8||!nav.path?.length){
+  nav.path=routeToRange(s,here,target,gap,walkable);nav.owner=s;nav.map=s.map;nav.target=target;
+  if(!nav.path.length)return here;
+ }
+ while(budget>1e-6){
+  const room=distance(here,target)-gap;if(room<=1e-6)break;
+  // 將繞障路徑中可直達的中間點略過，避免多餘的轉折。
+  if(nav.path?.length)for(let i=nav.path.length-1;i>0;i--)if(clearLine(s,here,nav.path[i],walkable)){nav.path.splice(0,i);break}
+  const aim=nav.path?.[0]||target,d=distance(here,aim);
+  if(d<=1e-6){if(nav.path?.length){nav.path.shift();continue}break}
+  const step=Math.min(d,budget,room),next={x:here.x+(aim.x-here.x)/d*step,y:here.y+(aim.y-here.y)/d*step};
+  if(!clearLine(s,here,next,walkable)){nav.path=[];break}
+  here=next;budget-=step;if(nav.path?.length&&distance(here,aim)<=1e-6)nav.path.shift();
+ }
+ return here;
+}
+
+Object.assign(exports,{followStep});
+},"scripts/rendering/assets.js":function(exports,require){
+// 正式素材可透過 manifest.json 或指定角色資料夾置換。
+const Assets={manifest:{},images:new Map(),animations:new Map(),audio:new Map()};
+const assetPath=s=>s.startsWith('data:')?s:'assets/'+s;
+function loadImage(src){return new Promise(resolve=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>resolve(null);img.src=assetPath(src)})}
+async function loadAssets(){
+ try{
+  const embedded=document.querySelector('#asset-manifest');
+  Assets.manifest=embedded?JSON.parse(embedded.textContent):await(await fetch('assets/manifest.json')).json();
+  Assets.images.clear();Assets.animations.clear();
+  await Promise.all(Object.entries(Assets.manifest.images||{}).map(async([key,entry])=>{
+   if(entry?.src){const img=await loadImage(entry.src);if(img)Assets.images.set(key,img)}
+   if(entry?.walkFrames){
+    const sequences={};
+    await Promise.all(Object.entries(entry.walkFrames).map(async([direction,files])=>{
+     if(!Array.isArray(files)||files.length!==(entry.frames||6))return;
+     const frames=await Promise.all(files.map(loadImage));
+     if(frames.every(img=>img&&(entry.nativeSize||(img.width===frames[0].width&&img.height===frames[0].height))))sequences[direction]=frames;
+    }));
+    if(Object.keys(sequences).length)Assets.animations.set(key,sequences);
+   }
+  }));
+  for(const [key,entry]of Object.entries(Assets.manifest.audio||{}))if(entry.src){const a=new Audio(assetPath(entry.src));a.loop=!!entry.loop;Assets.audio.set(key,a)}
+ }catch(error){console.warn('素材索引載入失敗，使用暫用點陣圖。',error.message)}
+}
+function imageAsset(ctx,key,x,y,w,h){const img=Assets.images.get(key);if(!img)return false;ctx.imageSmoothingEnabled=false;ctx.drawImage(img,x,y,w,h);return true}
+function characterDisplayHeight(name,direction){
+ const key='character.'+name,m=Assets.manifest.images?.[key]||{},sequences=Assets.animations.get(key);
+ const frames=sequences?.[direction]||sequences?.default||sequences?.down||Object.values(sequences||{})[0];
+ return m.nativeSize&&frames?.length?frames[0].height:m.displayHeight||24;
+}
+function characterAsset(ctx,name,x,y,direction,walking,t){
+ const key='character.'+name,m=Assets.manifest.images?.[key]||{},sequences=Assets.animations.get(key);
+ // 只有一組時沿用該朝向；不自動鏡射作者的角色設計。
+ const frames=sequences?.[direction]||sequences?.default||sequences?.down||Object.values(sequences||{})[0];
+ if(frames?.length){
+  const img=frames[walking?Math.floor(t*(m.fps||8))%frames.length:0],height=m.nativeSize?img.height:m.displayHeight||24,width=m.nativeSize?img.width:m.displayWidth||height*img.width/img.height;
+  ctx.imageSmoothingEnabled=false;ctx.drawImage(img,Math.round(x-width/2),Math.round(y-height),width,height);return true;
+ }
+ const img=Assets.images.get(key);if(!img)return false;
+ const fw=m.frameWidth||32,fh=m.frameHeight||48,frame=walking?Math.floor(t*(m.fps||8))%(m.frames||4):0,row=({down:0,left:1,right:2,up:3})[direction]||0;
+ ctx.imageSmoothingEnabled=false;ctx.drawImage(img,frame*fw,row*fh,fw,fh,x-(m.displayWidth||16)/2,y-(m.displayHeight||24),m.displayWidth||16,m.displayHeight||24);return true;
+}
+function playAsset(key,volume=.3){const a=Assets.audio.get(key);if(!a)return false;a.volume=volume;void a.play().catch(()=>{});return true}
+function syncAudio(enabled,volume){for(const a of Assets.audio.values()){a.volume=enabled?volume:0;if(!enabled)a.pause()}}
+function stopAsset(key){Assets.audio.get(key)?.pause()}
+
+
+Object.assign(exports,{Assets,loadAssets,imageAsset,characterDisplayHeight,characterAsset,playAsset,syncAudio,stopAsset});
+},"scripts/rendering/art.js":function(exports,require){
+const {palette : P,terrains}=require("scripts/rendering/palette.js");
+const {imageAsset,characterAsset}=require("scripts/rendering/assets.js");
+const { draw : drawCamp }=require("scripts/maps/camp.js");
+const { draw : drawForest }=require("scripts/maps/forest.js");
+const { draw : drawMonastery }=require("scripts/maps/monastery.js");
+const { draw : drawGrassland }=require("scripts/maps/grassland.js");
+/* Original low-resolution bitmap renderer. Every world pixel is drawn at 480 × 270. */
+const Art=(()=>{let ctx;const rect=(x,y,w,h,c)=>{ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),w,h)};function rng(seed){return()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296}}function tree(x,y,s=1,t=0){
+ ctx.save();ctx.translate(Math.round(x),Math.round(y));ctx.scale(s,s);
+ rect(-16,-1,36,5,P.shadow+'60');rect(-3,-14,7,23,P.trunk);rect(1,-10,2,18,P.bark);
+ // 延續原有三層樹冠；把平整矩形分成疏密不同的葉片與冷色暗部。
+ for(let j=0;j<3;j++){
+  let w=35-j*8,yy=-23-j*12;
+  rect(-w/2,yy,w,14,P.leafDark);rect(-w/2+3,yy-5,w-6,14,t?'#567b70':P.leaf);
+  rect(-w/2+6,yy-8,w-14,5,t?'#84a48a':P.leafLight);
+  rect(-w/2+2,yy+5,7,5,P.shadow);rect(w/2-8,yy+7,6,4,P.leafDark);
+  rect(-w/2+5,yy-3,6,2,P.leafLight);rect(2,yy-5,4,2,P.leafTip);
+  rect(-5,yy+2,6,3,P.leafDark);rect(w/2-4,yy+1,5,3,P.leaf);
+ }
+ ctx.restore();
+}
+function rock(x,y,w=12){rect(x+1,y-5,w-2,7,P.stone);rect(x,y-3,w,7,P.stoneShade);rect(x+2,y-6,w-5,2,P.stoneLight);rect(x+2,y-3,Math.max(2,w/3),2,P.stone);rect(x+3,y+3,w,2,P.shadow+'80')}
+function flower(x,y,c='#d8cb93'){rect(x,y,1,4,'#789050');rect(x-1,y-1,3,2,c);rect(x,y,1,1,'#d1a05d')}function char(x,y,a=false,walking=0,dead=false){ctx.save();ctx.translate(Math.round(x),Math.round(y));if(dead)ctx.rotate(-Math.PI/2);if(characterAsset(ctx,a?'tana':'colin',0,0,'down',!!walking,walking/10)){ctx.restore();return}rect(-5,0,11,3,'#142c2377');let foot=walking?Math.sin(walking)*2:0;rect(-3,-3,2,4+foot,'#292d29');rect(2,-3,2,4-foot,'#292d29');rect(-5,-13,10,10,a?'#263a38':'#baa578');rect(-4,-11,8,5,a?'#435254':'#cfbc8c');rect(-5,-7,10,3,a?'#1a2d2e':'#a78c60');rect(-6,-12,2,7,'#a69d80');rect(5,-12,2,7,'#b6ac8b');rect(-4,-20,8,8,'#e0c49b');rect(-5,-23,10,5,a?'#1b2727':'#bc9d65');rect(-5,-20,3,5,a?'#222f2c':'#d4b47c');rect(3,-19,2,4,a?'#24312d':'#aa8957');rect(-1,-17,1,1,'#303d33');rect(3,-17,1,1,'#303d33');if(!a){rect(-5,-10,3,9,'#655c40');rect(-6,-10,3,5,'#8c7950')}ctx.restore()}function tent(){if(imageAsset(ctx,'prop.tent',291,114,75,51))return;rect(294,156,67,9,'#233a2b');for(let i=0;i<36;i++){rect(324-i*.85,117+i,2+i*1.8,1,i<4?'#e0c18b':'#bd9d65')}for(let i=0;i<32;i++)rect(324-i*.46,123+i,1+i*.94,1,'#5d553c');rect(327,116,2,43,'#e4c48d');rect(297,155,61,2,'#e0bd80');rect(293,155,2,7,'#98845a');rect(362,154,2,7,'#98845a');rect(306,149,8,5,'#a38553');rect(346,149,8,5,'#a38553')}
+function fire(t,x=318,y=182){if(imageAsset(ctx,'prop.fire',x-12,y-23,26,30))return;for(let i=0;i<5;i++)rock(x-10+i*5,y+1+(i%2)*3,5);rect(x-7,y-1,15,3,'#776041');rect(x-4,y-5,8,5,'#ea9f4b');rect(x-3,y-11+Math.sin(t*8)*2,6,8,'#d98540');rect(x-1,y-14+Math.sin(t*6)*2,3,12,'#eec174');rect(x,y-8,2,7,'#fae6a3');rect(x+3+Math.sin(t)*3,y-21-(t*6%8),1,1,'#ddbb7b')}
+function bench(parts=[]){if(imageAsset(ctx,'prop.workbench',108,170,42,24))return;rect(110,178,38,6,'#846b46');rect(112,184,3,10,'#4d4731');rect(142,184,3,10,'#4d4731');rect(113,175,30,3,'#b89960');rect(119,173,11,2,'#737e6c');rect(127,170,2,7,'#a59569');for(let i=0;i<parts.length;i++){rect(99+i*9,200,8,3,'#b69964');rect(99+i*9,197,8,2,'#826c46')}}
+function scene(context,map,t,state={}){ctx=context;const rand=rng(921+map*723);const terrain=terrains[map]||terrains[0];rect(0,0,480,270,terrain.base);
+ // 稀疏的成簇草紋降低噪點，讓拾取物和可行走路線更容易辨識。
+ for(let i=0;i<900;i++){let x=rand()*480,y=rand()*270;rect(x,y,rand()>0.65?4:2,1,terrain.flecks[i%4]);if(i%5===0)rect(x+2,y-2,1,2,terrain.flecks[(i+1)%4])}
+ // 路線銜接真正的出入口；森林向東、修道院向南、草原向北。
+ const start=[0,113,158,0][map],end=[270,203,270,233][map];
+ for(let y=start;y<end;y++){
+  let x=map===2?Math.min(240,169+Math.max(0,y-183)*.85):234+Math.sin(y/37+map)*10;
+  let width=map===0?41:30;
+  if(map===1||map===2)width*=Math.min(1,(y-start+5)/21);
+  if(map===3)width*=Math.min(1,(end-y+5)/22);
+  rect(x-width/2,y,width,1,P.path);rect(x-width/2+3,y,Math.max(1,width-6),1,P.pathLight);
+  if(y%3===0)rect(x+(rand()-.5)*Math.max(1,width-7),y,2,1,P.pathShade);
+ }
+ if(map===1)for(let x=234;x<480;x++){
+  let y=190-Math.min(20,Math.max(0,x-355)/6),width=30;
+  rect(x,y-width/2,1,width,P.path);rect(x,y-width/2+3,1,width-6,P.pathLight);
+  if(x%4===0)rect(x,y+(rand()-.5)*24,2,1,P.pathShade);
+ }
+
+if(map===0)drawCamp({rand,t,state,rect,flower,tent,bench,fire,rock,char});
+if(map===1)drawForest({rand,t,state,rect,flower,tent,bench,fire,rock,char});
+if(map===2)drawMonastery({rand,t,state,rect,flower,tent,bench,fire,rock,char});
+if(map===3)drawGrassland({rand,t,state,rect,flower,tent,bench,fire,rock,char});
+for(let i=0;i<42;i++){let x=rand()*480,y=rand()*250+24;if((x<83||x>390)&&!(map===2&&x>300)&&!((map===0&&x<130||map===1&&x>370)&&Math.abs(y-170)<38))tree(x,y,.85+rand()*.5,map===3?1:0)}for(let i=0;i<23;i++){let x=rand()*480;if(!(map===2&&x>300)&&(![0,3].includes(map)||Math.abs(x-237)>33))tree(x,59+rand()*24,1+rand()*.5)}for(let i=0;i<11;i++){let x=rand()*480;if(![0,2].includes(map)||Math.abs(x-240)>62)tree(x,280+rand()*14,1.1+rand()*.6)}for(let i=0;i<28;i++){let x=(i*63.4+t*(1+i%3)*.4)%480,y=(i*37.7+Math.sin(t+i)*3)%240;rect(x,y,1,1,i%3?'#b6cafa55':'#f0dfa488')}
+if(state.day===7){ctx.fillStyle='#06131188';ctx.fillRect(0,0,480,95)}const bg=state.epilogue?'return-camp':state.campBuilt===false?'empty-camp':['camp','forest','monastery','grassland'][map];if(imageAsset(ctx,'background.'+bg,0,0,480,270)&&map===0)drawCamp({rand,t,state,rect,flower,tent,bench,fire,rock,char,ground:false});return ctx}
+function icon(context,type,w=16){let old=ctx;ctx=context;ctx.clearRect(0,0,w,w);if(imageAsset(ctx,'item.'+type,0,0,w,w)){ctx=old;return}ctx.save();ctx.scale(w/16,w/16);if(type==='wood'){rect(3,3,3,11,'#967448');rect(7,2,3,11,'#c19a61');rect(11,5,2,8,'#b2874f');rect(7,6,3,1,'#805e3d')}else if(type==='metal'){rect(4,3,8,2,'#bdc5b6');rect(3,5,3,7,'#778d84');rect(6,10,7,3,'#a3b3a2');rect(11,6,2,5,'#617b74')}else if(type==='cloth'){rect(3,3,10,10,'#bbb39b');rect(4,4,7,1,'#e5d7b4');rect(3,10,3,3,'#818d7a');rect(10,5,2,7,'#9d987e')}else if(type==='seed'||type==='flower'){rect(7,6,2,8,'#76934e');rect(4,9,3,2,'#799956');rect(9,7,3,2,'#8fac5d');rect(5,3,7,4,'#dfc39b');rect(7,2,3,6,'#e4b6a1');rect(8,4,1,2,'#e7d38a')}else if(type==='ring'){rect(5,4,6,2,'#d7bb73');rect(3,6,2,5,'#c2a168');rect(11,6,2,5,'#ecd296');rect(5,11,6,2,'#b18e58');rect(7,2,3,3,'#88b4a1')}else if(type==='book'){rect(3,2,9,12,'#aa8760');rect(5,3,8,10,'#c0af87');rect(3,2,2,12,'#745e43');rect(7,5,4,1,'#7e785e');rect(7,7,4,1,'#7e785e')}else if(type==='scissors'){rect(4,2,2,7,'#aeb8a8');rect(10,2,2,7,'#b8c2b2');rect(6,7,4,2,'#808d7c');rect(3,10,4,4,'#b9a271');rect(9,10,4,4,'#b9a271');rect(4,11,2,2,'#344b36');rect(10,11,2,2,'#344b36')}else if(type==='coat'){rect(4,3,8,10,'#798d88');rect(2,4,3,6,'#849e95');rect(11,4,3,6,'#697e7b');rect(7,3,2,10,'#b2aa89');rect(6,2,4,2,'#c0b291')}else{rect(5,2,6,11,'#d2b780');rect(4,3,8,2,'#b99663');rect(6,6,4,4,'#657964')}ctx.restore();ctx=old}
+function portrait(canvas,a){let old=ctx;ctx=canvas.getContext('2d');ctx.clearRect(0,0,28,39);if(imageAsset(ctx,'portrait.'+(a?'tana':'colin'),0,0,28,39)||characterAsset(ctx,a?'tana':'colin',14,38,'down',false,0)){ctx=old;return}ctx.save();ctx.translate(14,54);ctx.scale(2,2.3);char(0,0,a);ctx.restore();ctx=old}
+return{scene,char,icon,portrait,fire,setContext:c=>ctx=c};})();
+
+Object.assign(exports,{Art});
+},"scripts/rendering/palette.js":function(exports,require){
+// 固有色保留；陰影偏靛藍，亮面偏冷綠與奶油金。角色 PNG 不套用調色。
+const palette={
+  shadow:'#26334f',leafDark:'#294c53',leaf:'#3e7169',leafLight:'#63947c',leafTip:'#94b599',
+  trunk:'#4c4352',bark:'#8b7560',stone:'#77849f',stoneShade:'#505e7d',stoneLight:'#b0b9cc',
+  path:'#96917e',pathLight:'#b1aa8e',pathShade:'#807f7b',
+  water:'#38558c',ripple:'#8faadc',shore:'#647e9f',cream:'#ead7a4',
+};
+const terrains=[
+  {base:'#4a7069',flecks:['#577e71','#658675','#416263','#71917d']},
+  {base:'#3a605e',flecks:['#456d65','#507a6a','#344f5a','#648777']},
+  {base:'#506e7c',flecks:['#5d7c86','#69898c','#475e76','#7b9a98']},
+  {base:'#637f70',flecks:['#779480','#839d81','#547569','#96aa86']},
+];
+
+Object.assign(exports,{palette,terrains});
+},"scripts/maps/camp.js":function(exports,require){
+const {palette : P}=require("scripts/rendering/palette.js");
+function draw({rand,t,state:s,rect,flower,tent,bench,fire,rock,ground=true}){
+ if(ground){for(let y=100;y<227;y++){let w=Math.sqrt(Math.max(0,1-((y-164)/67)**2))*124;rect(241-w,y,w*2,1,'#a2977f')}
+ for(let i=0;i<170;i++){let x=rand()*238+122,y=rand()*117+105;if(((x-241)/124)**2+((y-164)/67)**2<.9)rect(x,y,2,1,i%3?'#b3a78b':'#8c897d')}
+ rect(0,155,136,30,P.path);rect(215,0,50,105,P.path);rect(215,223,50,47,P.path);
+ }
+ if(s.campBuilt!==false&&!s.epilogue){tent();bench(s.parts||[]);fire(t);rock(283,173,9)}
+ if(s.campBuilt!==false||s.epilogue){
+  rect(151,127,40,49,'#51485b');
+  for(let i=0;i<12;i++){let x=155+i%3*11,y=132+Math.floor(i/3)*10;rect(x,y,9,8,[4,7].includes(i)?'#393d52':'#786453');
+   const f=s.flowers?.[i];if(f){if(s.day>f.plantedDay){flower(x+3,y+4,f.color||'#e3b9b0');flower(x+6,y+6,f.color||'#e4d492')}else{rect(x+4,y+4,1,4,'#82a15b');rect(x+2,y+4,3,1,'#779654')}}
+  }
+ }
+ if(s.burial>=1){
+  let q=s.parts.find(p=>p.day===5)?.quality,wood=q==='優質'?'#bf9d63':q==='普通'?'#967a4e':'#6d6048';
+  rect(166,142,11,20,wood);rect(168,144,7,16,'#55442e');
+  if(s.burial>=2)rect(170,145,3,13,'#d6c2a2');
+  if(s.burial>=3)rect(168,144,7,16,wood);
+  if(s.burial>=4){rect(165,141,13,23,'#64543b');rect(167,143,9,18,'#796346')}
+  if(s.burial>=5&&s.cross){rect(171,128,2,19,'#bea16b');rect(165,133,14,2,'#bea16b')}
+  if(s.nametag){rect(170,132,6,3,'#d3c59e');rect(171,133,3,1,'#645a47')}
+  if(s.wreath){flower(167,139,'#e9d7bd');flower(176,138,'#e9d7bd');flower(171,142,'#e9d7bd')}
+ }
+}
+
+Object.assign(exports,{draw});
+},"scripts/maps/forest.js":function(exports,require){
+const {palette : P}=require("scripts/rendering/palette.js");
+// 森林小徑：木柵、樹樁位置對應既有碰撞範圍。
+function draw({rand,rect,flower,rock}){
+ rect(370,153,110,34,P.path);rect(372,158,108,23,P.pathLight);
+ for(const [x,y] of [[112,115],[340,201]]){
+  rect(x,y,19,8,P.trunk);rect(x+1,y-2,17,5,'#ab9275');rect(x+5,y-1,9,2,'#6c5b57');rect(x+2,y+5,3,3,P.bark);
+ }
+ rect(302,157,35,8,'#645562');rect(306,145,3,18,'#ac8c67');rect(329,148,3,15,'#b39976');rect(306,148,24,2,'#d3b88d');rock(303,166,8);rock(329,166,8);
+ for(let j=0;j<14;j++)flower(120+rand()*40,140+rand()*45,j%3?'#b7bee5':'#eadab1');
+}
+
+Object.assign(exports,{draw});
+},"scripts/maps/monastery.js":function(exports,require){
+const {palette : P}=require("scripts/rendering/palette.js");
+// 修道院：湖水、牆磚與舊彩窗採用冷藍層次，碰撞位置沿用原配置。
+function draw({rand,t,rect,flower,rock}){
+ for(let y=52;y<247;y++){
+  let x=315+Math.sin(y/21)*5;
+  rect(x-3,y,480-x+3,1,P.shore);rect(x,y,480-x,1,P.water);
+  if(y%9===0)for(let j=0;j<4;j++)rect(x+8+rand()*135+Math.sin(t*.5+y)*2,y,6+rand()*15,1,j%2?P.ripple:'#607db2');
+ }
+ const brick=(x,y,w=13)=>{rect(x,y,w,10,P.stoneShade);rect(x+1,y,w-2,7,P.stone);rect(x+1,y,w-4,2,P.stoneLight);rect(x+2,y+7,3,2,'#73978d')};
+ for(let j=0;j<10;j++)brick(112+j*11,113-(j%3)*7,10);
+ for(let y=97;y<185;y+=12){brick(113,y);brick(191,y)}
+ rect(148,105,20,28,'#26334f');rect(147,102,22,4,'#c5c2b7');rect(153,108,4,9,'#c295a8');rect(160,111,4,8,'#8baae1');rect(151,121,9,4,'#ecd9a0');
+ for(let j=0;j<6;j++){rect(116+j%2*3,136+j*5,2,6,'#42746d');rect(117+j%2*3,138+j*5,4,2,'#78a68b')}
+ for(let i=0;i<12;i++)rock(125+rand()*80,177+rand()*30,9);
+ for(let i=0;i<6;i++)flower(204+i*3,180+(i%3)*5,i%2?'#d1caeb':'#e8dcb2');
+}
+
+Object.assign(exports,{draw});
+},"scripts/maps/grassland.js":function(exports,require){
+const {palette : P}=require("scripts/rendering/palette.js");
+const {stones}=require("scripts/core/world-rules.js");
+function draw({rand,rect,flower,rock}){
+ rect(215,0,50,112,P.path);
+ for(const [x,y]of stones){rect(x+2,y-24,13,26,P.stoneShade);rect(x+4,y-27,9,3,P.stoneLight);rect(x+4,y-22,2,20,P.stone);rect(x+8,y-15,5,1,P.shadow);rock(x,y,18)}
+ for(let i=0;i<100;i++)flower(90+rand()*290,90+rand()*140,i%3?'#eadcaf':'#c2c9eb');
+}
+
+Object.assign(exports,{draw});
+},"scripts/systems/story.js":function(exports,require){
+const Core=require("scripts/core/rules.js");
+const {dialogues : D}=require("scripts/data/dialogues.js");
+const {imageAsset}=require("scripts/rendering/assets.js");
+const {Art}=require("scripts/rendering/art.js");
+const {game,$,panel,say,bubble,toast,hud,walkScene,animate,fade,closePanel}=require("scripts/systems/journey.js");
+
+function sleep(){
+  const s=game.state;if(s.day===7)return;
+  if(!s.craftDone){say([['Ｂ',D.sleep.unfinished]]);return}
+  game.mode='sleep';panel(D.sleep.question,'<div class="actions"><button id="sleepyes" class="primary">是。</button><button id="sleepno">再等等。</button></div>');
+  $('#sleepno').onclick=()=>{s.campLocked=true;closePanel()};
+  $('#sleepyes').onclick=()=>{
+    $('#overlay').hidden=true;walkScene({x:326,y:154,ax:340,ay:159},2,()=>{
+      fade(1,1.2);animate(1.2,()=>{},()=>{
+        s.day++;s.map=0;s.elapsed=0;s.craftDone=false;s.campLocked=false;s.stayingToday=s.day===2&&s.affinity<60;s.distant=s.burnedMemories>0;Core.wear(s);hud();
+        if(s.day===7){s.x=326;s.y=154;s.ax=340;s.ay=159;fade(0,2);walkScene({x:252,y:180,ax:232,ay:179},3,soulScene);return}
+        s.x=326;s.y=154;s.ax=340;s.ay=159;fade(0,1.5);walkScene({x:270,y:188,ax:295,ay:190},2,()=>{game.mode='';game.actions.autoSave();say(s.day===2?[['Ｂ','今天也一起走吧。'],['Ａ',s.stayingToday?'我待在這就好。':'嗯。']]:[['Ｂ',['','','今天也一起走吧。','今天找些金屬吧。能把東西好好固定住的那種。','想找一點柔軟的布。躺著的時候，應該會舒服些。','這幾天做的東西，今天能拼起來了。','再種些花吧。這裡以後，應該會很好看。'][s.day]]],()=>{if(s.bag.some(i=>i.x<0)){game.actions.inventory();toast('背包又破了一點。請安置暫放物品。')}})})
+      });
+    });
+  };
+}
+function soulScene(){
+  const s=game.state;s.bodyDown=true;
+  fade(1,3);animate(3,()=>{},()=>{
+    game.mode='cinematic';panel('最後的約定','<canvas id="soulart" width="320" height="180" aria-label="塔納握著匕首柄，守在躺下的柯林身旁"></canvas><div id="holdarea" hidden><div id="holdring">F</div><p>長按 F，直到最後一點光離開。<br><small>放開按鍵會重新開始。</small></p></div>');
+    $('.close').hidden=true;drawSoul(0);fade(0,3);
+    animate(3,()=>{},()=>say(D.soul_extraction.lines.map(l=>[l.speaker==='tana'?'Ａ':'Ｂ',l.text]),()=>{game.mode='soul';game.hold=0;game.keys={};$('#holdarea').hidden=false}));
+  });
+}
+function drawSoul(p){
+  const c=$('#soulart');if(!c)return;let ctx=c.getContext('2d');ctx.imageSmoothingEnabled=false;
+  ctx.fillStyle='#101b1e';ctx.fillRect(0,0,320,180);
+  if(!imageAsset(ctx,'cutscene.soul',0,0,320,180)){
+    ctx.fillStyle='#574d3b';ctx.fillRect(28,126,264,18);Art.setContext(ctx);
+    ctx.save();ctx.translate(150,123);ctx.scale(3,3);Art.char(0,0,false,0,true);Art.char(12,-6,true);ctx.restore();
+    ctx.fillStyle='#998e7b';ctx.fillRect(177,91,5,15);ctx.fillStyle='#d8eee6';ctx.fillRect(167,103-p*62,5+Math.sin(p*18)*2,8);ctx.fillStyle='#a9dacc66';ctx.fillRect(162,101-p*62,15,12);
+  }
+}
+function updateSoul(dt){
+  game.hold=game.keys.f?Math.min(5,game.hold+dt):0;
+  $('#holdring').style.setProperty('--progress',`${game.hold/5*360}deg`);drawSoul(game.hold/5);
+  if(game.hold>=5){const s=game.state;game.mode='cinematic';fade(1,1);animate(1,()=>{},()=>{s.soulTaken=true;s.bodyX=s.x;s.bodyY=s.y;s.x=s.ax;s.y=s.ay;$('#overlay').hidden=true;fade(0,1.5);animate(1.5,()=>{},()=>{game.mode='';game.keys={};bubble('這就是最後一個……');hud();game.actions.autoSave()})})}
+}
+function initStory(){Object.assign(game.actions,{sleep,soulScene,updateSoul})}
+
+Object.assign(exports,{initStory});
+},"scripts/systems/inventory.js":function(exports,require){
+const {imageAsset,playAsset}=require("scripts/rendering/assets.js");
+const {dialogues : D}=require("scripts/data/dialogues.js");
+const {cutPieces}=require("scripts/core/catalog.js");
+const {Art}=require("scripts/rendering/art.js");
+const Core=require("scripts/core/rules.js");
+const {game,$,$$,panel,toast,bubble,tone,hud,say,confirmAction,iconHTML,paintIcons}=require("scripts/systems/journey.js");
+let drag=null,cutTarget=null;
+function inventory(kind='bag'){game.mode=kind;let s=game.state,pending=game.pending,loose=s.bag.filter(i=>i.x<0&&!s.offerings.includes(i.id));panel(kind==='fire'?'把不再需要的，交給火':kind==='pickup'?'把旅途放進背包':'旅人的背包',`<div class="columns"><div class="pack-column"><div class="pack-surface"><div class="statline"><span>旅人的背包 · 第 ${s.day} 天</span><span>${Core.capacity(s)} 格可用 / 36 格</span></div><div id="baggrid" class="grid" aria-label="6 乘 6 背包格"></div></div><div id="detail" class="itemdetail belowbag"></div><p class="hint">拖曳移動物品 · R 旋轉 · 點選物品查看故事<br>也可先選物品，再點空格放置。斜紋格已經破損。</p>${pending?'<div class="eyebrow">地上的物品 · 尚未放入背包</div><div id="pending" class="itemlist"></div>':''}</div><div class="inventoryside"><div class="eyebrow">整理暫放區</div><div id="loose" class="itemlist staging" aria-label="背包外的物品暫放區"></div><p class="hint">拖到格子外暫放；換地圖前需收好。<br>旋轉不受阻擋，放下時仍需空位。</p><div id="cutpanel"></div><div id="itemactions" class="detailactions"></div>${kind==='fire'?'<canvas id="fireview" class="fireportrait" width="210" height="130"></canvas><p class="hint">火不會替你決定，什麼該留下。</p>':'<div class="travel-note"><div class="eyebrow">旅途的重量</div><p class="hint">留下的，是物品。<br>帶走的，是它們的故事。</p></div>'}</div></div>`);$('.panel').classList.add('inventory-panel');if(kind==='fire'){if(game.soundOn)playAsset('fire',game.volume);$('.inventoryside').style.width='430px';fireView()}function button(it,container){let b=document.createElement('button');b.className='itemchoice';b.innerHTML=iconHTML(it)+it.name;b.onclick=()=>choose(it);b.onpointerdown=e=>beginDrag(e,it);$(container).append(b)}if(pending)button(pending.item,'#pending');loose.forEach(i=>button(i,'#loose'));drawBag();choose(pending?.item||s.bag.find(i=>i.id===game.selected?.id&&!s.offerings.includes(i.id))||null);paintIcons()}
+function drawBag(){let s=game.state,g=$('#baggrid');if(!g)return;g.innerHTML='';for(let y=0;y<6;y++)for(let x=0;x<6;x++){let it=s.bag.find(i=>i.x>=0&&!s.offerings.includes(i.id)&&Core.cells(i).some(([a,b])=>a===x&&b===y)),d=document.createElement('div');d.className='cell'+(y*6+x>=Core.capacity(s)?' blocked':'')+(it?' itemcell':'');d.dataset.x=x;d.dataset.y=y;d.setAttribute('role','button');d.setAttribute('aria-label',it?.name||`第${y+1}列第${x+1}格`);if(it){d.style.setProperty('--itemcolor',it.color);d.dataset.item=it.id;let first=Core.cells(it)[0];d.onpointerdown=e=>beginDrag(e,it);d.onclick=()=>choose(it)}else d.onclick=()=>{if(game.selected)placeBag(game.selected,x,y)};d.onpointerenter=()=>previewBag(x,y);g.append(d)}paintPieces(g,s.bag.filter(i=>i.x>=0&&!s.offerings.includes(i.id)));highlight()}
+function choose(it){game.selected=it;let d=$('#detail');if(!d)return;d.innerHTML=it?`<div class="tag">${it.shape.length} 格 · ${it.memory?'隨身回憶':'旅途拾遺'}</div><h3 style="margin-top:13px">${it.name}${it.grade?` <small class="grade">${it.grade}</small>`:''}</h3><p>${game.state.day===7?it.after:it.desc}</p>`:'<h3>每一格，都有重量</h3><p>選一件物品，讀一讀它的故事。</p>';$('#itemactions').innerHTML=it?`<button id="rotate">旋轉物品 <kbd>R</kbd></button>${game.mode==='fire'&&!game.pending?'<button id="burn" class="danger">交給營火</button>':''}${!game.pending&&game.state.day<7&&!it.noGift?'<button id="gift">送給塔納</button>':''}${it.key==='scissors'&&game.state.day<7?'<button id="cut">剪裁</button>':''}${it.key==='flower'&&!game.pending&&game.state.day<7?'<button id="wreath">用兩朵野花編花圈</button>':''}`:'';if(it){$('#rotate').onclick=rotateSelected;if($('#burn'))$('#burn').onclick=()=>burn(it);if($('#gift'))$('#gift').onclick=()=>gift(it);if($('#cut'))$('#cut').onclick=cutCloth;if($('#wreath'))$('#wreath').onclick=makeWreath;}highlight()}
+function highlight(){$$('.itemcell').forEach(c=>c.classList.toggle('selected',Number(c.dataset.item)===game.selected?.id))}
+function previewBag(x,y){$$('#baggrid .cell').forEach(c=>c.classList.remove('good','bad'));let it=game.selected;if(!it)return;let ok=Core.fits(game.state,it,x,y);for(const [a,b]of it.shape)$(`#baggrid .cell[data-x="${a+x}"][data-y="${b+y}"]`)?.classList.add(ok?'good':'bad')}
+function rotateSelected(){let it=game.selected;if(!it)return;if(game.mode==='craft'){game.actions.rotateCraft(it);if(drag)updateGhost();return}let sh=Core.rotate(it.shape);it.shape=sh;if(it.x>=0&&!Core.fits(game.state,it,it.x,it.y)){it.x=-1;it.y=-1}inventory(game.mode);choose(it);if(drag)updateGhost();tone(350,.05)}
+function placeBag(it,x,y){let s=game.state;if(!Core.fits(s,it,x,y)){toast('這裡放不下。試著旋轉或整理一下。');return false}it.x=x;it.y=y;if(game.pending?.item.id===it.id){let first=!s.tutorial;s.bag.push(it);s.looted.push(game.pending.point.id);if(it.unique&&!s.uniqueCollected.includes(it.key))s.uniqueCollected.push(it.key);s.tutorial=true;game.pending=null;if(game.soundOn)playAsset('pickup',game.volume);inventory();const pickupLines=(D.pickups?.[it.key]||[]).map(l=>[l.speaker==='tana'?'Ａ':'Ｂ',l.text]);if(first)pickupLines.unshift(...[['Ｂ','原來，帶走一樣東西，就要替它留個位置。'],['Ｂ','拖曳可以移動，R 可以旋轉。放不下的，暫時留在地上吧。'],['Ｂ','今天先加工木材。營地北邊是修道院，南邊是石林草原。'],['Ａ','那就走吧。']]);if(pickupLines.length)say(pickupLines);if(it.type==='seed'&&!s.seedHint){s.seedHint=true;say([['Ｂ','你喜歡花嗎？'],['Ａ','你喜歡嗎？'],['Ｂ','喜歡。'],['Ａ','那就種吧。']])}}else{drawBag();choose(it);if($('#loose'))inventory(game.mode)}hud();tone(554,.08);return true}
+function beginDrag(e,it){if(e.button!==0)return;choose(it);drag={it,startX:e.clientX,startY:e.clientY,active:false,craft:game.mode==='craft'};e.preventDefault()}
+function updateGhost(){let el=$('.dragghost');if(!el)return;let sh=drag.it.shape;el.style.gridTemplateColumns=`repeat(${Math.max(...sh.map(p=>p[0]))+1},66px)`;el.style.gridTemplateRows=`repeat(${Math.max(...sh.map(p=>p[1]))+1},66px)`;el.innerHTML=sh.map(([x,y])=>`<i style="grid-column:${x+1};grid-row:${y+1}"></i>`).join('')}
+function fireView(){let c=$('#fireview'),g=c.getContext('2d');g.fillStyle='#1b2948';g.fillRect(0,0,210,130);Art.setContext(g);g.save();g.translate(-210,-135);Art.fire(1,318,235);Art.char(287,237,true);Art.char(346,239,false);g.restore();g.fillStyle='#cbb37d';g.font='10px serif';g.fillText('有些話，說給火聽。',57,111)}
+function burn(it){confirmAction('真的要燒掉嗎？','「'+it.name+'」會永遠消失。',()=>{let s=game.state;s.bag=s.bag.filter(i=>i.id!==it.id);game.actions.recordBurn(it);game.selected=null;inventory('fire');say([['Ｂ',it.memory?'這樣，應該會輕一點。':'借一點火，把多餘的重量留在這裡。']]);tone(130,.6);hud()})}
+function gift(it){game.actions.gift(it)}
+function replaceItems(remove,key){let s=game.state,it=Core.make(key,++s.serial),remaining=s.bag.filter(i=>!remove.includes(i.id));if(remove.some(id=>s.bag.find(i=>i.id===id)?.memory)){it.memory=true;it.fromTana=remove.some(id=>s.bag.find(i=>i.id===id)?.fromTana)}if(!Core.placeFirst({...s,bag:remaining},it)){toast('新物品放不下，先整理背包。');return false}s.bag=[...remaining,it];game.selected=it;inventory(game.mode);hud();return true}
+function cutCloth(){
+ const s=game.state;
+ if(!s.bag.some(i=>i.key==='scissors')||s.day===7)return;
+ cutTarget=null;
+ $('#cutpanel').innerHTML='<div class="cutslots"><button id="clothslot" aria-label="放入要剪裁的布料">放入布料</button><div class="scissorsslot">'+iconHTML(s.bag.find(i=>i.key==='scissors'))+'</div></div><div id="clothchoices" class="itemlist"></div><button id="docut" disabled>剪裁</button>';
+ const cloth=s.bag.filter(i=>(i.type==='cloth'||i.type==='coat')&&i.shape.length>1);
+ $('#clothchoices').innerHTML=cloth.map(i=>'<button data-cloth="'+i.id+'">'+i.name+'</button>').join('')||'<p class="hint">沒有可剪裁的布料。</p>';
+ $$('[data-cloth]').forEach(b=>b.onclick=()=>selectCloth(cloth.find(i=>i.id===Number(b.dataset.cloth))));
+ $('#clothslot').onclick=()=>{if(game.selected)selectCloth(game.selected)};
+ $('#docut').onclick=()=>{
+  const it=cutTarget;if(!it)return;
+  confirmAction('剪裁'+it.name+'？','將裁成 '+it.shape.length+' 片一格碎布，無法復原。剪刀會保留。',()=>{
+   if(!s.bag.includes(it)){inventory();return}
+   const pieces=cutPieces(s,it);s.bag=s.bag.filter(i=>i.id!==it.id);
+   for(const piece of pieces){Core.placeFirst(s,piece);s.bag.push(piece)}
+   cutTarget=null;inventory();hud();toast('布料裁好了。碎片保留原來的品質和回憶。');
+  });
+ };paintIcons();
+}
+function selectCloth(it){
+ if(!$('#clothslot'))return;
+ if(!game.state.bag.includes(it)||!['cloth','coat'].includes(it.type)||it.shape.length<2){toast('請放入至少兩格的布料或衣物。');return}
+ cutTarget=it;$('#clothslot').innerHTML=iconHTML(it)+'<small>'+it.name+'</small>';$('#docut').disabled=false;paintIcons();
+}
+function makeWreath(){let f=game.state.bag.filter(i=>i.key==='flower');if(f.length<2){toast('需要兩朵白色野花。');return}replaceItems(f.slice(0,2).map(i=>i.id),'wreath')}
+function initInventory(){Object.assign(game.actions,{inventory,rotateSelected});addEventListener('pointermove',e=>{if(!drag)return;if(Math.hypot(e.clientX-drag.startX,e.clientY-drag.startY)>4)drag.active=true;if(!drag.active)return;let ghost=$('.dragghost');if(!ghost){ghost=document.createElement('div');ghost.className='dragghost';$('#stage').append(ghost);updateGhost()}let r=$('#stage').getBoundingClientRect();ghost.style.left=(e.clientX-r.left)/game.scale-25+'px';ghost.style.top=(e.clientY-r.top)/game.scale-25+'px';let grid=$(drag.craft?'#craftgrid':'#baggrid');if(grid){let gr=grid.getBoundingClientRect(),x=Math.floor(((e.clientX-gr.left)/game.scale-5)/69),y=Math.floor(((e.clientY-gr.top)/game.scale-5)/69);drag.craft?game.actions.previewCraft(x,y):previewBag(x,y)}});addEventListener('pointerup',e=>{if(!drag)return;let d=drag;drag=null;$('.dragghost')?.remove();if(!d.active)return;if(!d.craft&&$('#clothslot')){const slot=$('#clothslot').getBoundingClientRect();if(e.clientX>=slot.left&&e.clientX<=slot.right&&e.clientY>=slot.top&&e.clientY<=slot.bottom){selectCloth(d.it);return}}let g=$(d.craft?'#craftgrid':'#baggrid');if(g){let r=g.getBoundingClientRect();if(!d.craft&&(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)){if(game.state.bag.includes(d.it)){d.it.x=-1;d.it.y=-1;inventory(game.mode);hud()}return}let x=Math.floor(((e.clientX-r.left)/game.scale-5)/69),y=Math.floor(((e.clientY-r.top)/game.scale-5)/69);d.craft?game.actions.placeCraft(d.it,x,y):placeBag(d.it,x,y)}})}
+
+function paintPieces(grid,items){
+ for(const it of items){
+  const w=Math.max(...it.shape.map(p=>p[0]))+1,h=Math.max(...it.shape.map(p=>p[1]))+1;
+  const c=document.createElement('canvas');c.className='pieceart';c.width=w*16;c.height=h*16;c.style.width=(w*69-3)+'px';c.style.height=(h*69-3)+'px';c.style.left=(it.x*69)+'px';c.style.top=(it.y*69)+'px';
+  const g=c.getContext('2d');g.imageSmoothingEnabled=false;
+  if(!imageAsset(g,'item.'+it.key,0,0,c.width,c.height)){
+   const icon=document.createElement('canvas');icon.width=icon.height=32;Art.icon(icon.getContext('2d'),it.type,32);g.drawImage(icon,0,0,c.width,c.height);
+  }
+  g.globalCompositeOperation='destination-in';g.beginPath();for(const [x,y]of it.shape)g.rect(x*16,y*16,16,16);g.fill();grid.append(c);
+ }
+}
+
+Object.assign(exports,{inventory,rotateSelected,beginDrag,initInventory,paintPieces});
+},"scripts/systems/crafting.js":function(exports,require){
+const {playAsset}=require("scripts/rendering/assets.js");
+const Core=require("scripts/core/rules.js");
+const {scoreCraft,craftPlan}=require("scripts/core/puzzle-rules.js");
+const {game,$,$$,parts,panel,toast,bubble,tone,hud,say,confirmAction,closePanel,iconHTML,paintIcons}=require("scripts/systems/journey.js");
+const {beginDrag,paintPieces}=require("scripts/systems/inventory.js");
+function work(){
+ const s=game.state;if(s.day===7){bubble('作品已經做好了。去花圃。');return}if(s.day===1&&!s.tutorial){say([['Ｂ','先去西邊的森林，撿一塊木板回來吧。']]);return}
+ if(s.craftDone){toast('今天的工作已完成。準備好後，到帳篷休息。');return}
+ confirmAction('開始今天的打造？','完成前請留在工作臺。晚上8點前完成後，仍可繼續探索。',()=>{s.day===5?assembly():beginCraft()});
+}
+function beginCraft(){
+ const day=game.state.day;game.mode='craft';game.selected=null;
+ game.craft={placed:[],...craftPlan(day)};
+ panel(parts[day-1],'<div class="columns"><div><div class="statline"><span>將材料拼入金色輪廓</span><span id="coverage"></span></div><div id="craftgrid" class="grid" style="grid-template-rows:repeat(4,66px)"></div><p class="hint">拖曳材料移動 · R 旋轉 · 點已放入的材料可選取<br>可重排、取回任意材料。輪廓以外的格子會扣分。</p></div><div style="width:430px"><div class="eyebrow">可用材料 · <span id="materialcount"></span> 件</div><div id="materials" class="itemlist scrolllist"></div><div class="actions"><button id="takeback">取回選取材料</button><button id="finishcraft" class="primary">完成今天的打造</button></div><p class="hint">品質由填滿程度、輪廓外格數與材料品質共同決定。<br>完成後仍可活動；20:00前還可外出探索。</p></div></div>');
+ $('#takeback').onclick=()=>{let p=game.craft.placed.find(p=>p.it.id===game.selected?.id);if(!p)return;game.craft.placed=game.craft.placed.filter(x=>x!==p);p.it.x=-1;p.it.y=-1;Core.placeFirst(game.state,p.it);game.state.bag.push(p.it);game.selected=null;drawCraft()};
+ $('#finishcraft').onclick=finishCraft;drawCraft();
+}
+function drawCraft(){
+ const g=$('#craftgrid'),c=game.craft;if(!g||!c)return;g.innerHTML='';
+ for(let y=0;y<4;y++)for(let x=0;x<6;x++){
+  const d=document.createElement('div'),inside=c.target.some(([a,b])=>a===x&&b===y),p=c.placed.find(p=>p.shape.some(([a,b])=>a+p.x===x&&b+p.y===y));
+  d.className='cell'+(inside?' targetcell':'')+(p?' itemcell':'');d.dataset.x=x;d.dataset.y=y;
+  d.setAttribute('role','button');d.setAttribute('aria-label',p?.it.name||('打造第'+(y+1)+'列第'+(x+1)+'格'));
+  if(p){d.style.setProperty('--itemcolor',p.it.color);d.onpointerdown=e=>beginDrag(e,p.it);d.onclick=()=>{game.selected=p.it;drawCraft()}}
+  else d.onclick=()=>{if(game.selected)placeCraft(game.selected,x,y)};
+  d.onpointerenter=()=>previewCraft(x,y);g.append(d);
+ }
+ const materials=game.state.bag.filter(i=>i.type===c.material&&i.key!=='nametag');
+ $('#materialcount').textContent=materials.length;
+ $('#materials').innerHTML=materials.map(i=>'<button class="itemchoice '+(game.selected?.id===i.id?'chosen':'')+'" data-material="'+i.id+'">'+iconHTML(i)+'<span class="minishape">'+i.shape.map(([x,y])=>'<i style="grid-column:'+(x+1)+';grid-row:'+(y+1)+'"></i>').join('')+'</span>'+i.name+'<small>'+i.grade+' · '+i.shape.length+' 格</small></button>').join('')||'<p>沒有相符的材料。也可以接受這份不完美。</p>';
+ $$('[data-material]').forEach(b=>{const it=materials.find(i=>i.id===Number(b.dataset.material));b.onclick=()=>{game.selected=it;drawCraft()};b.onpointerdown=e=>beginDrag(e,it)});
+ const q=scoreCraft(c);$('#coverage').textContent='覆蓋 '+Math.round(q.covered/c.target.length*100)+'% · '+Core.quality(q.score);
+ $('#takeback').disabled=!c.placed.some(p=>p.it.id===game.selected?.id);paintIcons();paintPieces(g,c.placed.map(p=>({...p.it,x:p.x,y:p.y,shape:p.shape})));
+}
+function canCraft(it,x,y,shape=it.shape){return shape.every(([a,b])=>a+x>=0&&a+x<6&&b+y>=0&&b+y<4)&&!game.craft.placed.some(p=>p.it.id!==it.id&&p.shape.some(([a,b])=>shape.some(([c,d])=>c+x===a+p.x&&d+y===b+p.y)))}
+function previewCraft(x,y){$$('#craftgrid .cell').forEach(c=>c.classList.remove('good','bad'));let it=game.selected;if(!it)return;let ok=canCraft(it,x,y);it.shape.forEach(([a,b])=>$('#craftgrid .cell[data-x="'+(a+x)+'"][data-y="'+(b+y)+'"]')?.classList.add(ok?'good':'bad'))}
+function placeCraft(it,x,y){
+ const c=game.craft,existing=c.placed.find(p=>p.it.id===it.id);if((!existing&&!game.state.bag.some(i=>i.id===it.id))||it.type!==c.material)return;
+ if(!canCraft(it,x,y)){toast('材料重疊，或超出了工作檯。');return}
+ if(existing){existing.x=x;existing.y=y;existing.shape=it.shape.map(p=>[...p])}
+ else{c.placed.push({it:{...it},x,y,shape:it.shape.map(p=>[...p])});game.state.bag=game.state.bag.filter(i=>i.id!==it.id)}
+ game.selected=null;drawCraft();tone(262,.1);
+}
+function rotateCraft(it){let shape=Core.rotate(it.shape),p=game.craft.placed.find(p=>p.it.id===it.id);if(p&&!canCraft(it,p.x,p.y,shape)){toast('這裡轉不過去，先移動材料。');return}it.shape=shape;if(p)p.shape=shape.map(x=>[...x]);drawCraft()}
+function finishCraft(){
+ const s=game.state,q=scoreCraft(game.craft),p={day:s.day,name:parts[s.day-1],score:q.score,quality:Core.quality(q.score),allPremium:game.craft.placed.length>0&&game.craft.placed.every(p=>p.it.grade==='優質'),placed:game.craft.placed.map(p=>({x:p.x,y:p.y,shape:p.shape,color:p.it.color,grade:p.it.grade}))};
+ s.parts.push(p);if(s.day===6)s.cross=q.score>0;
+ if(p.allPremium&&q.score===1)game.actions.unlock('artisan');
+ showResult(p);
+}
+function showResult(p){
+ if(game.soundOn)playAsset('craft',game.volume);
+ game.state.craftDone=true;game.mode='result';game.craft=null;game.selected=null;hud();game.actions.autoSave();
+ panel('今天，先做到這裡','<p class="quality">'+p.quality+'</p><p>'+(p.score>=.85?'每一道縫隙，都被你耐心填滿。':p.score>0?'有些地方不夠完美，但它是你親手做的。':'這裡留下了一個空缺。明天還是會來。')+'</p><p class="hint">成品留在工作區。今天仍可整理背包、送禮、種花。<br>準備好後，到帳篷結束一天。</p><button class="primary" id="finishwork">收起工具</button>');$('#finishwork').onclick=closePanel;
+}
+function assembly(){
+ game.mode='assembly';game.selected=null;game.state.assembled=[];
+ panel('把這幾天，拼在一起','<p>先選左側組件，再選右側對應位置。</p><div class="columns"><div id="assemblyparts" class="itemlist" style="width:270px;flex-direction:column"></div><div id="assemblyslots" class="assembly"></div></div><div class="actions"><button id="assemblefinish" class="primary" disabled>完成作品</button></div>');drawAssembly();
+}
+function drawAssembly(){
+ const s=game.state,labels=['上半部木構','下半部木構','固定金屬','內側布料'];
+ $('#assemblyparts').innerHTML=s.parts.slice(0,4).map((p,i)=>'<button data-part="'+i+'" '+(s.assembled.includes(i)?'disabled':'')+'>'+p.name+' · '+p.quality+'</button>').join('');
+ $('#assemblyslots').innerHTML=labels.map((v,i)=>'<button data-aslot="'+i+'" '+(s.assembled.includes(i)?'disabled':'')+'>'+(s.assembled.includes(i)?'✓ 已放置':v)+'</button>').join('');
+ $$('[data-part]').forEach(b=>b.onclick=()=>{game.selected=Number(b.dataset.part);$$('[data-part]').forEach(x=>x.style.borderColor=x===b?'#e5c886':'')});
+ $$('[data-aslot]').forEach(b=>b.onclick=()=>{const n=Number(b.dataset.aslot);if(game.selected!==n){toast('試著放到對應的部位。');return}s.assembled.push(n);game.selected=null;drawAssembly();tone(330+n*40,.15)});
+ $('#assemblefinish').disabled=s.assembled.length<4;
+ $('#assemblefinish').onclick=()=>{const score=s.parts.slice(0,4).reduce((n,p)=>n+p.score,0)/4,p={day:5,name:'棺木',score,quality:Core.quality(score)};s.parts.push(p);say([['Ｂ','原來……拼起來是這個樣子。'],['Ｂ','我親手做的，應該可以睡得很安穩吧。'],['Ａ','會的。']],()=>showResult(p))};
+}
+function initCrafting(){Object.assign(game.actions,{work,drawCraft,previewCraft,placeCraft,rotateCraft})}
+
+
+Object.assign(exports,{initCrafting});
+},"scripts/core/puzzle-rules.js":function(exports,require){
+function craftPlan(day){
+ const target=day<=2?Array.from({length:18},(_,i)=>[i%6,Math.floor(i/6)+1]):day===3?[[1,1],[2,1],[3,1],[4,1],[1,2],[4,2],[1,3],[2,3],[3,3],[4,3]]:day===4?Array.from({length:16},(_,i)=>[i%4+1,Math.floor(i/4)]):day===6?[[2,0],[2,1],[2,2],[2,3],[1,1],[3,1]]:[];
+ return {target,material:day<=2||day===6?'wood':day===3?'metal':day===4?'cloth':null};
+}
+function scoreCraft(c){
+ const cells=c.placed.flatMap(p=>p.shape.map(([x,y])=>[x+p.x,y+p.y]));
+ const covered=cells.filter(([x,y])=>c.target.some(([a,b])=>a===x&&b===y)).length,outside=cells.length-covered;
+ const weight=c.placed.reduce((n,p)=>n+p.shape.length*({'優質':1,'普通':.85,'破爛':.6}[p.it.grade]??.85),0)/(cells.length||1);
+ return {covered,outside,score:Math.max(0,Math.min(1,(covered-outside*.35)/c.target.length*weight))};
+}
+
+Object.assign(exports,{craftPlan,scoreCraft});
+},"scripts/systems/farewell.js":function(exports,require){
+const {bloom}=require("scripts/core/catalog.js");
+const {achievementData}=require("scripts/data/achievements.js");
+const {resolveEnding}=require("scripts/core/world-rules.js");
+const {Art}=require("scripts/rendering/art.js");
+const {imageAsset,playAsset}=require("scripts/rendering/assets.js");
+const {game,$,$$,panel,toast,bubble,tone,hud,say,confirmAction,closePanel,iconHTML,paintIcons,walkScene,animate,fade}=require("scripts/systems/journey.js");
+function garden(){
+ game.mode='garden';const s=game.state;
+ panel('留一點地方，給花','<p>種子睡一晚後開花。中央兩格留給最後的約定。</p><div class="garden">'+s.flowers.map((v,i)=>'<button data-plot="'+i+'" '+([4,7].includes(i)?'disabled':'')+'>'+([4,7].includes(i)?'▧':v?s.day>v.plantedDay?'✿':'♧':'＋')+'<small>'+([4,7].includes(i)?'預留的土地':v?s.day>v.plantedDay?(v.name||'花已開放'):'等待明天':'種下種子')+'</small></button>').join('')+'</div><p class="hint">點選已種植的位置可移除，種子不會退回。</p>');
+ $$('[data-plot]').forEach(b=>b.onclick=()=>{const i=Number(b.dataset.plot);if([4,7].includes(i))return;
+  if(s.flowers[i]){confirmAction('移除這叢花？','花叢移除後，種子不會退回。',()=>{s.flowers[i]=null;garden()});return}
+  const seeds=s.bag.filter(it=>it.type==='seed');if(!seeds.length){toast('背包裡還沒有野花種子。');return}
+  panel('種下哪一顆？','<div class="actions">'+seeds.map(it=>'<button data-seed="'+it.id+'">'+it.name+'</button>').join('')+'</div>');
+  $$('[data-seed]').forEach(b=>b.onclick=()=>{const seed=seeds.find(it=>it.id===Number(b.dataset.seed));s.bag=s.bag.filter(it=>it.id!==seed.id);const random=((Math.imul(s.seed+seed.id*31+i,1664525)>>>0)%10000)/10000;s.flowers[i]={plantedDay:s.day,seedKind:seed.seedKind,...bloom(seed.seedKind,random)};garden();hud();bubble('它會長大的。')});
+ });
+}
+const allItems=s=>[...s.bag,...s.gifted];
+const available=(s,key)=>allItems(s).find(i=>i.key===key&&!s.offerings.includes(i.id)&&(key!=='nametag'||i.initial));
+function consume(s,it){s.bag=s.bag.filter(i=>i.id!==it.id);s.gifted=s.gifted.filter(i=>i.id!==it.id)}
+function burial(){
+ const s=game.state;if(s.postEnding){postEndingChoices();return}if(s.epilogue){returnChoices();return}if(!s.soulTaken){bubble('先把最後的約定完成。');return}
+ if(s.burial>=8){finalChoices();return}game.mode='burial';
+ const steps=['放入棺木','安放柯林','選擇陪葬品','埋土','插上十字架','留下名字','放上花圈','最後凝視'];
+ if(s.burial===2){offerings();return}
+ const hasName=!!available(s,'nametag')&&s.cross,hasWreath=!!available(s,'wreath');
+ const descriptions=['這片異色的土地，原來一直替他留著位置。','你俯下身。他比記憶裡輕了。','','把泥土慢慢覆上。動作輕一點，再輕一點。',s.cross?'作品旁的十字架，還留著木材的味道。':'沒有十字架。風仍會經過這裡。',hasName?'把柯林的名字，繫在十字架上。':'沒有能綁在十字架上的原始名字布條。',hasWreath?'把編好的春天，留在他身邊。':'沒有花圈。風送來了花的氣味。','沒有誰催促你。可以慢慢告別。'];
+ panel(steps[s.burial],'<div class="burialscene"><canvas id="graveart" width="320" height="240"></canvas><div><p>'+descriptions[s.burial]+'</p>'+(s.burial===0?'<p class="quality">'+(s.parts.find(p=>p.day===5)?.quality||'空物')+'的作品</p>':'')+'<div class="actions"><button id="burialnext" class="primary">'+((s.burial===5&&!hasName)||(s.burial===6&&!hasWreath)?'繼續':steps[s.burial])+'</button></div></div></div>');
+ drawGrave($('#graveart'));
+ $('#burialnext').onclick=()=>{
+  if(s.burial===1)game.actions.unlock('goodnight');
+  if(s.burial===5&&hasName){s.nametag=true;consume(s,available(s,'nametag'))}
+  if(s.burial===6&&hasWreath){s.wreath=true;consume(s,available(s,'wreath'))}
+  s.burial++;tone(196,.5);hud();game.actions.autoSave();s.burial>=8?finalChoices():burial();
+ };
+}
+function offerings(){
+ const s=game.state;
+ panel('那些捨不得留下的東西','<p>最多六件陪葬品。塔納收下的禮物，也都在這裡。</p><div id="offeringlist" class="itemlist scrolllist" style="max-width:950px"></div><div id="offerdesc" class="itemdetail"><p>選一件物品，由塔納讀它的故事。</p></div><p class="hint">放進棺木的名字布條與花圈，就不能再留在墓上。</p><button id="offerconfirm" class="primary">確認陪葬品 · <span id="offercount">0</span> / 6 件</button>');
+ const chosen=new Set(s.offerings);
+ for(const it of allItems(s)){const b=document.createElement('button');b.className='itemchoice'+(chosen.has(it.id)?' chosen':'');b.innerHTML=iconHTML(it)+it.name+(s.gifted.some(g=>g.id===it.id)?'<small>塔納收著的</small>':'');
+  b.onclick=()=>{if(chosen.has(it.id))chosen.delete(it.id);else if(chosen.size<6)chosen.add(it.id);else toast('最多六件。');b.classList.toggle('chosen',chosen.has(it.id));$('#offerdesc').innerHTML='<h3>'+it.name+'</h3><p>'+it.after+'</p>';$('#offercount').textContent=chosen.size};$('#offeringlist').append(b);
+ }
+ paintIcons();$('#offercount').textContent=chosen.size;$('#offerconfirm').onclick=()=>{s.offerings=[...chosen];s.burial=3;burial()};
+}
+const endings={
+ 'relics':{title:'只剩遺物',text:'你銷毀了關於自己、關於Ａ所有的一切。回憶、情感、連結都沒有意義了。'},
+ 'john-doe':{title:'John Doe',text:'你沒有名字、沒有出身、沒有被記錄的容貌和故事，只有一個魔鬼記得你，剛好他可以活很久。'},
+ 'love':{title:'這是愛嗎？',text:'你從來沒有這麼安心過，你在心裡偷偷問：這是愛嗎？……你已經沒辦法聽到答案，但你隱約感覺到有個魔鬼在你的墓旁待了很久。'},
+ 'return':{title:'總是回來',text:'他仍收著那枚戒指。路的盡頭，總有一個地方讓他回來。'},
+ 'farewell':{title:'花仍會開',text:'七天的旅途結束了。留下的約定，會陪著下一個春天。'}
+};
+function finalChoices(){
+ const s=game.state;s.ending=resolveEnding(s);game.mode='burial';
+ const only=s.ending==='relics';
+ panel('最後的凝視','<div class="actions">'+(only?'<button id="gravewords">看看墳墓</button>':'<button id="sit" class="primary">坐下</button>')+'<button id="leave">離開</button></div>');
+ if(only)$('#gravewords').onclick=()=>bubble('這樣就夠了。');
+ else $('#sit').onclick=()=>{closePanel();walkScene({x:190,y:158},2,()=>{s.sitting=true;animate(5,()=>{},()=>{fade(1,2);animate(2,()=>{},()=>s.ending==='return'?returnVisit():endGame())})})};
+ if(s.ending==='return')$('#leave').hidden=true;$('#leave').onclick=()=>{closePanel();walkScene({x:465,y:170},4,()=>{fade(1,2);animate(2,()=>{},endGame)})};
+}
+function finishToTitle(){
+ fade(1,2);animate(2,()=>{},()=>{game.state.started=false;game.state.sitting=false;game.mode='';$('#overlay').hidden=true;$('#intro').hidden=false;fade(0,0)});
+}
+function postEndingChoices(){
+ const s=game.state;game.mode='burial';
+ const only=s.ending==='relics';
+ panel('墓旁','<div class="actions">'+(only?'':'<button id="aftersit">坐下</button>')+'<button id="afterleave">離開這裡</button>'+(!only&&!s.graveTalked?'<button id="aftertalk">和墓對話</button>':'')+'</div>');
+ if(only)bubble('這樣就夠了。');
+ if($('#aftersit'))$('#aftersit').onclick=()=>{closePanel();walkScene({x:194,y:164},2,()=>{s.sitting=true;animate(5,()=>{},finishToTitle)})};
+ $('#afterleave').onclick=()=>{closePanel();bubble('睡吧。');s.direction='right';walkScene({x:510,y:182},7,()=>animate(3,()=>{},finishToTitle))};
+ if($('#aftertalk'))$('#aftertalk').onclick=()=>{s.graveTalked=true;closePanel();game.mode='farewell';const words=['我有一股奇怪的感覺。','這到底是什麼……？','你應該會知道，但我沒辦法問你了。'];let i=0;const next=()=>{if(i===words.length){game.mode='';game.actions.autoSave();return}bubble(words[i++]);animate(5,()=>{},next)};next()};
+}
+function returnVisit(){
+ const s=game.state;
+ animate(3,()=>{},()=>{s.epilogue=true;s.sitting=false;s.x=484;s.y=170;s.bodyDown=false;s.campBuilt=false;fade(0,2);walkScene({x:194,y:164},6,()=>{game.mode='';s.ended=false;hud();game.actions.autoSave();toast('走近墳墓，按 F。')})});
+}
+function returnChoices(){
+ game.mode='burial';panel('又回到這裡','<div class="actions"><button id="returnsit">坐下</button><button id="wine" class="primary">把酒撒在墓上</button></div>');
+ const finish=()=>{fade(1,2);animate(2,()=>{},endGame)};
+ $('#returnsit').onclick=()=>{closePanel();game.state.sitting=true;animate(5,()=>{},finish)};
+ $('#wine').onclick=()=>{closePanel();game.state.pouring=true;animate(2,()=>{},()=>{game.state.pouring=false;bubble('據說把酒撒在墓上，亡者就會記得回來的路。');animate(5,()=>{},()=>{bubble('……但你不喜歡喝酒。');animate(4,()=>{},finish)})})};
+}
+function achievements(){game.mode='achievements';panel('旅途留下的事',achievementData.map(([id,n,d])=>'<div class="achievement '+(game.state.achievements.includes(id)?'earned':'')+'">'+(game.state.achievements.includes(id)?'✦':'◇')+' '+n+'<p class="hint">'+d+'</p></div>').join(''))}
+function drawGrave(c){
+ const ctx=c.getContext('2d'),s=game.state,scene=document.createElement('canvas');scene.width=480;scene.height=270;
+ Art.scene(scene.getContext('2d'),0,1,s);ctx.imageSmoothingEnabled=false;ctx.drawImage(scene,112,91,146,110,0,0,320,240);
+}
+function endGame(){
+ const s=game.state;s.ended=true;s.ending??=resolveEnding(s);game.mode='ending';fade(0,0);game.actions.autoSave();playAsset('ending',game.volume);
+ const e=endings[s.ending];
+ panel(e.title,'<div class="endinglayout"><canvas id="endingart" width="640" height="480"></canvas><div><div class="eyebrow">第七日 · 旅途的終點</div><h2>'+e.title+'</h2><p>'+e.text.replaceAll('Ａ','塔納')+'</p><p class="hint">按 Esc 關閉說明，回到墓旁自由活動。</p><p class="hint">'+s.offerings.length+' 件遺物 · '+s.flowers.filter(v=>v&&s.day>v.plantedDay).length+' 叢花</p><div class="actions"><button id="endach">查看成就</button><button id="endtitle">回到起點</button></div></div></div>');
+ $('.panelhead').hidden=true;
+ const c=$('#endingart'),ctx=c.getContext('2d');if(!imageAsset(ctx,'ending.'+s.ending,0,0,640,480)){ctx.save();ctx.scale(2,2);const t=document.createElement('canvas');t.width=320;t.height=240;drawGrave(t);ctx.imageSmoothingEnabled=false;ctx.drawImage(t,0,0);ctx.restore()}
+ $('#endach').onclick=achievements;$('#endtitle').onclick=()=>{game.mode='';$('#overlay').hidden=true;$('#intro').hidden=false;s.started=false};
+}
+function initFarewell(){Object.assign(game.actions,{garden,burial,achievements,endGame})}
+
+
+Object.assign(exports,{initFarewell});
+},"scripts/ui/menus.js":function(exports,require){
+const {syncAudio}=require("scripts/rendering/assets.js");
+const Core=require("scripts/core/rules.js");
+const {game,$,$$,maps,panel,toast,tone,hud,confirmAction,closePanel}=require("scripts/systems/journey.js");
+const readSave=k=>{try{return JSON.parse(localStorage.getItem(k))}catch{return null}};
+function writeSave(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch{toast('無法儲存：瀏覽器儲存空間不足或已停用。');return false}}
+function autoSave(){writeSave('seventh-autosave',{state:JSON.parse(JSON.stringify(game.state)),thumb:$('#world').toDataURL('image/png'),date:Date.now()})}
+function validSave(s){return s&&[1,2].includes(s.version)&&Number.isInteger(s.day)&&s.day>=1&&s.day<=7&&Number.isInteger(s.map)&&s.map>=0&&s.map<=3&&Array.isArray(s.bag)&&s.bag.every(i=>Core.defs[i.key]&&Array.isArray(i.shape))&&Array.isArray(s.parts)}
+function loadData(d){if(!validSave(d?.state)){toast('這份存檔無法讀取。');return}game.state={...Core.newState(),...JSON.parse(JSON.stringify(d.state))};game.state.flowers=Array.from({length:12},(_,i)=>typeof game.state.flowers[i]==='object'?game.state.flowers[i]:game.state.flowers[i]?{plantedDay:game.state.day-1}:null);migrateItems(game.state);game.state.started=true;game.mode='';game.selected=null;game.pending=null;game.craft=null;$('#overlay').hidden=true;$('#intro').hidden=true;game.keys={};game.target=null;hud();toast('已讀取旅程。');if(game.state.ended)game.actions.endGame();else if(game.state.day===7&&!game.state.soulTaken)game.actions.soulScene()}
+function migrateItems(s){
+ const older=s.version===1;s.version=2;
+ for(const it of [...s.bag,...s.gifted]){const d=Core.defs[it.key];if(!d)continue;
+  if(!it.originId){for(const key of ['grade','desc','name','unique','noGift','seedKind'])it[key]=d[key];
+   if(older&&['nametag','scissors','poisonflower'].includes(it.key)){it.shape=d.shape.map(p=>[...p]);if(it.x>=0&&!Core.fits(s,it,it.x,it.y)){it.x=-1;it.y=-1;Core.placeFirst(s,it)}}
+  }
+  if(it.unique&&!s.uniqueCollected.includes(it.key))s.uniqueCollected.push(it.key);
+ }
+ // 已經進行的旅程不憑空增加信件；新遊戲從完整的四件物品開始。
+}
+function menu(){game.mode='menu';panel('放得下嗎？',`<div class="menuitems"><button data-menu="resume">繼續遊戲</button><button data-menu="save">存檔</button><button data-menu="load">讀檔</button><button data-menu="settings">設定</button><button data-menu="quit">結束遊戲</button><button data-menu="achievements">成就</button></div><p class="hint">時間仍然流動。20:00後返回營地，當晚便不再外出。</p>`);$$('[data-menu]').forEach(b=>b.onclick=()=>{let a=b.dataset.menu;if(a==='resume')closePanel();else if(a==='save'||a==='load')slots(a);else if(a==='settings')settings();else if(a==='achievements')game.actions.achievements();else confirmAction('回到旅途的起點？','未存檔的進度會遺失。你也可以先返回選單存檔。',()=>{game.mode='';$('#overlay').hidden=true;$('#intro').hidden=false;game.state.started=false})})}
+function slots(action){if(!game.state.started)$('#intro').hidden=true;game.mode=action;panel(action==='save'?'把今天夾進書頁':'翻開某一天',`<p class="hint">7 個共用存檔欄位，保存在目前瀏覽器。清除網站資料會刪除存檔。</p><div class="slots">${Array.from({length:7},(_,i)=>{let d=readSave('seventh-slot-'+i);return `<button class="slot" data-slot="${i}" aria-label="存檔欄位 ${i+1}${d?' 第'+d.state.day+'天':''}">${d?`<img src="${d.thumb}" alt="存檔時的地圖"><span>第 ${d.state.day} 天 · ${maps[d.state.map]}<small>　${new Date(d.date).toLocaleDateString('zh-TW')}</small></span>`:''}</button>`}).join('')}</div><div class="actions"><button id="slotback">返回</button></div>`);$$('[data-slot]').forEach(b=>b.onclick=()=>{let key='seventh-slot-'+b.dataset.slot,d=readSave(key);if(action==='save'){const save=()=>{if(writeSave(key,{state:JSON.parse(JSON.stringify(game.state)),thumb:$('#world').toDataURL('image/png'),date:Date.now()})){slots('save');toast('旅程已保存。')}};if(d)confirmAction('覆蓋這一頁？',`原有的第 ${d.state.day} 天存檔會被目前進度取代。`,save);else save()}else if(d)loadData(d);else toast('這一頁還是空白的。')});$('#slotback').onclick=()=>game.state.started?menu():closePanel()}
+function settings(){game.mode='settings';panel('森林的聲音',`<div class="range"><label for="volume">環境音量</label><input id="volume" type="range" min="0" max="100" value="${Math.round(game.volume*100)}"></div><div class="actions"><button id="settingfull">切換全螢幕</button><button id="settingback">返回選單</button></div><p class="hint">WASD / 方向鍵移動，Shift 衝刺，F 互動，E 背包，R 旋轉。<br>也可點選地面行走，點選物品後再點空格放置。<br>1920 × 1080、16:9 等比縮放。建議使用電腦。</p>`);$('#volume').oninput=e=>{game.volume=Number(e.target.value)/100;writeSave('seventh-settings',{volume:game.volume});syncAudio(game.soundOn,game.volume);tone(392,.1)};$('#settingfull').onclick=$('#fullscreen').onclick;$('#settingback').onclick=menu}
+function initMenus(){Object.assign(game.actions,{menu,slots,autoSave});let p=readSave('seventh-settings');if(p&&Number.isFinite(p.volume))game.volume=p.volume}
+
+Object.assign(exports,{initMenus});
+}};const cache={};function require(id){if(cache[id])return cache[id];const exports=cache[id]={};const result=factories[id](exports,require);if(result?.catch)result.catch(e=>{document.body.textContent="遊戲載入失敗："+e.message;console.error(e)});return exports}require("scripts/main.js");</script></body></html>
