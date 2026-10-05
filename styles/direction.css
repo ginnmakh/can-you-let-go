@@ -52,3 +52,21 @@ nav button{background:#202d50ed;border-color:#91a0c3;color:#e8ddbc;width:56px;he
 .introinner p{font-size:20px;letter-spacing:3px;color:#c4cde4;margin:38px 0 36px;line-height:2.1}.introinner .primary{margin:0;width:345px;text-align:left;padding:19px 26px;font-size:20px;letter-spacing:3px}.introinner .primary span{float:right;margin-left:0}
 .introinner .textbutton{margin:16px 0;padding-left:0;font-size:16px;color:#cad4eb}.introinner>small{font-size:14px;letter-spacing:4px;color:#a6b9df;margin-top:16px}
 .introfoot{color:#bfcae3;font-size:14px;border-top:1px solid #a0b1d844;padding-top:22px}.introfoot a{color:#eed8a2}
+/* 結局圖文依序淡入；全部出現後才顯示右下角的「回到選單」。 */
+@keyframes endingReveal{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes endingButton{0%{opacity:0;visibility:hidden}1%{visibility:visible}100%{opacity:1;visibility:visible}}
+.endingreveal>canvas{animation:endingReveal 1.5s ease-out both}
+.endingreveal .eyebrow,.endingreveal h2{animation:endingReveal 1.2s 1.5s ease-out both}
+.endingreveal p:not(.hint){animation:endingReveal 1.5s 3s ease-out both}
+.endingreveal .hint{animation:endingReveal 1s 4.5s ease-out both}
+.panel:has(.endmenu){padding-bottom:100px}
+.endmenu{position:absolute;right:40px;bottom:32px;animation:endingButton .8s 5.5s ease-out both}
+/* 起始選單的結局圖鑑。 */
+.endinggallery{display:grid;grid-template-columns:repeat(5,208px);gap:16px;margin:8px 0 20px}
+.endingcell{height:206px;padding:0;overflow:hidden;background:#253657;border:2px solid #8c9dbe;display:flex;flex-direction:column}
+.endingcell canvas{display:block;width:100%;height:156px;image-rendering:pixelated}
+.endingcell span{display:block;margin:12px 14px;font-size:16px;color:#f2e5c2;text-align:left}
+.endingcell.locked{background:#18223f;border:2px dashed #5d6b92}
+#endingdetail{min-height:110px}
+/* 從起始選單開啟的視窗（讀檔、結局圖鑑）疊在起始畫面之上，不露出遊戲 HUD。 */
+#overlay.overtitle{z-index:30}
