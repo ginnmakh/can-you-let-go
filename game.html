@@ -1321,6 +1321,8 @@ function frame(t){
  if(s.started&&!game.mode&&!game.dialogues.length&&!s.ended){
   const k={...game.keys};for(const key of Object.keys(game.tapKeys))if(game.tapKeys[key])k[key]=true;game.tapKeys={};let dx=Number(!!(k.d||k.ArrowRight))-Number(!!(k.a||k.ArrowLeft)),dy=Number(!!(k.s||k.ArrowDown))-Number(!!(k.w||k.ArrowUp));
   if(dx||dy)game.target=null;
+  // 結局後坐在墓旁：一移動就起身，接上墓旁的選項。
+  if(s.sitting&&s.postEnding&&(dx||dy||game.target)){s.sitting=false;dx=dy=0;game.target=null;game.actions.standUp?.()}
   if(!dx&&!dy&&game.target){let n=Math.hypot(game.target.x-s.x,game.target.y-s.y);if(n>2){dx=(game.target.x-s.x)/n;dy=(game.target.y-s.y)/n}else game.target=null}
   let n=Math.hypot(dx,dy)||1,speed=WALK_SPEED*(k.Shift?SPRINT_MULTIPLIER:1);if(dx||dy)s.direction=Math.abs(dx)>Math.abs(dy)?dx>0?'right':'left':dy>0?'down':'up';dx=dx/n*dt*speed;dy=dy/n*dt*speed;
   let oldX=s.x,oldY=s.y;if(canWalk(s,s.x+dx,s.y))s.x+=dx;if(canWalk(s,s.x,s.y+dy))s.y+=dy;moving=oldX!==s.x||oldY!==s.y;
@@ -1356,7 +1358,7 @@ function say(lines,done){game.dialogues=lines.map(([who,text])=>[who,text.replac
 function showLine(){if(!game.dialogues.length){$('#dialogue').hidden=true;let f=onDialogEnd;onDialogEnd=null;f?.();return}let [who,text]=game.dialogues[0];$('#dialogue').hidden=false;$('#dialogue').innerHTML=`<canvas width="28" height="39"></canvas><b>${who==='Ａ'?'塔納':'柯林'}</b><p>${text}</p><small>F / 空白鍵 / 點擊繼續 ▾</small>`;Art.portrait($('#dialogue canvas'),who==='Ａ')}
 function nextLine(){game.dialogues.shift();tone(520,.035);showLine()}
 function panel(title,body,eyebrow='旅途中'){overlay.hidden=false;game.keys={};game.tapKeys={};game.target=null;overlay.innerHTML=`<section class="panel" role="dialog" aria-modal="true" aria-label="${title}"><div class="panelhead"><div><div class="eyebrow">${eyebrow}</div><h2>${title}</h2></div><button class="close" aria-label="關閉">×</button></div>${body}</section>`;$('.close').onclick=closePanel;setTimeout(()=>$$('#overlay button:not(.close):not(:disabled)').find(b=>!b.hidden)?.focus(),0)}
-function closePanel(){if(game.state.ended){game.state.ended=false;game.state.postEnding=true;game.state.sitting=false;game.state.x=194;game.state.y=182;}if(['craft','assembly'].includes(game.mode)){toast('先完成今天的打造，才能收起工具。');return}if(['cinematic','soul','farewell'].includes(game.mode))return;game.mode='';stopAsset('fire');game.pending=null;game.selected=null;overlay.hidden=true;overlay.innerHTML='';if(!game.state.started)$('#intro').hidden=false;hud()}
+function closePanel(){if(game.state.ended&&game.state.ending==='relics'){game.state.started=false;game.mode='';overlay.hidden=true;overlay.innerHTML='';$('#intro').hidden=false;return}if(game.state.ended){game.state.ended=false;game.state.postEnding=true;game.state.sitting=false;game.state.x=194;game.state.y=182;}if(['craft','assembly'].includes(game.mode)){toast('先完成今天的打造，才能收起工具。');return}if(['cinematic','soul','farewell'].includes(game.mode))return;game.mode='';stopAsset('fire');game.pending=null;game.selected=null;overlay.hidden=true;overlay.innerHTML='';if(!game.state.started)$('#intro').hidden=false;hud()}
 function confirmAction(title,text,yes){game.mode='confirm';panel(title,`<p>${text}</p><div class="actions"><button id="yes" class="primary">是，繼續</button><button id="no">否，返回</button></div>`);$('#yes').onclick=yes;$('#no').onclick=closePanel}
 const iconHTML=it=>`<canvas width="32" height="32" data-icon="${it.type}" data-key="${it.key}"></canvas>`;
 function paintIcons(){$$('[data-icon]').forEach(c=>imageAsset(c.getContext('2d'),'item.'+c.dataset.key,0,0,32,32)||Art.icon(c.getContext('2d'),c.dataset.icon,32))}
@@ -1885,21 +1887,25 @@ const endings={
 };
 function finalChoices(){
  const s=game.state;s.ending=resolveEnding(s);game.mode='burial';
- const only=s.ending==='relics';
- panel('最後的凝視','<div class="actions">'+(only?'<button id="gravewords">看看墳墓</button>':'<button id="sit" class="primary">坐下</button>')+'<button id="leave">離開</button></div>');
- if(only)$('#gravewords').onclick=()=>bubble('這樣就夠了。');
- else $('#sit').onclick=()=>{closePanel();walkScene({x:190,y:158},2,()=>{s.sitting=true;animate(5,()=>{},()=>{fade(1,2);animate(2,()=>{},()=>s.ending==='return'?returnVisit():endGame())})})};
- if(s.ending==='return')$('#leave').hidden=true;$('#leave').onclick=()=>{closePanel();walkScene({x:465,y:170},4,()=>{fade(1,2);animate(2,()=>{},endGame)})};
+ // 只剩遺物：沒有坐下，看墓或離開都直接結束。John Doe：只能再待一會兒。總是回來：只能坐下。
+ const only=s.ending==='relics',stayLabel=s.ending==='return'?'坐下':'再待一會兒';
+ panel('最後的凝視','<div class="actions">'+(only?'<button id="gravewords">看看墳墓</button>':'<button id="sit" class="primary">'+stayLabel+'</button>')+'<button id="leave">離開</button></div>');
+ const blackout=done=>{fade(1,2);animate(2,()=>{},done)};
+ if(only)$('#gravewords').onclick=()=>{closePanel();bubble('這樣就夠了。');animate(4,()=>{},()=>blackout(endGame))};
+ else $('#sit').onclick=()=>{closePanel();walkScene({x:190,y:158},2,()=>{s.sitting=true;
+  if(s.ending==='john-doe'){bubble('……這樣就夠了。');animate(5,()=>{},()=>blackout(endGame));return}
+  animate(5,()=>{},()=>blackout(()=>s.ending==='return'?returnVisit():endGame()))})};
+ if(['return','john-doe'].includes(s.ending))$('#leave').hidden=true;
+ $('#leave').onclick=()=>{closePanel();walkScene({x:465,y:170},4,()=>blackout(endGame))};
 }
 function finishToTitle(){
  fade(1,2);animate(2,()=>{},()=>{game.state.started=false;game.state.sitting=false;game.mode='';$('#overlay').hidden=true;$('#intro').hidden=false;fade(0,0)});
 }
-function postEndingChoices(){
+// 結局後在墓旁：「再待一會兒」會一直坐著，直到玩家移動才起身，起身後接上和墓對話／離開這裡。
+function postEndingChoices(standing=false){
  const s=game.state;game.mode='burial';
- const only=s.ending==='relics';
- panel('墓旁','<div class="actions">'+(only?'':'<button id="aftersit">坐下</button>')+'<button id="afterleave">離開這裡</button>'+(!only&&!s.graveTalked?'<button id="aftertalk">和墓對話</button>':'')+'</div>');
- if(only)bubble('這樣就夠了。');
- if($('#aftersit'))$('#aftersit').onclick=()=>{closePanel();walkScene({x:194,y:164},2,()=>{s.sitting=true;animate(5,()=>{},finishToTitle)})};
+ panel('墓旁','<div class="actions">'+(standing?'':'<button id="aftersit">再待一會兒</button>')+(!s.graveTalked?'<button id="aftertalk">和墓對話</button>':'')+'<button id="afterleave">離開這裡</button></div>');
+ if($('#aftersit'))$('#aftersit').onclick=()=>{closePanel();walkScene({x:194,y:164},2,()=>{s.sitting=true;game.mode=''})};
  $('#afterleave').onclick=()=>{closePanel();bubble('睡吧。');s.direction='right';walkScene({x:510,y:182},7,()=>animate(3,()=>{},finishToTitle))};
  if($('#aftertalk'))$('#aftertalk').onclick=()=>{s.graveTalked=true;closePanel();game.mode='farewell';const words=['我有一股奇怪的感覺。','這到底是什麼……？','你應該會知道，但我沒辦法問你了。'];let i=0;const next=()=>{if(i===words.length){game.mode='';game.actions.autoSave();return}bubble(words[i++]);animate(5,()=>{},next)};next()};
 }
@@ -1908,7 +1914,7 @@ function returnVisit(){
  animate(3,()=>{},()=>{s.epilogue=true;s.sitting=false;s.x=484;s.y=170;s.bodyDown=false;s.campBuilt=false;fade(0,2);walkScene({x:194,y:164},6,()=>{game.mode='';s.ended=false;hud();game.actions.autoSave();toast('走近墳墓，按 F。')})});
 }
 function returnChoices(){
- game.mode='burial';panel('又回到這裡','<div class="actions"><button id="returnsit">坐下</button><button id="wine" class="primary">把酒撒在墓上</button></div>');
+ game.mode='burial';panel('又回到這裡','<div class="actions"><button id="returnsit">待在這裡，什麼都不做。</button><button id="wine" class="primary">把酒撒在墓上</button></div>');
  const finish=()=>{fade(1,2);animate(2,()=>{},endGame)};
  $('#returnsit').onclick=()=>{closePanel();game.state.sitting=true;animate(5,()=>{},finish)};
  $('#wine').onclick=()=>{closePanel();game.state.pouring=true;animate(2,()=>{},()=>{game.state.pouring=false;bubble('據說把酒撒在墓上，亡者就會記得回來的路。');animate(5,()=>{},()=>{bubble('……但你不喜歡喝酒。');animate(4,()=>{},finish)})})};
@@ -1921,12 +1927,12 @@ function drawGrave(c){
 function endGame(){
  const s=game.state;s.ended=true;s.ending??=resolveEnding(s);game.mode='ending';fade(0,0);game.actions.autoSave();playAsset('ending',game.volume);
  const e=endings[s.ending];
- panel(e.title,'<div class="endinglayout"><canvas id="endingart" width="640" height="480"></canvas><div><div class="eyebrow">第七日 · 旅途的終點</div><h2>'+e.title+'</h2><p>'+e.text.replaceAll('Ａ','塔納')+'</p><p class="hint">按 Esc 關閉說明，回到墓旁自由活動。</p><p class="hint">'+s.offerings.length+' 件遺物 · '+s.flowers.filter(v=>v&&s.day>v.plantedDay).length+' 叢花</p><div class="actions"><button id="endach">查看成就</button><button id="endtitle">回到起點</button></div></div></div>');
+ panel(e.title,'<div class="endinglayout"><canvas id="endingart" width="640" height="480"></canvas><div><div class="eyebrow">第七日 · 旅途的終點</div><h2>'+e.title+'</h2><p>'+e.text.replaceAll('Ａ','塔納')+'</p><p class="hint">'+(s.ending==='relics'?'按 Esc 回到起點。':'按 Esc 關閉說明，回到墓旁自由活動。')+'</p><p class="hint">'+s.offerings.length+' 件遺物 · '+s.flowers.filter(v=>v&&s.day>v.plantedDay).length+' 叢花</p><div class="actions"><button id="endach">查看成就</button><button id="endtitle">回到起點</button></div></div></div>');
  $('.panelhead').hidden=true;
  const c=$('#endingart'),ctx=c.getContext('2d');if(!imageAsset(ctx,'ending.'+s.ending,0,0,640,480)){ctx.save();ctx.scale(2,2);const t=document.createElement('canvas');t.width=320;t.height=240;drawGrave(t);ctx.imageSmoothingEnabled=false;ctx.drawImage(t,0,0);ctx.restore()}
  $('#endach').onclick=achievements;$('#endtitle').onclick=()=>{game.mode='';$('#overlay').hidden=true;$('#intro').hidden=false;s.started=false};
 }
-function initFarewell(){Object.assign(game.actions,{garden,burial,achievements,endGame})}
+function initFarewell(){Object.assign(game.actions,{garden,burial,achievements,endGame,standUp:()=>postEndingChoices(true)})}
 
 
 Object.assign(exports,{initFarewell});
