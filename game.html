@@ -1344,7 +1344,8 @@ function travelBlock(s,p){
   if(s.day===7)return 'last-day';
   if(s.campLocked||gameMinutes(s)>=1200)return 'night';
  }
- if(s.bag.some(i=>i.x<0&&!s.offerings.includes(i.id)))return 'loose';
+ // 暫放物品只限制出發；回營地永遠放行，才能到營火清出空間。
+ if(p.map!==0&&s.bag.some(i=>i.x<0&&!s.offerings.includes(i.id)))return 'loose';
  if(s.map===0&&s.day===1&&!s.tutorial&&p.map!==1)return 'tutorial';
  return null;
 }
