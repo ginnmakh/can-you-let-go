@@ -127,6 +127,8 @@ function talk(){
   const tier=D.interactions.tiers.find(t=>t.id===(id==='neutral'?'high':id));
   const pool=rotatingChoices(s,'talk:'+id,availableTalks(s));
   say(lines([sample(tier.opening_pool)]),()=>{
+    // 這個好感區間的話都說完了：塔納仍會回應，但不再出現選項。
+    if(!pool.length)return;
     game.mode='talk';panel('想對塔納說的話','<div class="talkchoices">'+pool.map((t,i)=>'<button data-talk="'+i+'">'+t.label+'</button>').join('')+'</div>');
     $$('[data-talk]').forEach(b=>b.onclick=()=>{const t=pool[Number(b.dataset.talk)];applyChoice(s,t.id,t.affinity_delta||0);syncFollowing();closePanel();say(lines(t.lines))});
   });
@@ -1123,7 +1125,8 @@ function talkTier(s){return s.affinity<=60?'cold':s.affinity<=80?'low':s.affinit
 function availableTalks(s){
  if(s.day>=7)return [];
  const tier=talkTier(s),pool=D.interactions.tiers.find(t=>t.id===(tier==='neutral'?'high':tier)).pool;
- return pool.filter(t=>(tier!=='neutral'||['high_nothing','high_look'].includes(t.id))&&(!t.requires?.min_day||s.day>=t.requires.min_day)&&(!t.requires?.has_burned_gift_from_tana||!!burnedGift(s)));
+ // 講過的選項（id 已記錄在 appliedChoices）不再出現；舊存檔也沿用這份紀錄。
+ return pool.filter(t=>!s.appliedChoices?.includes(t.id)&&(tier!=='neutral'||['high_nothing','high_look'].includes(t.id))&&(!t.requires?.min_day||s.day>=t.requires.min_day)&&(!t.requires?.has_burned_gift_from_tana||!!burnedGift(s)));
 }
 
 // Shuffle a full cycle, rather than repeatedly drawing the same two choices.

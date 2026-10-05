@@ -5,7 +5,8 @@ export function talkTier(s){return s.affinity<=60?'cold':s.affinity<=80?'low':s.
 export function availableTalks(s){
  if(s.day>=7)return [];
  const tier=talkTier(s),pool=D.interactions.tiers.find(t=>t.id===(tier==='neutral'?'high':tier)).pool;
- return pool.filter(t=>(tier!=='neutral'||['high_nothing','high_look'].includes(t.id))&&(!t.requires?.min_day||s.day>=t.requires.min_day)&&(!t.requires?.has_burned_gift_from_tana||!!burnedGift(s)));
+ // 講過的選項（id 已記錄在 appliedChoices）不再出現；舊存檔也沿用這份紀錄。
+ return pool.filter(t=>!s.appliedChoices?.includes(t.id)&&(tier!=='neutral'||['high_nothing','high_look'].includes(t.id))&&(!t.requires?.min_day||s.day>=t.requires.min_day)&&(!t.requires?.has_burned_gift_from_tana||!!burnedGift(s)));
 }
 
 // Shuffle a full cycle, rather than repeatedly drawing the same two choices.

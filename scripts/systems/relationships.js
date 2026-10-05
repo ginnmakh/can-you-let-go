@@ -45,6 +45,8 @@ function talk(){
   const tier=D.interactions.tiers.find(t=>t.id===(id==='neutral'?'high':id));
   const pool=rotatingChoices(s,'talk:'+id,availableTalks(s));
   say(lines([sample(tier.opening_pool)]),()=>{
+    // 這個好感區間的話都說完了：塔納仍會回應，但不再出現選項。
+    if(!pool.length)return;
     game.mode='talk';panel('想對塔納說的話','<div class="talkchoices">'+pool.map((t,i)=>'<button data-talk="'+i+'">'+t.label+'</button>').join('')+'</div>');
     $$('[data-talk]').forEach(b=>b.onclick=()=>{const t=pool[Number(b.dataset.talk)];applyChoice(s,t.id,t.affinity_delta||0);syncFollowing();closePanel();say(lines(t.lines))});
   });
