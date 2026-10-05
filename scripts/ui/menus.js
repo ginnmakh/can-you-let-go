@@ -1,11 +1,12 @@
 import {syncAudio} from '../rendering/assets.js';
 import * as Core from '../core/rules.js';
+import {addRecord,ACHIEVEMENTS_KEY} from '../core/records.js';
 import {game,$,$$,maps,panel,toast,tone,hud,confirmAction,closePanel} from '../systems/journey.js';
 const readSave=k=>{try{return JSON.parse(localStorage.getItem(k))}catch{return null}};
 function writeSave(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch{toast('無法儲存：瀏覽器儲存空間不足或已停用。');return false}}
 function autoSave(){writeSave('seventh-autosave',{state:JSON.parse(JSON.stringify(game.state)),thumb:$('#world').toDataURL('image/png'),date:Date.now()})}
 function validSave(s){return s&&[1,2].includes(s.version)&&Number.isInteger(s.day)&&s.day>=1&&s.day<=7&&Number.isInteger(s.map)&&s.map>=0&&s.map<=3&&Array.isArray(s.bag)&&s.bag.every(i=>Core.defs[i.key]&&Array.isArray(i.shape))&&Array.isArray(s.parts)}
-function loadData(d){if(!validSave(d?.state)){toast('這份存檔無法讀取。');return}game.state={...Core.newState(),...JSON.parse(JSON.stringify(d.state))};game.state.flowers=Array.from({length:12},(_,i)=>typeof game.state.flowers[i]==='object'?game.state.flowers[i]:game.state.flowers[i]?{plantedDay:game.state.day-1}:null);migrateItems(game.state);game.state.started=true;game.mode='';game.selected=null;game.pending=null;game.craft=null;$('#overlay').hidden=true;$('#overlay').classList.remove('overtitle');$('#intro').hidden=true;game.keys={};game.target=null;hud();toast('已讀取旅程。');if(game.state.ended)game.actions.endGame();else if(game.state.day===7&&!game.state.soulTaken)game.actions.soulScene()}
+function loadData(d){if(!validSave(d?.state)){toast('這份存檔無法讀取。');return}game.state={...Core.newState(),...JSON.parse(JSON.stringify(d.state))};game.state.flowers=Array.from({length:12},(_,i)=>typeof game.state.flowers[i]==='object'?game.state.flowers[i]:game.state.flowers[i]?{plantedDay:game.state.day-1}:null);migrateItems(game.state);game.state.started=true;game.mode='';game.selected=null;game.pending=null;game.craft=null;$('#overlay').hidden=true;$('#overlay').classList.remove('overtitle');for(const id of game.state.achievements||[])addRecord(ACHIEVEMENTS_KEY,id);$('#intro').hidden=true;game.keys={};game.target=null;hud();toast('已讀取旅程。');if(game.state.ended)game.actions.endGame();else if(game.state.day===7&&!game.state.soulTaken)game.actions.soulScene()}
 function migrateItems(s){
  const older=s.version===1;s.version=2;
  for(const it of [...s.bag,...s.gifted]){const d=Core.defs[it.key];if(!d)continue;

@@ -3,6 +3,7 @@ import {achievementData} from '../data/achievements.js';
 import {applyChoice} from '../core/catalog.js';
 import {burnedGift,talkTier,availableTalks,rotatingChoices} from '../core/relationship-rules.js';
 import * as Core from '../core/rules.js';
+import {readRecord,addRecord,ACHIEVEMENTS_KEY} from '../core/records.js';
 import {game,$,$$,panel,closePanel,say,bubble,hud} from './journey.js';
 
 const sample=a=>a[Math.floor(Math.random()*a.length)];
@@ -20,7 +21,8 @@ function showAward(){
   el.classList.add('show');
   setTimeout(()=>{el.classList.remove('show');setTimeout(()=>{awardActive=false;showAward()},650)},7000);
 }
-export function unlock(id){const a=game.state.achievements;if(!a.includes(id)){a.push(id);awardQueue.push(id);showAward()}}
+// 成就跨存檔記錄；任何一次旅程達成過就不再重複通知。
+export function unlock(id){const a=game.state.achievements,fresh=!a.includes(id)&&!readRecord(ACHIEVEMENTS_KEY).includes(id);if(!a.includes(id))a.push(id);addRecord(ACHIEVEMENTS_KEY,id);if(fresh){awardQueue.push(id);showAward()}}
 function syncFollowing(){const s=game.state;if(s.affinity>=60)s.stayingToday=false;if(s.affinity<50){s.ax=287;s.ay=189;game.trail=[]}}
 export function changeAffinity(delta){const s=game.state;s.affinity=Math.max(0,Math.min(100,s.affinity+delta));syncFollowing()}
 export function recordBurn(it){

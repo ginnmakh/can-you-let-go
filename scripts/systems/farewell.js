@@ -1,6 +1,7 @@
 import {bloom} from '../core/catalog.js';
 import {achievementData} from '../data/achievements.js';
 import {resolveEnding} from '../core/world-rules.js';
+import {readRecord,addRecord,ENDINGS_KEY,ACHIEVEMENTS_KEY} from '../core/records.js';
 import {Art} from '../rendering/art.js';
 import {imageAsset,playAsset} from '../rendering/assets.js';
 import {game,$,$$,panel,toast,bubble,tone,hud,say,confirmAction,closePanel,iconHTML,paintIcons,walkScene,animate,fade} from './journey.js';
@@ -61,7 +62,7 @@ function graveside(){
  panel('最後的凝視','<div class="actions">'+(relics?'<button id="gravewords">看看墳墓</button>':'<button id="sit" class="primary">再待一會兒</button>'+(!s.graveTalked?'<button id="gravetalk">和墓對話</button>':''))+(canLeave?'<button id="leave">離開這裡</button>':'')+'</div>');
  if($('#gravewords'))$('#gravewords').onclick=()=>{closePanel();game.mode='farewell';bubble('這樣就夠了。');animate(4,()=>{},()=>blackout(endGame))};
  if($('#sit'))$('#sit').onclick=()=>{closePanel();walkScene({x:197,y:164},2,()=>{s.sitting=true;game.sitTime=0;game.mode=''})};
- if($('#gravetalk'))$('#gravetalk').onclick=()=>{s.graveTalked=true;closePanel();game.mode='farewell';const words=['我有一股奇怪的感覺。','這到底是什麼……？','你應該會知道，但我沒辦法問你了。'];let i=0;const next=()=>{if(i===words.length){game.mode='';game.actions.autoSave();return}bubble(words[i++]);animate(5,()=>{},next)};next()};
+ if($('#gravetalk'))$('#gravetalk').onclick=()=>{s.graveTalked=true;closePanel();game.mode='farewell';const words=['我有一股奇怪的感覺。','這到底是什麼……？','你應該會知道，但我沒辦法問你了。'];let i=0;const next=()=>{if(i===words.length){if(s.ending==='john-doe'){animate(3,()=>{},()=>blackout(endGame));return}if(s.ending==='return'){animate(3,()=>{},()=>blackout(returnVisit));return}game.mode='';game.actions.autoSave();return}bubble(words[i++]);animate(5,()=>{},next)};next()};
  if($('#leave'))$('#leave').onclick=()=>{closePanel();bubble('睡吧。');s.direction='right';walkScene({x:510,y:182},7,()=>animate(3,()=>{},()=>blackout(endGame)))};
 }
 // 坐著不動滿 5 秒（由主迴圈呼叫）。
@@ -80,15 +81,12 @@ function returnChoices(){
  $('#returnsit').onclick=()=>{closePanel();game.state.sitting=true;game.mode='farewell';animate(5,()=>{},finish)};
  $('#wine').onclick=()=>{closePanel();game.state.pouring=true;animate(2,()=>{},()=>{game.state.pouring=false;bubble('據說把酒撒在墓上，亡者就會記得回來的路。');animate(5,()=>{},()=>{bubble('……但你不喜歡喝酒。');animate(4,()=>{},finish)})})};
 }
-function achievements(){game.mode='achievements';panel('旅途留下的事',achievementData.map(([id,n,d])=>'<div class="achievement '+(game.state.achievements.includes(id)?'earned':'')+'">'+(game.state.achievements.includes(id)?'✦':'◇')+' '+n+'<p class="hint">'+d+'</p></div>').join(''))}
+// 成就跨存檔保留；起始選單與遊戲中的 Esc 選單共用。
+function achievements(){const got=[...new Set([...readRecord(ACHIEVEMENTS_KEY),...(game.state.achievements||[])])];if(!game.state.started)$('#overlay').classList.add('overtitle');game.mode='achievements';panel('旅途留下的事',achievementData.map(([id,n,d])=>'<div class="achievement '+(got.includes(id)?'earned':'')+'">'+(got.includes(id)?'✦':'◇')+' '+n+'<p class="hint">'+d+'</p></div>').join(''),'回憶')}
 function drawGrave(c,s=game.state){
  const ctx=c.getContext('2d'),scene=document.createElement('canvas');scene.width=480;scene.height=270;
  Art.scene(scene.getContext('2d'),0,1,s);ctx.imageSmoothingEnabled=false;ctx.drawImage(scene,112,91,146,110,0,0,c.width,c.height);
 }
-// 已達成的結局跨存檔保留，與存讀檔分開。
-const ENDINGS_KEY='seventh-endings';
-export function unlockedEndings(){try{const v=JSON.parse(localStorage.getItem(ENDINGS_KEY));return Array.isArray(v)?v:[]}catch{return[]}}
-function recordEnding(id){const list=unlockedEndings();if(list.includes(id))return;try{localStorage.setItem(ENDINGS_KEY,JSON.stringify([...list,id]))}catch{}}
 // 結局圖：優先使用 assets/endings 的正式圖；否則以墓況暫代（傳入 s 時畫當下的墓，圖鑑則依結局生成並加色調）。
 function endingArt(c,id,s){
  const ctx=c.getContext('2d');if(imageAsset(ctx,'ending.'+id,0,0,c.width,c.height))return;
@@ -101,7 +99,7 @@ function endingArt(c,id,s){
 }
 // 結局圖文依序淡入；跑完後右下角出現「回到選單」。這個畫面不能關閉，遊戲到此結束。
 function endGame(){
- const s=game.state;s.ended=true;s.sitting=false;s.ending??=resolveEnding(s);game.mode='ending';fade(0,0);recordEnding(s.ending);game.actions.autoSave();playAsset('ending',game.volume);
+ const s=game.state;s.ended=true;s.sitting=false;s.ending??=resolveEnding(s);game.mode='ending';fade(0,0);addRecord(ENDINGS_KEY,s.ending);game.actions.autoSave();playAsset('ending',game.volume);
  const e=endings[s.ending];
  panel(e.title,'<div class="endinglayout endingreveal"><canvas id="endingart" width="640" height="480"></canvas><div><div class="eyebrow">第七日 · 旅途的終點</div><h2>'+e.title+'</h2><p>'+e.text.replaceAll('Ａ','塔納')+'</p><p class="hint">'+s.offerings.length+' 件遺物 · '+s.flowers.filter(v=>v&&s.day>v.plantedDay).length+' 叢花</p></div></div><button id="endmenu" class="primary endmenu">回到選單</button>');
  $('.panelhead').hidden=true;
@@ -110,7 +108,7 @@ function endGame(){
 }
 // 起始選單的結局圖鑑：未達成的格子留空。
 function gallery(){
- const got=unlockedEndings();$('#overlay').classList.add('overtitle');game.mode='gallery';
+ const got=readRecord(ENDINGS_KEY);$('#overlay').classList.add('overtitle');game.mode='gallery';
  panel('結局圖鑑','<p class="hint">已達成 '+Object.keys(endings).filter(id=>got.includes(id)).length+' / '+Object.keys(endings).length+'</p><div class="endinggallery">'+Object.entries(endings).map(([id,e])=>got.includes(id)?'<button class="endingcell" data-ending="'+id+'"><canvas width="320" height="240"></canvas><span>'+e.title+'</span></button>':'<div class="endingcell locked" aria-label="尚未達成的結局"></div>').join('')+'</div><div id="endingdetail" class="itemdetail"><p>'+(got.length?'選一個結局，重讀它的文字。':'還沒有抵達任何結局。')+'</p></div>','回憶');
  $$('[data-ending]').forEach(b=>{endingArt(b.querySelector('canvas'),b.dataset.ending);b.onclick=()=>{const e=endings[b.dataset.ending];$('#endingdetail').innerHTML='<h3>'+e.title+'</h3><p>'+e.text.replaceAll('Ａ','塔納')+'</p>'}});
 }
