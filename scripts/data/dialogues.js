@@ -322,6 +322,50 @@ export const dialogues = {
       "not_on": "hover_or_choice_change",
       "exclude_unmet_conditions": true
     },
+    "exhausted": {
+      "pool": [
+        {
+          "speaker": "tana",
+          "text": "……",
+          "weight": 3
+        },
+        {
+          "speaker": "tana",
+          "text": "你的話還是那麼多。",
+          "weight": 1
+        },
+        {
+          "speaker": "tana",
+          "text": "為什麼這樣看我？",
+          "weight": 1
+        },
+        {
+          "speaker": "tana",
+          "text": "繼續吧。",
+          "weight": 3
+        },
+        {
+          "speaker": "tana",
+          "text": "你以前走路速度有這麼慢嗎？",
+          "weight": 1
+        },
+        {
+          "speaker": "tana",
+          "text": "人類為什麼需要儀式感？",
+          "weight": 1
+        },
+        {
+          "speaker": "tana",
+          "text": "別那樣看著我。",
+          "weight": 1
+        },
+        {
+          "speaker": "tana",
+          "text": "你今天話很多。",
+          "weight": 1
+        }
+      ]
+    },
     "tier_precedence": [
       "cold",
       "low",

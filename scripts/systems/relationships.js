@@ -6,6 +6,7 @@ import * as Core from '../core/rules.js';
 import {game,$,$$,panel,closePanel,say,bubble,hud} from './journey.js';
 
 const sample=a=>a[Math.floor(Math.random()*a.length)];
+const weighted=a=>{let r=Math.random()*a.reduce((n,x)=>n+(x.weight??1),0);return a.find(x=>(r-=x.weight??1)<0)??a.at(-1)};
 const lines=a=>a.map(l=>[l.speaker==='tana'?'Ａ':'Ｂ',l.text.replace('{burned_gift_name}',burnedGift(game.state)||'')]);
 const awardQueue=[];let awardActive=false;
 function showAward(){
@@ -44,9 +45,9 @@ function talk(){
   const s=game.state,id=talkTier(s);if(s.day>=7)return;
   const tier=D.interactions.tiers.find(t=>t.id===(id==='neutral'?'high':id));
   const pool=rotatingChoices(s,'talk:'+id,availableTalks(s));
+  // 這個好感區間的話都說完了：塔納只說一句，點掉對話框就結束，柯林不回話。
+  if(!pool.length){say(lines([weighted(D.interactions.exhausted.pool)]));return}
   say(lines([sample(tier.opening_pool)]),()=>{
-    // 這個好感區間的話都說完了：塔納仍會回應，但不再出現選項。
-    if(!pool.length)return;
     game.mode='talk';panel('想對塔納說的話','<div class="talkchoices">'+pool.map((t,i)=>'<button data-talk="'+i+'">'+t.label+'</button>').join('')+'</div>');
     $$('[data-talk]').forEach(b=>b.onclick=()=>{const t=pool[Number(b.dataset.talk)];applyChoice(s,t.id,t.affinity_delta||0);syncFollowing();closePanel();say(lines(t.lines))});
   });
